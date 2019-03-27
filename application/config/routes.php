@@ -15,9 +15,7 @@ $route["kegiatan"]              = "Umum/kegiatan";
 $route["galeri"]                = "Umum/galeri";
 
 //pengurus
-$route["pengurus"]          = "pengurus/C_POtentikasi/index";
-$route["pengurus/masuk"]    = "pengurus/C_POtentikasi/masuk";
-$route["pengurus/keluar"]   = "pengurus/C_POtentikasi/keluar";
+$route["pengurus"]  = "pengurus/C_PMasuk/index";
 $route["pengurus/beranda"]  = "pengurus/C_PBeranda/index";
 $route["pengurus/organisasi"]   = "pengurus/C_POrganisasi/index";
 $route["pengurus/keanggotaan"]          = "pengurus/C_PKeanggotaan/index";
