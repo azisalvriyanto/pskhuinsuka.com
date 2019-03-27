@@ -129,6 +129,12 @@
   .sly-login form .button-login:hover {
     background-color: #66b1ff;
   }
+
+  .invalid-feedback {
+    margin-top: 0.25rem;
+    font-size: 90%;
+    color: #c4183c;
+  }
   </style>
 </head>
 <body>
@@ -289,9 +295,11 @@
     <div>
       <div class="input-box">
         <input type="text" id="loginEmail" maxlength="254" name="username" placeholder="Masukkan username" required/>
+        <div id="validasi-username" class="invalid-feedback" hidden="true"></div>
       </div>
       <div class="input-box">
         <input type="password" id="loginPassword" name="password" placeholder="Masukkan password" required/>
+        <div id="validasi-password" class="invalid-feedback" hidden="true"></div>
       </div>
       <div>
         <label id="showPasswordToggle" for="showPasswordCheck" class="password-show">
@@ -300,8 +308,7 @@
       </div>
       <br/>
       <div>
-        <!-- <button type="button" id="login" class="button-login">Masuk</button> -->
-        <input type="submit" id="login" class="button-login" value="Masuk">
+        <button type="button" id="login" class="button-login">Masuk</button>
       </div>
     </div>
 
@@ -312,56 +319,73 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+$(document).ready(function() {
+  $("#login").click(function() {
+    $.ajax({
+      url: `<?= $api ?>`+`/otentikasi/masuk`,
+      dataType: "json",
+      type: "POST",
+      data : {
+          "username": $("#loginEmail").val(),
+          "password": $("#loginPassword").val()
+      },
+      beforeSend: function (e) {
+          $("#login").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan otentikasi...");
+      },
+      success: function(response) {
+          $("#login").html("Masuk");
 
-// $(document).ready(function() {
-//   $("#login").click(function() {
-//     $.ajax({
-//       url: `<?= $api ?>`+`/otentikasi/masuk`,
-//       dataType: "json",
-//       type: "POST",
-//       data : {
-//           "username": $("#loginEmail").val(),
-//           "password": $("#loginPassword").val()
-//       },
-//       beforeSend: function (e) {
-//           $("#login").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan otentikasi...");
-//       },
-//       success: function(response) {
-//           $("#login").html("Masuk");
-//           if (response.status === 200) {
-//             window.location.assign(`<?= base_url("pengurus/")."beranda" ?>`);
-//           } else {
-//             alert(response.keterangan)
-//           }
-//       },
-//       error: function (jqXHR, exception) {
-//           $("#login").html("Masuk");
+          if (response.status === 200) {
+            window.location.assign(`<?= base_url("pengurus/")."beranda" ?>`);
+          } else {
+            if (response.keterangan.includes("Username")) {
+              $("#validasi-username").removeAttr("hidden");
+              $("#validasi-username").html(response.keterangan);
+            } else if (response.keterangan.includes("Password")) {
+              $("#validasi-username").attr("hidden", "true");
+              $("#validasi-password").removeAttr("hidden");
+              $("#validasi-password").html(response.keterangan);
+            } else {
+              $("#validasi-username").removeAttr("hidden");
+              $("#validasi-password").removeAttr("hidden");
+              $("#validasi-username").html("Username yang anda masukkan tidak benar.");
+              $("#validasi-password").html("Password yang anda masukkan tidak benar.");
+            }
+          }
+      },
+      error: function (jqXHR, exception) {
+          $("#login").html("Masuk");
 
-//           if (jqXHR.status === 0) {
-//               keterangan = "Not connect (verify network).";
-//           } else if (jqXHR.status == 404) {
-//               keterangan = "Requested page not found.";
-//           } else if (jqXHR.status == 500) {
-//               keterangan = "Internal Server Error.";
-//           } else if (exception === "parsererror") {
-//               keterangan = "Requested JSON parse failed.";
-//           } else if (exception === "timeout") {
-//               keterangan = "Time out error.";
-//           } else if (exception === "abort") {
-//               keterangan = "Ajax request aborted.";
-//           } else {
-//               keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-//           }
-//           swal({
-//               title: "Proses masuk gagal.",
-//               text: keterangan,
-//               icon: "error",
-//               button: "Tutup"
-//           });
-//       }
-//     });
-//   });
-// });
+          if (jqXHR.status === 0) {
+              keterangan = "Not connect (verify network).";
+          } else if (jqXHR.status == 404) {
+              keterangan = "Requested page not found.";
+          } else if (jqXHR.status == 500) {
+              keterangan = "Internal Server Error.";
+          } else if (exception === "parsererror") {
+              keterangan = "Requested JSON parse failed.";
+          } else if (exception === "timeout") {
+              keterangan = "Time out error.";
+          } else if (exception === "abort") {
+              keterangan = "Ajax request aborted.";
+          } else {
+              keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+          }
+          swal({
+              title: "Proses masuk gagal.",
+              text: keterangan,
+              icon: "error",
+              button: "Tutup"
+          });
+
+          $("#validasi-username").removeAttr("hidden");
+          $("#validasi-password").removeAttr("hidden");
+          $("#validasi-username").html(keterangan);
+          $("#validasi-password").html(keterangan);
+      }
+    });
+  });
+});
 
 var email = document.querySelector('#loginEmail'),
   password = document.querySelector('#loginPassword'),
