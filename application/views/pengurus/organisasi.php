@@ -55,8 +55,8 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item p-3">
                                             <div class="row">
-                                                <div class="col" id="profil-keterangan">
-                                                    <form id="profil-form"<?= empty($data["periode"]) ? " hidden" : "" ?>>
+                                                <div class="col">
+                                                    <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
                                                                 <img class="rounded-circle" src="<?= base_url("assets/pengurus/") ?>images/avatars/0.jpg" alt="User Avatar" width="140">
@@ -159,12 +159,11 @@
                                                         <div class="col-md-12 text-center pt-3 pb-3">
                                                             <button type="button" class="btn btn-accent" id="profil-submit">Perbarui Profil</button>
                                                         </div>
-                                                    </form><?php if (empty($data["periode"])) { ?>
+                                                    </form>
 
-                                                    <div id="profil-keterangan_sub" class="col-md-12 text-center pt-2">
+                                                    <div id="profil-keterangan" class="col-md-12 text-center pt-2"<?= !empty($data["periode"]) ? " hidden" : "" ?>>
                                                          <label>Profil organisasi tidak ditemukan.</label>
-                                                     </div><?php } ?>
-
+                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -247,7 +246,7 @@
                             if (response.status === 200) {
                                 $("#status").html(``);
                                 $("#profil-form").removeAttr("hidden");
-                                $("#profil-keterangan_sub").remove();
+                                $("#profil-keterangan").attr("hidden", "true");
 
                                 var data = response.keterangan;
                                 $("input[id=nama_lengkap]").val(data.nama_lengkap);
@@ -266,11 +265,9 @@
                                 $("input[id=youtube]").val(data.kontak.youtube);
                             } else {
                                 $("#profil-form").attr("hidden", "true");
-                                $("#profil-keterangan_sub").remove();
-                                $("#profil-keterangan").append(`<div id="profil-keterangan_sub" class="col-md-12 text-center pt-2">
-                                                        <label>Profil organisasi tidak ditemukan.</label>
-                                                    </div>`);
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#profil-keterangan").removeAttr("hidden");
+
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -281,10 +278,7 @@
                         },
                         error: function (jqXHR, exception) {
                             $("#profil-form").attr("hidden", "true");
-                            $("#profil-keterangan_sub").remove();
-                            $("#profil-keterangan").append(`<div id="profil-keterangan_sub" class="col-md-12 text-center pt-2">
-                                                        <label>Profil organisasi tidak ditemukan.</label>
-                                                    </div>`);
+                            $("#profil-keterangan").removeAttr("hidden");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (Verify Network).";
@@ -339,7 +333,7 @@
                             $("#profil-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
                         },
                         success: function(response) {
-                            $("#profil-submit").fadeIn(750).html("Perbarui Profil");
+                            $("#profil-submit").html("Perbarui Profil");
                             if (response.status === 200) {
                                 swal({
                                     title: "Profil berhasil diperbarui",
@@ -350,7 +344,7 @@
                                     location.reload();
                                 });
                             } else {
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -360,7 +354,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#profil-submit").fadeIn(750).html("Perbarui Profil");
+                            $("#profil-submit").html("Perbarui Profil");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -408,7 +402,7 @@
                             $("#jpendapat-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
                         },
                         success: function(response) {
-                            $("#jpendapat-submit").fadeIn(750).html("Perbarui Jejak Pendapat");
+                            $("#jpendapat-submit").html("Perbarui Jejak Pendapat");
                             if (response.status === 200) {
                                 swal({
                                     title: "Jejak Pendapat berhasil diperbarui",
@@ -416,7 +410,7 @@
                                     button: "Tutup",
                                 });
                             } else {
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -426,7 +420,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#jpendapat-submit").fadeIn(750).html("Perbarui Jejak Pendapat");
+                            $("#jpendapat-submit").html("Perbarui Jejak Pendapat");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";

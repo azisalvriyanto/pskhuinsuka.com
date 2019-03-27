@@ -76,9 +76,9 @@
 
                                         </div>
                                     </div>
-                                    <div class="card-body p-0 pb-3 text-center" id="keterangan">
+                                    <div class="card-body p-0 pb-3 text-center">
                                                         
-                                        <table class="table mb-0" id="table"<?= empty($data["daftar"]) ? " hidden" : "" ?>>
+                                        <table class="table mb-0" id="table"<?= !empty($data["daftar"]) ? "" : " hidden" ?>>
                                             <thead class="bg-light">
                                                 <tr>
                                                     <th scope="col" class="border-0">#</th>
@@ -107,14 +107,13 @@
                                                 <tr><?php } } ?>
 
                                             </tbody>
-                                        </table><?php if (empty($data["daftar"])) { ?>
+                                        </table>
 
-                                            <div id="keterangan_sub" class="row">
-                                                <div class="col-md-12 text-center pt-3">
-                                                    <label>Daftar anggota tidak ditemukan.</label>
-                                                </div>
-                                            </div><?php } ?>
-
+                                        <div id="keterangan" class="row"<?= !empty($data["daftar"]) ? " hidden" : "" ?>>
+                                            <div class="col-md-12 text-center pt-3">
+                                                <label>Daftar anggota tidak ditemukan.</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +147,7 @@
                             if (response.status === 200) {
                                 $("#status").html(``);
                                 $("#table").removeAttr("hidden");
-                                $("#keterangan_sub").remove();
+                                $("#keterangan").attr("hidden", "true");
                                 $("#tbody").html(``);
 
                                 var data = response.keterangan;
@@ -168,14 +167,9 @@
                                 }
                             } else {
                                 $("#table").attr("hidden", "true");
-                                $("#keterangan_sub").remove();
-                                $("#keterangan").append(`
-                                                    <div id="keterangan_sub" class="row">
-                                                        <div class="col-md-12 text-center pt-3">
-                                                            <label>Daftar anggota tidak ditemukan.</label>
-                                                        </div>
-                                                    </div>`);
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#keterangan").removeAttr("hidden");
+
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -186,13 +180,7 @@
                         },
                         error: function (jqXHR, exception) {
                             $("#table").attr("hidden", "true");
-                            $("#keterangan_sub").remove();
-                            $("#keterangan").append(`
-                                                <div id="keterangan_sub" class="row">
-                                                    <div class="col-md-12 text-center pt-3">
-                                                        <label>Daftar anggota tidak ditemukan.</label>
-                                                    </div>
-                                                </div>`);
+                            $("#keterangan").removeAttr("hidden");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (Verify Network).";
@@ -274,7 +262,7 @@
                                         button: "Tutup"
                                     });
 
-                                    $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                         <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>

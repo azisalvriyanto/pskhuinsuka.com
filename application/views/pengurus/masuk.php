@@ -327,7 +327,7 @@
 //           $("#login").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan otentikasi...");
 //       },
 //       success: function(response) {
-//           $("#login").fadeIn(750).html("Masuk");
+//           $("#login").html("Masuk");
 //           if (response.status === 200) {
 //             window.location.assign(`<?= base_url("pengurus/")."beranda" ?>`);
 //           } else {
@@ -335,7 +335,7 @@
 //           }
 //       },
 //       error: function (jqXHR, exception) {
-//           $("#login").fadeIn(750).html("Masuk");
+//           $("#login").html("Masuk");
 
 //           if (jqXHR.status === 0) {
 //               keterangan = "Not connect (verify network).";

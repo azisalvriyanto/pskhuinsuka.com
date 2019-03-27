@@ -211,7 +211,7 @@
                             $("#tambah").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan penambahan");
                         },
                         success: function(response) {
-                            $("#tambah").fadeIn(750).html("Tambah");
+                            $("#tambah").html("Tambah");
 
                             if (response.status === 200) {
                                 swal({
@@ -223,7 +223,7 @@
                                     window.location.assign(`<?= base_url("pengurus/")."keanggotaan/" ?>`+$("#username").val());
                                 });
                             } else {
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -233,7 +233,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#tambah").fadeIn(750).html("Tambah");
+                            $("#tambah").html("Tambah");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -280,7 +280,7 @@
                             $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
                         },
                         success: function(response) {
-                            $("#perbarui").fadeIn(750).html("Perbarui Profil");
+                            $("#perbarui").html("Perbarui Profil");
                             if (response.status === 200) {
                                 swal({
                                     title: "Profil berhasil diperbarui.",
@@ -291,7 +291,7 @@
                                     location.reload();
                                 });
                             } else {
-                                $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -301,7 +301,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#perbarui").fadeIn(750).html("Perbarui Profil");
+                            $("#perbarui").html("Perbarui Profil");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -367,7 +367,7 @@
                                             button: "Tutup"
                                         });
 
-                                        $("#status").fadeIn(750).html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                             <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
                                             </button>
