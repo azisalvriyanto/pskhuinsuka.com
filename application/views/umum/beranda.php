@@ -7,8 +7,19 @@
 <head>
     <?php $this->load->view("umum/_partials/head.php") ?>
 
+    <style>
+        pre {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            text-align: justify;
+            font-size: 13pt;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+         }
+    </style>
 </head>
-
 <body>    
     <!-- header -->
     <?php $this->load->view("umum/_partials/header.php") ?>
@@ -81,17 +92,17 @@
     <!-- organisasi -->
     <section class="banner-bottom">
         <div class="container">
-            <div class="row"><?php if (!empty($organisasi["sejarah"])) { ?>
+            <div class="row inner-sec-wthree"><?php if (!empty($organisasi["sejarah"])) { ?>
 
                 <div class="col-lg-5 bt-bottom-info" data-aos="fade-right">
                     <h5><?= $organisasi["nama_lengkap"] ?></h5>
                 </div>
                 <div class="col-lg-7 bt-bottom-info" data-aos="fade-left">
-                    <p><?= $organisasi["sejarah"] ?></p>
+                    <pre><p><?= $organisasi["sejarah"] ?><p></pre>
                 </div>
             </div><?php } if (!empty($organisasi["visi"]) && !empty($organisasi["misi"])) { ?>
 
-            <div class="row">
+            <div class="row inner-sec-wthree">
                 <div class="col-lg-6 bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
                     <div class="bt-icon">
                         <span class="fas fa-trophy"></span>

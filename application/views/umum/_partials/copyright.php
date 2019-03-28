@@ -17,7 +17,7 @@
                     if (!empty($organisasi["kontak"]["twitter"])) { ?>
 
                     <li>
-                        <a class="facebook" href="//www.youtube.com/<?= $organisasi["kontak"]["twitter"] ?>">
+                        <a class="facebook" href="//www.twitter.com/<?= $organisasi["kontak"]["twitter"] ?>">
 							<i class="fab fa-twitter"></i>
 						</a>
                     </li><?php }
@@ -31,7 +31,7 @@
                     if (!empty($organisasi["kontak"]["youtube"])) { ?>
 
                     <li>
-                        <a class="facebook" href="//www.youtube.com/<?= !empty($organisasi["kontak"]["youtube"]) ? $organisasi["kontak"]["youtube"] : "" ?>">
+                        <a class="facebook" href="//www.youtube.com/channel/<?= !empty($organisasi["kontak"]["youtube"]) ? $organisasi["kontak"]["youtube"] : "" ?>">
 							<i class="fab fa-youtube"></i>
 						</a>
                     </li><?php }  } ?>

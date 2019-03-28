@@ -8,6 +8,12 @@
     <?php $this->load->view("umum/_partials/head.php") ?>
     
     <link href="<?= base_url("assets/umum/") ?>css/contact.css" rel='stylesheet' type='text/css' />
+
+    <style>
+        .text-wrap {
+            word-wrap: break-word; 
+        }
+    </style>
 </head>
 
 <body>
@@ -31,88 +37,74 @@
                     <iframe src="<?= $organisasi["kontak"]["peta"] ?>" class="map" style="border:0" allowfullscreen=""></iframe>
                 </div><?php } ?>
 
-
-                <div class="address row" style="margin-bottom: 1em">
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="fas fa-map-marker-alt" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Alamat</h6>
-                                <p><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : ""  ?></p>
-                            </div>
+                <div class="col-sm-4" style="padding: 10px;">
+                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                        <div class="bt-icon">
+                            <span class="fas fa-map-marker-alt"></span>
                         </div>
-                    </div>
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="fas fa-phone-volume" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Nomor Telepon</h6>
-                                <p><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : ""  ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="far fa-envelope" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Email</h6>
-                                <a href="mailto:<?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : ""  ?>">
-                                    <p><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : ""  ?></p>
-                                </a>
-                            </div>
-                        </div>
+                        <br>
+                        <h3 class="sub-tittle" style="color: white;">Alamat</h3>
+                        <p class="text-wrap"><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : "-"  ?></p>
                     </div>
                 </div>
-
-                <div class="address row" style="margin-top: 1em">
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="fab fa-facebook-f" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Facebook</h6>
-                                <a href="//www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?>">
-                                    <p>www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?></p>
-                                </a>
-                            </div>
+                <div class="col-sm-4" style="padding: 10px;">
+                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                        <div class="bt-icon">
+                            <span class="fas fa-phone-volume"></span>
                         </div>
-                    </div>
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="fab fa-twitter" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Twitter</h6>
-                                <a href="//www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?>">
-                                    <p>www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?></p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 address-grid-inf-w3layouts" data-aos="zoom-out">
-                        <div class="address-info">
-                            <div class="address-left">
-                                <span class="fab fa-instagram" aria-hidden="true"></span>
-                            </div>
-                            <div class="address-right">
-                                <h6>Instagram</h6>
-                                <a href="//www.instagram.com/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?>">
-                                    <p>www.instagram.com/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?></p>
-                                </a>
-                            </div>
-                        </div>
+                        <br>
+                        <h3 class="sub-tittle" style="color: white;">Telepon</h3>
+                        <p class="text-wrap"><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : "-"  ?></p>
                     </div>
                 </div>
-
-                
+                <div class="col-sm-4" style="padding: 10px;">
+                    <a href="mailto:<?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : ""  ?>">
+                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                            <div class="bt-icon">
+                                <span class="far fa-envelope"></span>
+                            </div>
+                            <br>
+                            <h3 class="sub-tittle" style="color: white;">Email</h3>
+                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : "-"  ?></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-4" style="padding: 10px;">
+                    <a href="//www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?>">
+                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                        <div class="bt-icon" style>
+                            <span class="fab fa-facebook-f"></span>
+                        </div>
+                        <br>
+                        <h3 class="sub-tittle" style="color: white;">Facebook</h3>
+                        <p class="text-wrap">www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?></p>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-sm-4" style="padding: 10px;">
+                    <a href="//www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?>">
+                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                            <div class="bt-icon" style>
+                                <span class="fab fa-twitter"></span>
+                            </div>
+                            <br>
+                            <h3 class="sub-tittle" style="color: white;">Twitter</h3>
+                            <p class="text-wrap">www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?></p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-4" style="padding: 10px;">
+                    <a href="//www.instagram.com/channel/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?>">
+                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
+                            <div class="bt-icon" style>
+                                <span class="fab fa-instagram"></span>
+                            </div>
+                            <br>
+                            <h3 class="sub-tittle" style="color: white;">Instagram</h3>
+                            <p class="text-wrap">www.instagram.com/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?></p>
+                        </div>
+                    </a>
+                </div>
 
                 <div class="contact_grid_right">
                     <br><br>

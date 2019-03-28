@@ -1,6 +1,8 @@
 <?php
-    defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+	defined('BASEPATH') OR exit('No direct script access allowed');
+	
+	$array_hari = array(0 => "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+	$array_bulan = array(1 => "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember"); ?>
 <!DOCTYPE html>
 <html>
 
@@ -19,117 +21,38 @@
     <?php $this->load->view("umum/_partials/breadcrumb.php") ?>
 
     <!-- //breadcrumb -->
-    
+
     <!-- field -->
     <section class="services">
 		<div class="container">
 			<h3 class="tittle">Galeri</h3>
-			<div class="row inner-sec-wthree">
-				<div class="col-md-4 proj_gallery_grid" data-aos="zoom-in">
-					<div class="section_1_gallery_grid">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g1.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g1.jpg" alt=" " class="img-responsive" />
+			<div class="row inner-sec-wthree"><?php for ($i=0; $i<18 ; $i++) {
+				$waktu = $data[$i]["created_time"];
+				$hari = $array_hari[date("w", $waktu)];
+				$tanggal = date("j", $waktu);
+				$bulan = $array_bulan[date("n", $waktu)];
+				$tahun = date("Y", $waktu);?>
+
+				<div class="col-md-4 proj_gallery_grid" data-aos="zoom-in" style="padding: 0px;">
+					<div class="section_1_gallery_grid" style="margin: 0px;">
+						<a title="<?= $data[$i]["caption"]["text"] ?>" target="_blank" href="<?= $data[$i]["link"] ?>">
+							<div class="section_1_gallery_grid1" style="padding: 1px;">
+								<img src="<?= $data[$i]["images"]["standard_resolution"]["url"] ?>" alt=" " class="img-responsive" />
 								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
+									<h3 class="pb-2"><?= $hari.", ".$tanggal." ".$bulan." ".$tahun ?></h3>
+									<p>
+										<span class="fa fa-heart" aria-hidden="true"></span>
+										<?= $data[$i]["likes"]["count"] ?>
+										&nbsp;&nbsp;&nbsp;
+										<span class="fa fa-comments" aria-hidden="true"></span>
+										<?= $data[$i]["comments"]["count"] ?>
+									</p>
 								</div>
 							</div>
 						</a>
 					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g2.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g2.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g3.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g3.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 proj_gallery_grid" data-aos="zoom-in">
-					<div class="section_1_gallery_grid">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g4.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g4.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g5.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g5.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g6.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g6.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 proj_gallery_grid" data-aos="zoom-in">
-					<div class="section_1_gallery_grid">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g7.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g7.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g8.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g8.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="section_1_gallery_grid" data-aos="zoom-in">
-						<a title="Donec sapien massa, placerat ac sodales ac, feugiat quis est." href="<?= base_url("assets/umum/") ?>images/g9.jpg">
-							<div class="section_1_gallery_grid1">
-								<img src="<?= base_url("assets/umum/") ?>images/g9.jpg" alt=" " class="img-responsive" />
-								<div class="proj_gallery_grid1_pos">
-									<h3>Smelter</h3>
-									<p>Add some text</p>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
+				</div><? } ?>
+
 			</div>
 		</div>
 	</section>
