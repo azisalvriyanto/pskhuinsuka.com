@@ -352,7 +352,6 @@
                     });
                 });
 
-
                 $("#hapus").click(function() {
                     var username = $("#username").val();
                     swal({
