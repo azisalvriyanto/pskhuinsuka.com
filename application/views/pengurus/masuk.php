@@ -345,6 +345,13 @@ $(document).ready(function() {
               $("#validasi-username").attr("hidden", "true");
               $("#validasi-password").removeAttr("hidden");
               $("#validasi-password").html(response.keterangan);
+            } else if (response.keterangan.includes("Akun")) {
+              swal({
+                title: "Proses masuk gagal.",
+                text: response.keterangan,
+                icon: "error",
+                button: "Tutup"
+              });
             } else {
               $("#validasi-username").removeAttr("hidden");
               $("#validasi-password").removeAttr("hidden");
@@ -377,11 +384,6 @@ $(document).ready(function() {
               icon: "error",
               button: "Tutup"
           });
-
-          $("#validasi-username").removeAttr("hidden");
-          $("#validasi-password").removeAttr("hidden");
-          $("#validasi-username").html(keterangan);
-          $("#validasi-password").html(keterangan);
       }
     });
   });

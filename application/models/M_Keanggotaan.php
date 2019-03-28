@@ -26,9 +26,10 @@ class M_Keanggotaan extends CI_Model {
 
     public function lihat($username)
     {
-        $query = $this->db->select("keanggotaan.*, divisi.divisi_keterangan, jabatan.jabatan_keterangan")->from("keanggotaan")
+        $query = $this->db->select("akun.akun_keterangan, keanggotaan.*, divisi.divisi_keterangan, jabatan.jabatan_keterangan")->from("keanggotaan")
         ->join("jabatan", "jabatan.jabatan_id=keanggotaan.keanggotaan_jabatan")
         ->join("divisi", "divisi.divisi_id=keanggotaan.keanggotaan_divisi")
+        ->join("akun", "akun.akun_username=keanggotaan.keanggotaan_username")
         ->where("keanggotaan_username", $username)->get();
 
         if ($query->num_rows() > 0) {
@@ -37,6 +38,7 @@ class M_Keanggotaan extends CI_Model {
             return array(
                 "status" => 200,
                 "keterangan" => array(
+                    "keterangan" => $query->akun_keterangan,
                     "periode" => $query->keanggotaan_periode,
                     "username" => $query->keanggotaan_username,
                     "nama" => $query->keanggotaan_nama,

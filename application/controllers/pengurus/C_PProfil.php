@@ -20,6 +20,7 @@ class C_PProfil extends CI_Controller {
 						"data" => array(
 							"daftar_periode" => $periode["keterangan"],
 							"daftar_divisi" => $divisi["keterangan"],
+							"keterangan" => $result["keterangan"]["keterangan"],
 							"periode" => $result["keterangan"]["periode"],
 							"username" => $result["keterangan"]["username"],
 							"nama" => $result["keterangan"]["nama"],

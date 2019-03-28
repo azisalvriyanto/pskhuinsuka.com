@@ -362,7 +362,7 @@
         <!-- javascript -->
         <?php $this->load->view("pengurus/_partials/javascript.php") ?>
 
-        <!-- //javascript -->
 		<script src="<?= base_url("assets/pengurus/") ?>scripts/app/app-blog-overview.1.1.0.js"></script>
+        <!-- //javascript -->
 	</body>
 </html>

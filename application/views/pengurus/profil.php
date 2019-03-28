@@ -52,8 +52,22 @@
                                         <div class="row">
                                             <div class="col">
                                                 <form>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4">
+                                                    <div class="form-row"><?php if ($menu["judul"] === "Keanggotaan") { ?>
+
+                                                        <div class="form-group col-md-2">
+                                                            <label for="keterangan">Keterangan</label>
+                                                            <select id="keterangan" class="form-control">
+                                                                <?php
+                                                                    if (empty($data["keterangan"])) {
+                                                                        echo "<option value=\"\" selected>Pilih...</option>";
+                                                                    } ?>
+
+                                                                <option value="1"<?= $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
+                                                                <option value="0"<?= $data["keterangan"] === "0" ? " selected" : "" ?>>Tidak Aktif</option>
+                                                            </select>
+                                                        </div><?php } ?>
+
+                                                        <div class="form-group col-md-3">
                                                             <label for="periode">Periode</label>
                                                             <select id="periode" class="form-control">
                                                             <?php
@@ -77,7 +91,7 @@
 
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-8">
+                                                        <div class="form-group <?= $menu["judul"] === "Keanggotaan" ? "col-md-7" : "col-md-9" ?>">
                                                             <label for="nama">Nama</label>
                                                             <input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= !empty($data["periode"]) ? $data["nama"] : "" ?>">
                                                         </div>
@@ -102,7 +116,7 @@
                                                                     }
 
                                                                     if (!empty($data["daftar_periode"])) {
-                                                                        for ($i=1; $i<count($data["daftar_divisi"]) ; $i++) {
+                                                                        for ($i=0; $i<count($data["daftar_divisi"]) ; $i++) {
                                                                             if ($menu["judul_sub"] !== "Tambah") {
                                                                                 if ($data["divisi"] === $data["daftar_divisi"][$i]["divisi_keterangan"] && !empty($data["divisi"])) {
                                                                                     $selected = " selected";
@@ -208,7 +222,7 @@
                             "motto": $("#motto").val()
                         },
                         beforeSend: function (e) {
-                            $("#tambah").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan penambahan");
+                            $("#tambah").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan penambahan...");
                         },
                         success: function(response) {
                             $("#tambah").html("Tambah");
@@ -277,7 +291,7 @@
                             "motto": $("#motto").val()
                         },
                         beforeSend: function (e) {
-                            $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
+                            $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
                             $("#perbarui").html("Perbarui Profil");

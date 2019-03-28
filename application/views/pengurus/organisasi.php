@@ -330,7 +330,7 @@
                             "peta": $("#peta").val()
                         },
                         beforeSend: function (e) {
-                            $("#profil-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
+                            $("#profil-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
                             $("#profil-submit").html("Perbarui Profil");
@@ -399,7 +399,7 @@
                             "3_pendapat": $("#3_pendapat").val()
                         },
                         beforeSend: function (e) {
-                            $("#jpendapat-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan");
+                            $("#jpendapat-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
                             $("#jpendapat-submit").html("Perbarui Jejak Pendapat");

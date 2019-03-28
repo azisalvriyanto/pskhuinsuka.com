@@ -126,8 +126,8 @@
                             <span class="icon">
 								<i class="fas fa-laptop"></i>
 							</span>
-                            <h5><?= $data["divisi"][2]["divisi_keterangan"] ?></h5>
-                            <p><?= $data["divisi"][2]["divisi_penjelasan"] ?></p>
+                            <h5><?= $data["divisi"][1]["divisi_keterangan"] ?></h5>
+                            <p><?= $data["divisi"][1]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                     <div class="grid_info second">
@@ -135,8 +135,8 @@
                             <span class="icon">
 								<i class="far fa-clone"></i>
 							</span>
-                            <h5><?= $data["divisi"][3]["divisi_keterangan"] ?></h5>
-                            <p><?= $data["divisi"][3]["divisi_penjelasan"] ?></p>
+                            <h5><?= $data["divisi"][2]["divisi_keterangan"] ?></h5>
+                            <p><?= $data["divisi"][2]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                 </div>
@@ -149,8 +149,8 @@
                             <span class="icon">
 								<i class="fas fa-sitemap"></i>
 							</span>
-                            <h5><?= $data["divisi"][4]["divisi_keterangan"] ?></h5>
-                            <p><?= $data["divisi"][4]["divisi_penjelasan"] ?></p>
+                            <h5><?= $data["divisi"][3]["divisi_keterangan"] ?></h5>
+                            <p><?= $data["divisi"][3]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                     <div class="grid_info second">
@@ -158,8 +158,8 @@
                             <span class="icon">
 								<i class="fab fa-android"></i>
 							</span>
-                            <h5><?= $data["divisi"][5]["divisi_keterangan"] ?></h5>
-                            <p><?= $data["divisi"][5]["divisi_penjelasan"] ?></p>
+                            <h5><?= $data["divisi"][4]["divisi_keterangan"] ?></h5>
+                            <p><?= $data["divisi"][4]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                 </div>
