@@ -58,8 +58,9 @@
                                                             <label for="keterangan">Keterangan</label>
                                                             <select id="keterangan" class="form-control">
                                                                 <?php
-                                                                    if (empty($data["keterangan"])) {
+                                                                    if ($data["keterangan"] === NULL) {
                                                                         echo "<option value=\"\" selected>Pilih...</option>";
+                                                                        $data["keterangan"] = "";
                                                                     } ?>
 
                                                                 <option value="1"<?= $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
@@ -211,6 +212,7 @@
                         dataType: "json",
                         type: "POST",
                         data : {
+                            "keterangan": $("#keterangan").val(),
                             "periode": $("#periode").val(),
                             "nama": $("#nama").val(),
                             "username": $("#username").val(),
@@ -277,11 +279,18 @@
                 });
 
                 $("#perbarui").click(function() {
+                    if ($("#keterangan").val()+"" !== "undefined") {
+                        var keterangan = $("#keterangan").val();
+                    } else {
+                        var keterangan = "1";
+                    }
+
                     $.ajax({
                         url: site_api+"/keanggotaan/perbarui",
                         dataType: "json",
                         type: "POST",
                         data : {
+                            "keterangan": keterangan,
                             "username": $("#username").val(),
                             "nama": $("#nama").val(),
                             "divisi": $("#divisi").val(),
