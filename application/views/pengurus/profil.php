@@ -311,7 +311,53 @@
                                     button: "Tutup",
                                 })
                                 .then((value) => {
-                                    location.reload();
+                                    if (
+                                        $("#username").val() === `<?= $pengguna["username"] ?>`
+                                        && keterangan === "0"
+                                    ) {
+                                        $.ajax({
+                                            url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                            dataType: "json",
+                                            type: "GET",
+                                            success: function(response) {
+                                                if (response.status === 200) {
+                                                    window.location.assign(`<?= base_url("pengurus") ?>`);
+                                                } else {
+                                                    swal({
+                                                        title: "Silahkan coba lagi!",
+                                                        text: response.keterangan,
+                                                        icon: "error",
+                                                        button: "Tutup"
+                                                    });
+                                                }
+                                            },
+                                            error: function (jqXHR, exception) {
+                                                if (jqXHR.status === 0) {
+                                                    keterangan = "Not connect (verify network).";
+                                                } else if (jqXHR.status == 404) {
+                                                    keterangan = "Requested page not found.";
+                                                } else if (jqXHR.status == 500) {
+                                                    keterangan = "Internal Server Error.";
+                                                } else if (exception === "parsererror") {
+                                                    keterangan = "Requested JSON parse failed.";
+                                                } else if (exception === "timeout") {
+                                                    keterangan = "Time out error.";
+                                                } else if (exception === "abort") {
+                                                    keterangan = "Ajax request aborted.";
+                                                } else {
+                                                    keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                                }
+                                                swal({
+                                                    title: "Silahkan coba lagi!",
+                                                    text: keterangan,
+                                                    icon: "error",
+                                                    button: "Tutup"
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        location.reload();
+                                    }
                                 });
                             } else {
                                 $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
@@ -376,7 +422,46 @@
                                         })
                                         .then((yes) => {
                                             if (username === `<?= $pengguna["username"] ?>`) {
-                                                window.location.assign(`<?= base_url("pengurus/")."keluar" ?>`);
+                                                $.ajax({
+                                                    url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                    dataType: "json",
+                                                    type: "GET",
+                                                    success: function(response) {
+                                                        if (response.status === 200) {
+                                                            window.location.assign(`<?= base_url("pengurus") ?>`);
+                                                        } else {
+                                                            swal({
+                                                                title: "Silahkan coba lagi!",
+                                                                text: response.keterangan,
+                                                                icon: "error",
+                                                                button: "Tutup"
+                                                            });
+                                                        }
+                                                    },
+                                                    error: function (jqXHR, exception) {
+                                                        if (jqXHR.status === 0) {
+                                                            keterangan = "Not connect (verify network).";
+                                                        } else if (jqXHR.status == 404) {
+                                                            keterangan = "Requested page not found.";
+                                                        } else if (jqXHR.status == 500) {
+                                                            keterangan = "Internal Server Error.";
+                                                        } else if (exception === "parsererror") {
+                                                            keterangan = "Requested JSON parse failed.";
+                                                        } else if (exception === "timeout") {
+                                                            keterangan = "Time out error.";
+                                                        } else if (exception === "abort") {
+                                                            keterangan = "Ajax request aborted.";
+                                                        } else {
+                                                            keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                                        }
+                                                        swal({
+                                                            title: "Silahkan coba lagi!",
+                                                            text: keterangan,
+                                                            icon: "error",
+                                                            button: "Tutup"
+                                                        });
+                                                    }
+                                                });
                                             } else {
                                                 window.location.assign(`<?= base_url("pengurus/")."keanggotaan" ?>`);
                                             }
@@ -542,7 +627,46 @@
                                 .then((yes) => {
                                     if (yes) {
                                         if (`<?= $menu["judul"] ?>` === "Profil" || username_lama === `<?= $pengguna["username"] ?>`) {
-                                            window.location.assign(`<?= base_url("pengurus/")."keluar" ?>`);
+                                            $.ajax({
+                                                url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                dataType: "json",
+                                                type: "GET",
+                                                success: function(response) {
+                                                    if (response.status === 200) {
+                                                        window.location.assign(`<?= base_url("pengurus") ?>`);
+                                                    } else {
+                                                        swal({
+                                                            title: "Silahkan coba lagi!",
+                                                            text: response.keterangan,
+                                                            icon: "error",
+                                                            button: "Tutup"
+                                                        });
+                                                    }
+                                                },
+                                                error: function (jqXHR, exception) {
+                                                    if (jqXHR.status === 0) {
+                                                        keterangan = "Not connect (verify network).";
+                                                    } else if (jqXHR.status == 404) {
+                                                        keterangan = "Requested page not found.";
+                                                    } else if (jqXHR.status == 500) {
+                                                        keterangan = "Internal Server Error.";
+                                                    } else if (exception === "parsererror") {
+                                                        keterangan = "Requested JSON parse failed.";
+                                                    } else if (exception === "timeout") {
+                                                        keterangan = "Time out error.";
+                                                    } else if (exception === "abort") {
+                                                        keterangan = "Ajax request aborted.";
+                                                    } else {
+                                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                                    }
+                                                    swal({
+                                                        title: "Silahkan coba lagi!",
+                                                        text: keterangan,
+                                                        icon: "error",
+                                                        button: "Tutup"
+                                                    });
+                                                }
+                                            });
                                         } else {
                                             window.location.assign(`<?= base_url("pengurus/")."keanggotaan" ?>`+username_baru);
                                         }
