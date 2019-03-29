@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/*
+git add .
+git commit -m "memperbaiki inputan divisi pada view \"profil\""
+git push -u al-vri master
+*/
+
 $route["default_controller"]	= "Umum";
 //$route["404_override"]			= "Galat/_404";
 $route["404_override"]			= "";

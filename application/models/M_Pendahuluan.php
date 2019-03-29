@@ -98,14 +98,18 @@ class M_Pendahuluan extends CI_Model {
             );
         }
 
-        $query = $this->db->select("keanggotaan_username, keanggotaan_nama, keanggotaan_jabatan")->from("akun")->join("keanggotaan","keanggotaan.keanggotaan_username=akun.akun_username")->where("akun_username", $username)->get();
+        $query = $this->db->select("keanggotaan_username, keanggotaan_nama, keanggotaan_divisi, keanggotaan_jabatan, akun_keterangan")->from("akun")
+        ->join("keanggotaan","keanggotaan.keanggotaan_username=akun.akun_username")
+        ->where("akun_username", $username)->get();
         if ($query->num_rows() > 0) {
             $data = @array_merge($data,
                 array(
                     "pengguna" => array(
                         "username" => $query->row()->keanggotaan_username,
                         "nama" => $query->row()->keanggotaan_nama,
-                        "keterangan" => $query->row()->keanggotaan_jabatan
+                        "keterangan" => $query->row()->akun_keterangan,
+                        "divisi" => $query->row()->keanggotaan_divisi,
+                        "jabatan" => $query->row()->keanggotaan_jabatan
                     )
                 )
             );
@@ -115,7 +119,9 @@ class M_Pendahuluan extends CI_Model {
                     "pengguna" => array(
                         "username" => "",
                         "nama" => "",
-                        "keterangan" => ""
+                        "keterangan" => "",
+                        "divisi" => "",
+                        "jabatan" => ""
                     )
                 )
             );

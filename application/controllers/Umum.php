@@ -110,7 +110,11 @@ class Umum extends CI_Controller {
 				)
 			);
 		} else {
-			$data = "";
+			$data = @array_merge($data,
+				array(
+					"data" => ""
+				)
+			);
 		}
 
 		$this->load->view("umum/galeri", $data);

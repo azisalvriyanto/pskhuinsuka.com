@@ -117,7 +117,14 @@
                                                                     }
 
                                                                     if (!empty($data["daftar_periode"])) {
-                                                                        for ($i=0; $i<count($data["daftar_divisi"]) ; $i++) {
+                                                                        if ($pengguna["divisi"] === "1") {
+                                                                            $divisi_dari = 0;
+                                                                        }
+                                                                        else {
+                                                                            $divisi_dari = 1;
+                                                                        }
+
+                                                                        for ($i=$divisi_dari; $i<count($data["daftar_divisi"]) ; $i++) {
                                                                             if ($menu["judul_sub"] !== "Tambah") {
                                                                                 if ($data["divisi"] === $data["daftar_divisi"][$i]["divisi_keterangan"] && !empty($data["divisi"])) {
                                                                                     $selected = " selected";
