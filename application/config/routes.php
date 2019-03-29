@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 git add .
-git commit -m "memperbaiki inputan divisi pada view \"profil\""
+git commit -m 'memperbaiki inputan divisi pada view "profil"'
 git push -u al-vri master
 */
 
