@@ -157,7 +157,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-accent" id="profil-submit">Perbarui Profil</button>
+                                                            <button type="button" class="btn btn-accent" id="profil-submit">
+                                                                <i class="far fa-save mr-1"></i>
+                                                                Perbarui Profil
+                                                            </button>
                                                         </div>
                                                     </form>
 
@@ -205,7 +208,10 @@
                                                         </div><?php } ?>
 
                                                         <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-accent" id="jpendapat-submit">Perbaharui Jejak Pendapat</button>
+                                                            <button type="button" class="btn btn-accent" id="jpendapat-submit">
+                                                                <i class="far fa-save mr-1"></i>
+                                                                Perbaharui Jejak Pendapat
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -333,7 +339,7 @@
                             $("#profil-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
-                            $("#profil-submit").html("Perbarui Profil");
+                            $("#profil-submit").html("<i class=\"far fa-save mr-1\"></i> Perbarui Profil");
                             if (response.status === 200) {
                                 swal({
                                     title: "Profil berhasil diperbarui",
@@ -354,7 +360,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#profil-submit").html("Perbarui Profil");
+                            $("#profil-submit").html("<i class=\"far fa-save mr-1\"></i> Perbarui Profil");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -402,7 +408,7 @@
                             $("#jpendapat-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
-                            $("#jpendapat-submit").html("Perbarui Jejak Pendapat");
+                            $("#jpendapat-submit").html("<i class=\"far fa-save mr-1\"></i> Perbarui Jejak Pendapat");
                             if (response.status === 200) {
                                 swal({
                                     title: "Jejak Pendapat berhasil diperbarui",
@@ -420,7 +426,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#jpendapat-submit").html("Perbarui Jejak Pendapat");
+                            $("#jpendapat-submit").html("<i class=\"far fa-save mr-1\"></i> Perbarui Jejak Pendapat");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";

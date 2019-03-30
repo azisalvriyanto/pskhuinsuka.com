@@ -216,7 +216,7 @@
 														<button type="button" class="btn btn-white">
 															<span class="text-light">
 																<i class="material-icons">more_vert</i>
-															</span> Edit </button>
+															</span> Sunting </button>
 													</div>
 												</div>
 											</div>
@@ -244,7 +244,7 @@
 														<button type="button" class="btn btn-white">
 															<span class="text-light">
 																<i class="material-icons">more_vert</i>
-															</span> Edit </button>
+															</span> Sunting </button>
 													</div>
 												</div>
 											</div>
@@ -272,7 +272,7 @@
 														<button type="button" class="btn btn-white">
 															<span class="text-light">
 																<i class="material-icons">more_vert</i>
-															</span> Edit </button>
+															</span> Sunting </button>
 													</div>
 												</div>
 											</div>

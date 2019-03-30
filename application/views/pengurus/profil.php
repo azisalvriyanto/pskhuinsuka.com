@@ -25,19 +25,30 @@
                         <!-- //header -->
 
 						<!-- field -->
-						<div class="row">
+						<div class="row"><?php if ($menu["judul"] !== "Profil") { ?>
+                                                        
+                            <div class="col-md-12 text-right" style="margin-top: -62px;">
+                                <button type="button" class="btn btn-info" id="kembali">
+                                    <i class="fas fa-arrow-left mr-1"></i>
+                                    Kembali
+                                </button>
+                            </div><?php } ?>
+
                             <div class="col-lg-4">
                                 <div class="card card-small mb-4 pt-3">
                                     <div class="card-header border-bottom text-center">
                                         <div class="mb-3 mx-auto">
                                         <img class="rounded-circle" src="<?= base_url("assets/pengurus/") ?>images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                                        <h4 class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "Nama" ?></h4>
-                                        <span class="text-muted d-block mb-2"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "Divisi" ?> (<?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "Jabatan" ?>)</span>
+                                        <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "Nama" ?></h4>
+                                        <span class="text-muted d-block mb-2">
+                                            <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "Divisi" ?></span>
+                                            (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "Jabatan" ?></span>)
+                                        </span>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-4">
                                         <div class="progress-wrapper">
-                                            <span><?= !empty($data["periode"]) ? $data["motto"] : "Tidak ada motto." ?></span>
+                                            <span id="tampil_motto"><?= !empty($data["periode"]) ? $data["motto"] : "Tidak ada motto." ?></span>
                                         </div>
                                     </ul>
                                 </div>
@@ -54,7 +65,7 @@
                                                 <form>
                                                     <div class="form-row"><?php if ($menu["judul"] === "Keanggotaan") { ?>
 
-                                                        <div class="form-group col-md-2">
+                                                        <div class="form-group col-md-3">
                                                             <label for="keterangan">Keterangan</label>
                                                             <select id="keterangan" class="form-control">
                                                                 <?php
@@ -92,7 +103,7 @@
 
                                                             </select>
                                                         </div>
-                                                        <div class="form-group <?= $menu["judul"] === "Keanggotaan" ? "col-md-7" : "col-md-9" ?>">
+                                                        <div class="form-group <?= $menu["judul"] === "Keanggotaan" ? "col-md-6" : "col-md-9" ?>">
                                                             <label for="nama">Nama</label>
                                                             <input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= !empty($data["periode"]) ? $data["nama"] : "" ?>">
                                                         </div>
@@ -167,23 +178,18 @@
                                                         <textarea class="form-control" name="motto" id="motto" rows="2" placeholder="Motto."><?= !empty($data["periode"]) ? $data["motto"] : "" ?></textarea>
                                                     </div>
                                                     <div class="form-row pt-3">
-                                                        <div class="form-group <?= !empty($data["periode"]) && $menu["judul"] === "Keanggotaan" ? "col-md-4" : "col-md-6" ?> text-center">
-                                                            <button type="button" class="btn btn-accent" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "Perbarui Profil" : "Tambah" ?></button>
+                                                        <div class="form-group <?= $menu["judul_sub"] === "Tambah" ? "col-md-12" : " col-md-6" ?> text-center">
+                                                            <button type="button" class="btn btn-accent" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "<i class=\"far fa-save mr-1\"></i> Perbarui Profil" : "<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil" ?></button>
                                                         </div>
                                                         <?php
                                                             if (!empty($data["periode"])) {
-                                                                echo "<div class=\"form-group col-md-4 text-center\">
-                                                            <button type=\"button\" class=\"btn btn-danger\" id=\"hapus\">Hapus Profil</button>
+                                                                echo "<div class=\"form-group col-md-6 text-center\">
+                                                            <button type=\"button\" class=\"btn btn-danger\" id=\"hapus\"><i class=\"fas fa-trash-alt mr-1\"></i> Hapus Profil</button>
                                                         </div>";
                                                             } else {
                                                                 echo "";
                                                             }
                                                         ?>
-                                                        <?php if ($menu["judul"] !== "Profil") { ?>
-                                                        
-                                                        <div class="form-group <?= !empty($data["periode"]) ? "col-md-4" : "col-md-6" ?> text-center">
-                                                            <button type="button" class="btn btn-info" id="kembali">Kembali</button>
-                                                        </div><?php } ?>
 
                                                     </div>
                                                 </form>
@@ -213,6 +219,26 @@
             var site_api = `<?= $api ?>`;
 
             $(document).ready(function() {
+                $("#nama").keyup(function() {
+                    $("#tampil_nama").html($("#nama").val());
+                });
+
+                $("#motto").keyup(function() {
+                    $("#tampil_motto").html($("#motto").val());
+                });
+
+                $("#divisi").change(function() {
+                    $("#tampil_divisi").html(
+                        $("#divisi option:selected").text()
+                    );
+                });
+
+                $("#jabatan").change(function() {
+                    $("#tampil_jabatan").html(
+                        $("#jabatan option:selected").text()
+                    );
+                });
+
                 $("#tambah").click(function() {
                     $.ajax({
                         url: site_api+"/keanggotaan/tambah",
@@ -234,11 +260,11 @@
                             $("#tambah").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan penambahan...");
                         },
                         success: function(response) {
-                            $("#tambah").html("Tambah");
+                            $("#tambah").html("<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil");
 
                             if (response.status === 200) {
                                 swal({
-                                    title: "Profil berhasil ditambah.",
+                                    title: "Profil berhasil ditambahkan.",
                                     icon: "success",
                                     button: "Tutup",
                                 })
@@ -256,7 +282,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#tambah").html("Tambah");
+                            $("#tambah").html("<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -310,7 +336,7 @@
                             $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
                         success: function(response) {
-                            $("#perbarui").html("Perbarui Profil");
+                            $("#perbarui").html("<i class=\"far fa-save mr-1\"></i> Perbarui Profil");
                             if (response.status === 200) {
                                 swal({
                                     title: "Profil berhasil diperbarui.",
@@ -377,7 +403,7 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#perbarui").html("Perbarui Profil");
+                            $("#perbarui").html("<i class=\"far fa-save mr-1\"></i> Perbarui Profil");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
@@ -407,9 +433,10 @@
 
                 $("#hapus").click(function() {
                     var username = $("#username").val();
+                    var nama = $("#nama").val();
                     swal({
                         title: "Apakah anda yakin?",
-                        text: "Setelah dihapus, anda tidak akan dapat memulihkan data dari username "+username+".",
+                        text: "Setelah dihapus, anda tidak dapat memulihkan data "+nama+".",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,
@@ -578,7 +605,7 @@
                 $("#kembali").click(function() {
                     swal({
                         title: "Apakah anda yakin?",
-                        text: "Data yang anda edit tidak akan disimpan.",
+                        text: "Data yang anda sunting tidak akan disimpan.",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true,

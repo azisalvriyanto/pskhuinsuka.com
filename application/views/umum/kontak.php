@@ -38,70 +38,82 @@
                 </div><?php } ?>
 
                 <div class="col-sm-4" style="padding: 10px;">
-                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                        <div class="bt-icon">
-                            <span class="fas fa-map-marker-alt"></span>
+                    <div class="icon_info" style="background: black; height: 100%;">
+                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                            <div class="bt-icon">
+                                <span class="fas fa-map-marker-alt"></span>
+                            </div>
+                            <br>
+                            <h3 class="sub-tittle" style="color: white;">Alamat</h3>
+                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : "-"  ?></p>
                         </div>
-                        <br>
-                        <h3 class="sub-tittle" style="color: white;">Alamat</h3>
-                        <p class="text-wrap"><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : "-"  ?></p>
                     </div>
                 </div>
                 <div class="col-sm-4" style="padding: 10px;">
-                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                        <div class="bt-icon">
-                            <span class="fas fa-phone-volume"></span>
+                    <div class="icon_info" style="background: black; height: 100%;">
+                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                            <div class="bt-icon">
+                                <span class="fas fa-phone-volume"></span>
+                            </div>
+                            <br>
+                            <h3 class="sub-tittle" style="color: white;">Telepon</h3>
+                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : "-"  ?></p>
                         </div>
-                        <br>
-                        <h3 class="sub-tittle" style="color: white;">Telepon</h3>
-                        <p class="text-wrap"><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : "-"  ?></p>
                     </div>
                 </div>
                 <div class="col-sm-4" style="padding: 10px;">
                     <a href="mailto:<?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : ""  ?>">
-                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                            <div class="bt-icon">
-                                <span class="far fa-envelope"></span>
+                        <div class="icon_info" style="background: black; height: 100%;">
+                            <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                                <div class="bt-icon">
+                                    <span class="far fa-envelope"></span>
+                                </div>
+                                <br>
+                                <h3 class="sub-tittle" style="color: white;">Email</h3>
+                                <p class="text-wrap"><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : "-"  ?></p>
                             </div>
-                            <br>
-                            <h3 class="sub-tittle" style="color: white;">Email</h3>
-                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : "-"  ?></p>
                         </div>
                     </a>
                 </div>
                 <div class="col-sm-4" style="padding: 10px;">
                     <a href="//www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?>">
-                    <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                        <div class="bt-icon" style>
-                            <span class="fab fa-facebook-f"></span>
+                        <div class="icon_info" style="background: black; height: 100%;">
+                            <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                                <div class="bt-icon" style>
+                                    <span class="fab fa-facebook-f"></span>
+                                </div>
+                                <br>
+                                <h3 class="sub-tittle" style="color: white;">Facebook</h3>
+                                <p class="text-wrap">www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?></p>
+                            </div>
                         </div>
-                        <br>
-                        <h3 class="sub-tittle" style="color: white;">Facebook</h3>
-                        <p class="text-wrap">www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?></p>
-                    </div>
                     </a>
                 </div>
                 <div class="col-sm-4" style="padding: 10px;">
                     <a href="//www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?>">
-                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                            <div class="bt-icon" style>
-                                <span class="fab fa-twitter"></span>
+                        <div class="icon_info" style="background: black; height: 100%;">
+                            <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                                <div class="bt-icon" style>
+                                    <span class="fab fa-twitter"></span>
+                                </div>
+                                <br>
+                                <h3 class="sub-tittle" style="color: white;">Twitter</h3>
+                                <p class="text-wrap">www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?></p>
                             </div>
-                            <br>
-                            <h3 class="sub-tittle" style="color: white;">Twitter</h3>
-                            <p class="text-wrap">www.twitter.com/<?= !empty($organisasi["kontak"]["twitter"]) ? $organisasi["kontak"]["twitter"] : ""  ?></p>
                         </div>
                     </a>
                 </div>
                 <div class="col-sm-4" style="padding: 10px;">
                     <a href="//www.instagram.com/channel/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?>">
-                        <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in" style="background: black; height: 100%; padding: 25px">
-                            <div class="bt-icon" style>
-                                <span class="fab fa-instagram"></span>
+                        <div class="icon_info" style="background: black; height: 100%;">
+                            <div class="bottom-sub-grid text-center aos-init aos-animate" data-aos="zoom-in">
+                                <div class="bt-icon" style>
+                                    <span class="fab fa-instagram"></span>
+                                </div>
+                                <br>
+                                <h3 class="sub-tittle" style="color: white;">Instagram</h3>
+                                <p class="text-wrap">www.instagram.com/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?></p>
                             </div>
-                            <br>
-                            <h3 class="sub-tittle" style="color: white;">Instagram</h3>
-                            <p class="text-wrap">www.instagram.com/<?= !empty($organisasi["kontak"]["instagram"]) ? $organisasi["kontak"]["instagram"] : ""  ?></p>
                         </div>
                     </a>
                 </div>

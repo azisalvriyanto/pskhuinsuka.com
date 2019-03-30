@@ -53,7 +53,7 @@ class C_PKeanggotaan extends CI_Controller {
 		if($this->session->userdata("username")) {
 			$menu = array(
 				"judul" => "Keanggotaan",
-				"judul_sub" => "Profil"
+				"judul_sub" => "Sunting"
 			);
 			$data		= $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
 

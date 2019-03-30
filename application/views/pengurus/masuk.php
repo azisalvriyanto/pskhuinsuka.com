@@ -333,11 +333,13 @@ $(document).ready(function() {
           $("#login").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan otentikasi...");
       },
       success: function(response) {
-          $("#login").html("Masuk");
-
           if (response.status === 200) {
+            $("#login").html("Proses masuk berhasil.");
+
             window.location.assign(`<?= base_url("pengurus/")."beranda" ?>`);
           } else {
+            $("#login").html("Masuk");
+            
             if (response.keterangan.includes("Username")) {
               $("#validasi-username").removeAttr("hidden");
               $("#validasi-username").html(response.keterangan);

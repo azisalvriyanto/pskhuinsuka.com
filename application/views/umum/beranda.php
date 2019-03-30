@@ -134,18 +134,12 @@
                 <div class="col-lg-4 grid_info_main" data-aos="flip-left">
                     <div class="grid_info">
                         <div class="icon_info">
-                            <span class="icon">
-								<i class="fas fa-laptop"></i>
-							</span>
                             <h5><?= $data["divisi"][1]["divisi_keterangan"] ?></h5>
                             <p><?= $data["divisi"][1]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                     <div class="grid_info second">
                         <div class="icon_info">
-                            <span class="icon">
-								<i class="far fa-clone"></i>
-							</span>
                             <h5><?= $data["divisi"][2]["divisi_keterangan"] ?></h5>
                             <p><?= $data["divisi"][2]["divisi_penjelasan"] ?></p>
                         </div>
@@ -157,18 +151,12 @@
                 <div class="col-lg-4 grid_info_main" data-aos="flip-right">
                     <div class="grid_info">
                         <div class="icon_info">
-                            <span class="icon">
-								<i class="fas fa-sitemap"></i>
-							</span>
                             <h5><?= $data["divisi"][3]["divisi_keterangan"] ?></h5>
                             <p><?= $data["divisi"][3]["divisi_penjelasan"] ?></p>
                         </div>
                     </div>
                     <div class="grid_info second">
                         <div class="icon_info">
-                            <span class="icon">
-								<i class="fab fa-android"></i>
-							</span>
                             <h5><?= $data["divisi"][4]["divisi_keterangan"] ?></h5>
                             <p><?= $data["divisi"][4]["divisi_penjelasan"] ?></p>
                         </div>
