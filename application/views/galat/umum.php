@@ -35,27 +35,41 @@
                         <div class="clearfix"> </div>
                     </form>
                     <div class="error">
-                        <ul>
-                            <li>
-                                <a class="facebook" href="//www.facebook.com/">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-                            </li>
-                            <li>
-                                <a class="facebook" href="//www.instagram.com/">
-									<i class="fab fa-instagram"></i>
-								</a>
-                            </li>
-                            <li>
-                                <a class="facebook" href="//www.youtube.com">
-									<i class="fab fa-youtube"></i>
-								</a>
-                            </li>
-                        </ul>
+                        <ul><?php
+                            if (!empty($organisasi["kontak"])) {
+                            if (!empty($organisasi["kontak"]["facebook"])) { ?>
 
+                            <li>
+                                <a class="facebook" href="//www.facebook.com/<?= $organisasi["kontak"]["facebook"] ?>">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li><?php }
+                            if (!empty($organisasi["kontak"]["twitter"])) { ?>
+
+                            <li>
+                                <a class="facebook" href="//www.twitter.com/<?= $organisasi["kontak"]["twitter"] ?>">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li><?php }
+                            if (!empty($organisasi["kontak"]["instagram"])) { ?>
+
+                            <li>
+                                <a class="facebook" href="//www.instagram.com/<?= $organisasi["kontak"]["instagram"] ?>">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li><?php }
+                            if (!empty($organisasi["kontak"]["youtube"])) { ?>
+
+                            <li>
+                                <a class="facebook" href="//www.youtube.com/channel/<?= !empty($organisasi["kontak"]["youtube"]) ? $organisasi["kontak"]["youtube"] : "" ?>">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li><?php }  } ?>
+
+                        </ul>
                     </div>
 
-                    <a class="b-home" href="<?= base_url() ?>">Kembali ke Beranda</a>
+                    <a class="b-home" href="<?= base_url() ?>">&larr; Kembali ke Beranda</a>
                 </div>
 
             </div>

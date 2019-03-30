@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 git add .
 git commit -m ''
 git push -u al-vri master
+azisalvriyanto
 */
 
 $route["default_controller"]	= "Umum";
-//$route["404_override"]			= "Galat/_404";
-$route["404_override"]			= "";
+$route["404_override"]			= "Galat/_404";
 $route["translate_uri_dashes"]	= FALSE;
 
 //umum
