@@ -72,9 +72,9 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link <?= (@strtolower($menu["judul"]) == "Ganti Kepengurusan") ? "active" : ""; ?>" href="<?= base_url("pengurus/") ?>gantikepengurusan">
+								<a class="nav-link <?= (@strtolower($menu["judul"]) == "Pengaturan") ? "active" : ""; ?>" href="<?= base_url("pengurus/") ?>pengaturan">
 									<i class="material-icons">autorenew</i>
-									<span>Ganti Kepengurusan</span>
+									<span>Pengaturan</span>
 								</a>
 							</li>
 						</ul>

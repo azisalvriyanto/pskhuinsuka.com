@@ -98,10 +98,9 @@ class Umum extends CI_Controller {
 			"judul" => "Galeri"
 		);
 		$data		= $this->M_Pendahuluan->umum($menu);
-		
-		$client_id	= "cf5254337ca64db3a9de40a846ea5fa2";
+
 		$aksestoken	= "1811199856.cf52543.12ad8454f3144e18b4db1f5c2a9bea78";
-		$instagram	= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=1811199856.cf52543.12ad8454f3144e18b4db1f5c2a9bea78");
+		$instagram	= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=".$aksestoken);
 
 		if ($instagram["meta"]["code"] === 200) {
 			$data = @array_merge($data,
