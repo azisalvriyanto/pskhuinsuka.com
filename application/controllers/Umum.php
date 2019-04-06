@@ -99,15 +99,33 @@ class Umum extends CI_Controller {
 		);
 		$data		= $this->M_Pendahuluan->umum($menu);
 
-		$aksestoken	= "1811199856.cf52543.12ad8454f3144e18b4db1f5c2a9bea78";
-		$instagram	= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=".$aksestoken);
+		$periode_daftar	= $this->M_Periode->daftar();
+		if ($periode_daftar["status"] === 200) {//$periode["keterangan"][count($periode["keterangan"])-1]["periode_id"]
+			$galeri     = $this->M_Galeri->lihat($periode_daftar["keterangan"][count($periode_daftar["keterangan"])-1]["periode_id"]);
+			if ($galeri["status"] === 200) {
+				$instagram_aksestoken	= $galeri["keterangan"]["instagram"];
+				$instagram				= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagram_aksestoken);
 
-		if ($instagram["meta"]["code"] === 200) {
-			$data = @array_merge($data,
-				array(
-					"data" => $instagram["data"]
-				)
-			);
+				if ($instagram["meta"]["code"] === 200) {
+					$data = @array_merge($data,
+						array(
+							"data" => $instagram["data"]
+						)
+					);
+				} else {
+					$data = @array_merge($data,
+						array(
+							"data" => ""
+						)
+					);
+				}
+			} else {
+				$data = @array_merge($data,
+					array(
+						"data" => ""
+					)
+				);
+			}
 		} else {
 			$data = @array_merge($data,
 				array(

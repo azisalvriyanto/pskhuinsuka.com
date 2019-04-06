@@ -247,9 +247,9 @@
                         data : {
                             "keterangan": $("#keterangan").val(),
                             "periode": $("#periode").val(),
-                            "nama": $("#nama").val(),
                             "username": $("#username").val(),
                             "password": $("#password").val(),
+                            "nama": $("#nama").val(),
                             "divisi": $("#divisi").val(),
                             "jabatan": $("#jabatan").val(),
                             "email": $("#email").val(),   
@@ -324,6 +324,7 @@
                         type: "POST",
                         data : {
                             "keterangan": keterangan,
+                            "periode": $("#periode").val(),
                             "username": $("#username").val(),
                             "nama": $("#nama").val(),
                             "divisi": $("#divisi").val(),
@@ -547,59 +548,64 @@
                     });
                 });
 
-                $("#divisi").click(function() {
-                    $("#jabatan").removeAttr("disabled");
+                $("#divisi").change(function() {
+                    if ($("#divisi").val() !== "") {
+                        $("#jabatan").removeAttr("disabled");
 
-                    $.ajax({
-                        url: site_api+"/divisi/jabatan/"+$("#divisi").val(),
-                        dataType: "json",
-                        type: "GET",
-                        success: function(response) {
-                            if (response.status === 200) {
-                                $("#jabatan").empty();
-                                $("#jabatan").append(new Option("Pilih..."));
-                                for (const index in response.keterangan) {
-                                    var option = new Option(response.keterangan[index].jabatan_keterangan, response.keterangan[index].jabatan_x_jabatan);
-                                    $("#jabatan").append(option);
+                        $.ajax({
+                            url: site_api+"/divisi/jabatan/"+$("#divisi").val(),
+                            dataType: "json",
+                            type: "GET",
+                            success: function(response) {
+                                if (response.status === 200) {
+                                    $("#jabatan").empty();
+                                    $("#jabatan").append(new Option("Pilih..."));
+                                    for (const index in response.keterangan) {
+                                        var option = new Option(response.keterangan[index].jabatan_keterangan, response.keterangan[index].jabatan_x_jabatan);
+                                        $("#jabatan").append(option);
+                                    }
+                                } else {
+                                    swal({
+                                        text: "Refresh halaman kembali.",
+                                        text: response.keterangan,
+                                        icon: "error",
+                                        button: "Tutup"
+                                    })
+                                    .then((yes) => {
+                                        location.reload();
+                                    });
                                 }
-                            } else {
-                                swal({
-                                    text: "Refresh halaman kembali.",
-                                    text: response.keterangan,
-                                    icon: "error",
-                                    button: "Tutup"
-                                })
-                                .then((yes) => {
-                                    location.reload();
-                                });
-                            }
-                        },
-                        error: function (jqXHR, exception) {
-                            if (jqXHR.status === 0) {
-                                keterangan = "Not connect (verify network).";
-                            } else if (jqXHR.status == 404) {
-                                keterangan = "Requested page not found.";
-                            } else if (jqXHR.status == 500) {
-                                keterangan = "Internal Server Error.";
-                            } else if (exception === "parsererror") {
-                                keterangan = "Requested JSON parse failed.";
-                            } else if (exception === "timeout") {
-                                keterangan = "Time out error.";
-                            } else if (exception === "abort") {
-                                keterangan = "Ajax request aborted.";
-                            } else {
-                                keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-                            }
+                            },
+                            error: function (jqXHR, exception) {
+                                if (jqXHR.status === 0) {
+                                    keterangan = "Not connect (verify network).";
+                                } else if (jqXHR.status == 404) {
+                                    keterangan = "Requested page not found.";
+                                } else if (jqXHR.status == 500) {
+                                    keterangan = "Internal Server Error.";
+                                } else if (exception === "parsererror") {
+                                    keterangan = "Requested JSON parse failed.";
+                                } else if (exception === "timeout") {
+                                    keterangan = "Time out error.";
+                                } else if (exception === "abort") {
+                                    keterangan = "Ajax request aborted.";
+                                } else {
+                                    keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                }
 
-                            $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <i class="fa fa-info mx-2"></i>
-                                <strong>`+keterangan+`</strong>
-                            </div>`);
-                        }
-                    });
+                                $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                    <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <i class="fa fa-info mx-2"></i>
+                                    <strong>`+keterangan+`</strong>
+                                </div>`);
+                            }
+                        });
+                    } else {
+                        $("#jabatan").attr("disabled", "");
+                        $("#jabatan").change();
+                    }
                 });
 
                 $("#kembali").click(function() {

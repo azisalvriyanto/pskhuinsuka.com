@@ -220,7 +220,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
 						<!-- //field -->
 						
@@ -314,7 +313,7 @@
 
                 $("#profil-submit").click(function() {
                     $.ajax({
-                        url: site_api+"/organisasi/simpan",
+                        url: site_api+"/organisasi/perbarui",
                         dataType: "json",
                         type: "POST",
                         data : {

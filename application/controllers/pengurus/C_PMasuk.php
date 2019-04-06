@@ -7,8 +7,8 @@ class C_PMasuk extends CI_Controller {
 			redirect("pengurus/beranda");
 		} else {
 			$data  = array(
-				"api" => "http://localhost/pskhuinsuka.com.api"
-            );
+				"api" => base_url("..")."/pskhuinsuka.com.api"
+      );
 
 			$this->load->view("pengurus/masuk", $data);
 		}

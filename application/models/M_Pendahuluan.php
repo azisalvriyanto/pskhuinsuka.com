@@ -73,7 +73,7 @@ class M_Pendahuluan extends CI_Model {
                 "judul" => $menu["judul"],
                 "judul_sub" => $menu["judul_sub"]
             ),
-            "api" => "http://localhost/pskhuinsuka.com.api"
+            "api" => base_url("..")."/pskhuinsuka.com.api"
         );
 
         $query = $this->db->select("organisasi_nama_lengkap, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();

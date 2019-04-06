@@ -31,4 +31,5 @@ $route["pengurus/profil"]       = "pengurus/C_PProfil/index";
 $route["pengurus/artikel"]          = "pengurus/C_PArtikel/index";
 $route["pengurus/artikel/tambah"]   = "pengurus/C_PArtikel/tambah";
 $route["pengurus/artikel/(:num)"]   = "pengurus/C_PArtikel/perbarui/$1";
+$route["pengurus/galeri"]       = "pengurus/C_PGaleri/index";
 $route["pengurus/pengaturan"]   = "pengurus/C_PPengaturan/index";

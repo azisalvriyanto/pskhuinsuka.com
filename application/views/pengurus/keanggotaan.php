@@ -171,8 +171,8 @@
                                                     <td>`+data[index].jabatan_keterangan+`</td>
                                                     <td>`+data[index].keanggotaan_telepon+`</td>
                                                     <td class="text-nowrap">
-                                                        <button type="button" onclick="sunting('`+data[index].keanggotaan_username+`, `+data[index].keanggotaan_nama+`');" class="btn btn-sm btn-outline-info mr-1">Sunting</button>
-                                                        <button type="button" onclick="hapus('`+data[index].keanggotaan_username+`, `+data[index].keanggotaan_nama+`');" class="btn btn-sm btn-outline-danger mr-1">Hapus</button>
+                                                        <button type="button" onclick="sunting(\``+data[index].keanggotaan_username+`\`, \``+data[index].keanggotaan_nama+`\`);" class="btn btn-sm btn-outline-info mr-1"><i class="fas fa-pencil-alt mr-1"></i> Sunting</button>
+                                                        <button type="button" onclick="hapus(\``+data[index].keanggotaan_username+`\`, \``+data[index].keanggotaan_nama+`\`);" class="btn btn-sm btn-outline-danger mr-1"><i class="fas fa-trash-alt mr-1"></i> Hapus</button>
                                                     </td>
                                                 <tr>`);
                                 }
