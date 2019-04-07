@@ -2,7 +2,9 @@
 <html class="no-js h-100" lang="en">
 	<head>
         <?php $this->load->view("pengurus/_partials/head.php") ?>
-    
+
+        <style>
+        </style>
     </head>
 	<body class="h-100">
 		<div class="container-fluid">
@@ -56,10 +58,20 @@
                                         <li class="list-group-item p-3">
                                             <div class="row">
                                                 <div class="col">
+                                                    <div hidden="true">
+                                                        <form id="form-logo" enctype="multipart/form-data">
+                                                            <input type="text" id="logo_periode" name="logo_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
+                                                            <input type="file" id="logo_file" name="logo_file" class="form-control">
+                                                        </form>
+                                                    </div>
                                                     <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img class="rounded-circle" src="<?= base_url("assets/pengurus/") ?>images/avatars/0.jpg" alt="User Avatar" width="140">
+                                                                <img class="change-img rounded-circle" src="<?= base_url("assets/") ?>gambar/organisasi/logo_<?= $data["periode"] ?>.png" alt="User Avatar" height="140" width="140">
+                                                                <button type="button" class="btn btn-secondary" id="perbarui-logo" style="margin-top: 70px; margin-left:-50px;">
+                                                                    <i class="fas fa-pencil-alt mr-1"></i>
+                                                                    Ubah
+                                                                </button>
                                                             </div>
                                                             <div class="form-group col-md-7">
                                                                 <div class="form-group">
@@ -156,8 +168,8 @@
                                                                 <input type="text" class="form-control" id="peta" placeholder="https://www.google.com/maps/embed?pb=!1h33!7m42!1k5!1k998" aria-label="Peta" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["peta"] : "" ?>">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-accent" id="profil-submit">
+                                                        <div class="text-center pt-3 pb-3">
+                                                            <button type="button" class="btn btn-accent col-md-12" id="profil-submit">
                                                                 <i class="far fa-save mr-1"></i>
                                                                 Perbarui Profil
                                                             </button>
@@ -207,8 +219,8 @@
                                                             </div>
                                                         </div><?php } ?>
 
-                                                        <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-accent" id="jpendapat-submit">
+                                                        <div class="text-center pt-3 pb-3">
+                                                            <button type="button" class="btn btn-accent col-md-12" id="jpendapat-submit">
                                                                 <i class="far fa-save mr-1"></i>
                                                                 Perbaharui Jejak Pendapat
                                                             </button>
@@ -237,8 +249,92 @@
         <?php $this->load->view("pengurus/_partials/javascript.php") ?>
 
         <script>
+            var site_api = `<?= $api ?>`;
+            
             $(document).ready(function() {
-                var site_api = `<?= $api ?>`;
+                $("#perbarui-logo").click(function() {
+                    var form_logo = $("#form-logo")[0];
+
+                    swal({
+                        icon: "warning",
+                        title: "Anda akan mengganti logo?",
+                        content: form_logo,
+						buttons: [
+					 		true,
+					 		{
+					 			text: "Unggah",
+					 			closeModal: false,
+					 		}
+                        ],
+                    })
+                    .then((yes) => {
+                        if (yes) {
+                            $.ajax({
+                                url: site_api+"/organisasi/logo",
+                                dataType: "json",
+                                method: "POST",
+                                data: new FormData(form_logo),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(response) {
+                                    if (response.status === 200) {
+                                        swal({
+                                            title: "Logo berhasil diperbarui.",
+                                            icon: "success",
+                                            button: "Tutup"
+                                        })
+                                        .then((yes) => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        swal({
+                                            title: "Logo gagal diperbarui.",
+                                            text: response.keterangan,
+                                            icon: "error",
+                                            button: "Tutup"
+                                        })
+                                        .then((yes) => {
+                                            location.reload();
+                                        });
+                                    }
+                                },
+                                error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 0) {
+                                        keterangan = "Not connect (verify network).";
+                                    } else if (jqXHR.status == 404) {
+                                        keterangan = "Requested page not found.";
+                                    } else if (jqXHR.status == 500) {
+                                        keterangan = "Internal Server Error.";
+                                    } else if (exception === "parsererror") {
+                                        keterangan = "Requested JSON parse failed.";
+                                    } else if (exception === "timeout") {
+                                        keterangan = "Time out error.";
+                                    } else if (exception === "abort") {
+                                        keterangan = "Ajax request aborted.";
+                                    } else {
+                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                    }
+
+                                    swal({
+                                        title: "Logo gagal diperbarui.",
+                                        text: response.keterangan,
+                                        icon: "error",
+                                        button: "Tutup"
+                                    });
+
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <i class="fa fa-info mx-2"></i>
+                                        <strong>`+keterangan+`</strong>
+                                    </div>`);
+                                }
+                            });
+                        }
+                    });
+                });
 
                 $("#periode").change(function(){
                     var periode = $(this).find(":selected").attr("value");
@@ -254,6 +350,7 @@
                                 $("#profil-keterangan").attr("hidden", "true");
 
                                 var data = response.keterangan;
+                                $("input[id=logo_periode]").val(data.periode);
                                 $("input[id=nama_lengkap]").val(data.nama_lengkap);
                                 $("input[id=nama_pendek]").val(data.nama_pendek);
                                 $("textarea[id=visi]").val(data.visi);

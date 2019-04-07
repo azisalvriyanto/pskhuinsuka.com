@@ -228,7 +228,6 @@
                     text: "Anda akan menyunting data "+nama+".",
                     icon: "warning",
                     buttons: true,
-                    dangerMode: true,
                 })
                 .then((yes) => {
                     if (yes) {

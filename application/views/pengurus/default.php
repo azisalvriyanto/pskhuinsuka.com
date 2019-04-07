@@ -5,8 +5,6 @@
     
     </head>
 	<body class="h-100">
-        <?php $this->load->view("pengurus/_partials/warna.php") ?>
-
 		<div class="container-fluid">
 			<div class="row">
 				<!-- sidebar -->

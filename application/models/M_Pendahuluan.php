@@ -18,6 +18,7 @@ class M_Pendahuluan extends CI_Model {
                         "periode" => $query->organisasi_periode,
                         "nama_lengkap" => $query->organisasi_nama_lengkap,
                         "nama_pendek" => $query->organisasi_nama_pendek,
+                        "logo" => $query->organisasi_periode,
                         "visi" => $query->organisasi_visi,
                         "misi" => $query->organisasi_misi,
                         "deskripsi" => $query->organisasi_deskripsi,
@@ -76,11 +77,12 @@ class M_Pendahuluan extends CI_Model {
             "api" => base_url("..")."/pskhuinsuka.com.api"
         );
 
-        $query = $this->db->select("organisasi_nama_lengkap, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
+        $query = $this->db->select("organisasi_periode, organisasi_nama_lengkap, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
         if ($query->num_rows() > 0) {
             $data = @array_merge($data,
                 array(
                     "organisasi" => array(
+                        "logo" => base_url("assets/")."gambar/organisasi/logo_".$query->row()->organisasi_periode.".png",
                         "nama_panjang" => $query->row()->organisasi_nama_lengkap,
                         "nama_pendek" => $query->row()->organisasi_nama_pendek
                     )
@@ -91,6 +93,7 @@ class M_Pendahuluan extends CI_Model {
             $data = @array_merge($data,
                 array(
                     "organisasi" => array(
+                        "logo" => "",
                         "nama_panjang" => "",
                         "nama_pendek" => ""
                     )
@@ -106,6 +109,7 @@ class M_Pendahuluan extends CI_Model {
                 array(
                     "pengguna" => array(
                         "username" => $query->row()->keanggotaan_username,
+                        "foto" => base_url("assets/")."gambar/keanggotaan/".$query->row()->keanggotaan_username.".png",
                         "nama" => $query->row()->keanggotaan_nama,
                         "keterangan" => $query->row()->akun_keterangan,
                         "divisi" => $query->row()->keanggotaan_divisi,

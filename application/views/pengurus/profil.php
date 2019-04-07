@@ -35,20 +35,37 @@
                             </div><?php } ?>
 
                             <div class="col-lg-4">
-                                <div class="card card-small mb-4 pt-3">
+                                <div class="card card-small mb-4 pt-3"><?php
+                                    if ($menu["judul_sub"] !== "Tambah") { ?>
+
+                                    <div hidden="true">
+                                        <form id="form-foto" enctype="multipart/form-data">
+                                            <input type="text" id="foto_username" name="foto_username" class="form-control" value="<?= $data["username"] ?>" hidden>
+                                            <input type="file" id="foto_file" name="foto_file" class="form-control">
+                                        </form>
+                                    </div><?php } ?>
+
                                     <div class="card-header border-bottom text-center">
                                         <div class="mb-3 mx-auto">
-                                        <img class="rounded-circle" src="<?= base_url("assets/pengurus/") ?>images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                                        <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "Nama" ?></h4>
+                                            <img class="rounded-circle" src="<?= $data["foto"] ?>" alt="User Avatar" width="110" height="110"><?php
+                                            if ($menu["judul_sub"] !== "Tambah") { ?>
+
+                                                <button type="button" class="btn btn-secondary" id="perbarui-foto" style="margin-top: 60px; margin-left:-60px;">
+                                                    <i class="fas fa-pencil-alt mr-1"></i>
+                                                    Ubah
+                                                </button><?php } ?>
+
+                                        </div>
+                                        <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "{ Nama }" ?></h4>
                                         <span class="text-muted d-block mb-2">
-                                            <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "Divisi" ?></span>
-                                            (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "Jabatan" ?></span>)
+                                            <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "{ Divisi }" ?></span>
+                                            (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "{ Jabatan }" ?></span>)
                                         </span>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-4">
                                         <div class="progress-wrapper">
-                                            <span id="tampil_motto"><?= !empty($data["periode"]) ? $data["motto"] : "Tidak ada motto." ?></span>
+                                            <span id="tampil_motto"><?= !empty($data["periode"]) ? $data["motto"] : "{ Tidak ada motto. }" ?></span>
                                         </div>
                                     </ul>
                                 </div>
@@ -111,11 +128,25 @@
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <label for="username">Username</label>
-                                                            <input type="text" class="form-control" id="username" placeholder="Username" value="<?= !empty($data["periode"]) ? $data["username"] : "" ?>" <?= !empty($data["periode"]) ? "onclick=\"ubah_username()\" readonly" : "" ?>>
+                                                            <div class="input-group input-group-seamless">
+                                                                <span class="input-group-prepend">
+                                                                    <span class="input-group-text">
+                                                                        <i class="material-icons">person</i>
+                                                                    </span>
+                                                                </span>
+                                                                <input type="text" class="form-control" id="username" placeholder="Username" value="<?= !empty($data["periode"]) ? $data["username"] : "" ?>" <?= !empty($data["periode"]) ? "onclick=\"ubah_username()\" readonly" : "" ?>>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="password">Password</label>
-                                                            <input type="password" class="form-control <?= !empty($data["periode"]) ? "text-center": "" ?>" id="password" <?= !empty($data["periode"]) ? "placeholder=\"Ubah password\" onclick=\"ubah_password()\" readonly" : "placeholder=\"Password\" value=\"\"" ?>>
+                                                            <div class="input-group input-group-seamless">
+                                                                <input type="password" class="form-control <?= !empty($data["periode"]) ? "text-center": "" ?>" id="password" <?= !empty($data["periode"]) ? "placeholder=\"Ubah password\" onclick=\"ubah_password()\" readonly" : "placeholder=\"Password\" value=\"\"" ?>>
+                                                                <span class="input-group-append">
+                                                                    <span class="input-group-text">
+                                                                        <i class="material-icons">lock</i>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-row">
@@ -179,7 +210,7 @@
                                                     </div>
                                                     <div class="form-row pt-3">
                                                         <div class="form-group <?= $menu["judul_sub"] === "Tambah" ? "col-md-12" : " col-md-6" ?> text-center">
-                                                            <button type="button" class="btn btn-accent" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "<i class=\"far fa-save mr-1\"></i> Perbarui Profil" : "<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil" ?></button>
+                                                            <button type="button" class="btn btn-accent<?= $menu["judul_sub"] === "Tambah" ? " col-md-12" : "" ?>" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "<i class=\"far fa-save mr-1\"></i> Perbarui Profil" : "<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil" ?></button>
                                                         </div>
                                                         <?php
                                                             if (!empty($data["periode"])) {
@@ -220,23 +251,43 @@
 
             $(document).ready(function() {
                 $("#nama").keyup(function() {
-                    $("#tampil_nama").html($("#nama").val());
+                    if ($("#nama").val() !== "") {
+                        var nama = $("#nama").val();
+                    } else {
+                        var nama = "{ Nama }";
+                    }
+
+                    $("#tampil_nama").html(nama);
                 });
 
                 $("#motto").keyup(function() {
-                    $("#tampil_motto").html($("#motto").val());
+                    if ($("#motto").val() !== "") {
+                        var motto = $("#motto").val();
+                    } else {
+                        var motto = "{ Tidak ada motto. }";
+                    }
+
+                    $("#tampil_motto").html(motto);
                 });
 
                 $("#divisi").change(function() {
-                    $("#tampil_divisi").html(
-                        $("#divisi option:selected").text()
-                    );
+                    if ($("#divisi").val() !== "") {
+                        var divisi = $("#divisi option:selected").text();
+                    } else {
+                        var divisi = "{ Divisi }";
+                    }
+
+                    $("#tampil_divisi").html(divisi);
                 });
 
                 $("#jabatan").change(function() {
-                    $("#tampil_jabatan").html(
-                        $("#jabatan option:selected").text()
-                    );
+                    if ($("#jabatan").val() !== "") {
+                        var jabatan = $("#jabatan option:selected").text();
+                    } else {
+                        var jabatan = "{ Jabatan }";
+                    }
+
+                    $("#tampil_jabatan").html(jabatan);
                 });
 
                 $("#tambah").click(function() {
@@ -311,11 +362,93 @@
                     });
                 });
 
+                $("#perbarui-foto").click(function() {
+                    var form_foto = $("#form-foto")[0];
+
+                    swal({
+                        icon: "warning",
+                        title: "Anda akan mengganti logo?",
+                        content: form_foto,
+                        dangerMode: true,
+						buttons: [
+					 		true,
+					 		{
+					 			text: "Unggah",
+					 			closeModal: false,
+					 		}
+                        ],
+                    })
+                    .then((yes) => {
+                        if (yes) {
+                            $.ajax({
+                                url: site_api+"/keanggotaan/foto",
+                                dataType: "json",
+                                method: "POST",
+                                data: new FormData(form_foto),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(response) {
+                                    if (response.status === 200) {
+                                        swal({
+                                            title: "Foto profil berhasil diperbarui.",
+                                            icon: "success",
+                                            button: "Tutup"
+                                        })
+                                        .then((yes) => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        swal({
+                                            title: "Foto profil gagal diperbarui.",
+                                            text: response.keterangan,
+                                            icon: "error",
+                                            button: "Tutup"
+                                        });
+                                    }
+                                },
+                                error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 0) {
+                                        keterangan = "Not connect (verify network).";
+                                    } else if (jqXHR.status == 404) {
+                                        keterangan = "Requested page not found.";
+                                    } else if (jqXHR.status == 500) {
+                                        keterangan = "Internal Server Error.";
+                                    } else if (exception === "parsererror") {
+                                        keterangan = "Requested JSON parse failed.";
+                                    } else if (exception === "timeout") {
+                                        keterangan = "Time out error.";
+                                    } else if (exception === "abort") {
+                                        keterangan = "Ajax request aborted.";
+                                    } else {
+                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                    }
+
+                                    swal({
+                                        title: "Logo gagal diperbarui.",
+                                        text: response.keterangan,
+                                        icon: "error",
+                                        button: "Tutup"
+                                    });
+
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <i class="fa fa-info mx-2"></i>
+                                        <strong>`+keterangan+`</strong>
+                                    </div>`);
+                                }
+                            });
+                        }
+                    });
+                });
+
                 $("#perbarui").click(function() {
                     if ($("#keterangan").val()+"" !== "undefined") {
                         var keterangan = $("#keterangan").val();
                     } else {
-                        var keterangan = "1";
+                        var keterangan = Number(`<?= !empty($data["keterangan"]) ?>`);
                     }
 
                     $.ajax({
@@ -342,7 +475,7 @@
                                 swal({
                                     title: "Profil berhasil diperbarui.",
                                     icon: "success",
-                                    button: "Tutup",
+                                    button: "Tutup"
                                 })
                                 .then((value) => {
                                     if (
@@ -389,7 +522,7 @@
                                                 });
                                             }
                                         });
-                                    } else {
+                                    } else if ($("#username").val() === `<?= $pengguna["username"] ?>`) {
                                         location.reload();
                                     }
                                 });
@@ -439,8 +572,14 @@
                         title: "Apakah anda yakin?",
                         text: "Setelah dihapus, anda tidak dapat memulihkan data "+nama+".",
                         icon: "warning",
-                        buttons: true,
                         dangerMode: true,
+                        buttons: [
+                            true,
+                            {
+                                text: "Hapus",
+                                closeModal: false,
+                            }
+                        ],
                     })
                     .then((yes) => {
                         if (yes) {
@@ -559,14 +698,14 @@
                             success: function(response) {
                                 if (response.status === 200) {
                                     $("#jabatan").empty();
-                                    $("#jabatan").append(new Option("Pilih..."));
+                                    $("#jabatan").append(new Option("Pilih...", ""));
                                     for (const index in response.keterangan) {
                                         var option = new Option(response.keterangan[index].jabatan_keterangan, response.keterangan[index].jabatan_x_jabatan);
                                         $("#jabatan").append(option);
                                     }
                                 } else {
                                     swal({
-                                        text: "Refresh halaman kembali.",
+                                        title: "Refresh halaman kembali.",
                                         text: response.keterangan,
                                         icon: "error",
                                         button: "Tutup"
@@ -633,8 +772,9 @@
                     content: {
                         element: "input",
                         attributes: {
-                        placeholder: "Massukan username baru..",
-                        type: "text",
+                            placeholder: "Massukan username baru anda...",
+                            type: "text",
+                            value: username_lama
                         }
                     },
                     dangerMode: true,
@@ -666,7 +806,7 @@
                                 })
                                 .then((yes) => {
                                     if (yes) {
-                                        if (`<?= $menu["judul"] ?>` === "Profil" || username_lama === `<?= $pengguna["username"] ?>`) {
+                                        if (username_lama === `<?= $pengguna["username"] ?>`) {
                                             $.ajax({
                                                 url: `<?= $api ?>`+`/otentikasi/keluar`,
                                                 dataType: "json",
@@ -708,7 +848,7 @@
                                                 }
                                             });
                                         } else {
-                                            window.location.assign(`<?= base_url("pengurus/")."keanggotaan" ?>`+username_baru);
+                                            window.location.assign(`<?= base_url("pengurus/")."keanggotaan/" ?>`+username_baru);
                                         }
                                     }
                                 });
@@ -722,9 +862,6 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            swal.stopLoading();
-                            swal.close();
-
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (verify network).";
                             } else if (jqXHR.status == 404) {
@@ -740,6 +877,13 @@
                             } else {
                                 keterangan = "Uncaught Error ("+jqXHR.responseText+").";
                             }
+
+                            swal({
+                                title: "Username gagal diperbarui.",
+                                text: keterangan,
+                                icon: "error",
+                                button: "Tutup"
+                            });
 
                             $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                 <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
@@ -768,7 +912,7 @@
                     content: {
                         element: "input",
                         attributes: {
-                        placeholder: "Massukan password anda.",
+                        placeholder: "Massukan password baru anda.",
                         type: "password",
                         },
                     },
@@ -795,10 +939,56 @@
                         success: function(response) {
                             if (response.status === 200) {
                                 swal({
-                                    text: "Password berhasil diperbarui.",
+                                    title: "Kata sandi berhasil diperbarui.",
                                     icon: "success",
                                     button: "Tutup"
                                 })
+                                .then((yes) => {
+                                    if (yes) {
+                                        if ($("#username").val() === `<?= $pengguna["username"] ?>`) {
+                                            $.ajax({
+                                                url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                dataType: "json",
+                                                type: "GET",
+                                                success: function(response) {
+                                                    if (response.status === 200) {
+                                                        window.location.assign(`<?= base_url("administrator") ?>`);
+                                                    } else {
+                                                        swal({
+                                                            title: "Silahkan coba lagi!",
+                                                            text: response.keterangan,
+                                                            icon: "error",
+                                                            button: "Tutup"
+                                                        });
+                                                    }
+                                                },
+                                                error: function (jqXHR, exception) {
+                                                    if (jqXHR.status === 0) {
+                                                        keterangan = "Not connect (verify network).";
+                                                    } else if (jqXHR.status == 404) {
+                                                        keterangan = "Requested page not found.";
+                                                    } else if (jqXHR.status == 500) {
+                                                        keterangan = "Internal Server Error.";
+                                                    } else if (exception === "parsererror") {
+                                                        keterangan = "Requested JSON parse failed.";
+                                                    } else if (exception === "timeout") {
+                                                        keterangan = "Time out error.";
+                                                    } else if (exception === "abort") {
+                                                        keterangan = "Ajax request aborted.";
+                                                    } else {
+                                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                                    }
+                                                    swal({
+                                                        title: "Silahkan coba lagi!",
+                                                        text: keterangan,
+                                                        icon: "error",
+                                                        button: "Tutup"
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
                             } else {
                                 swal({
                                     text: "Password gagal diperbarui.",

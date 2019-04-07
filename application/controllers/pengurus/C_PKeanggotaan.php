@@ -62,6 +62,12 @@ class C_PKeanggotaan extends CI_Controller {
 
 			$result		= $this->M_Keanggotaan->lihat($username);
 			if ($result["status"] === 200) {
+				if (!@is_file("./assets/gambar/keanggotaan/".$result["keterangan"]["username"].".png")) {
+					$foto	= base_url("assets/")."gambar/keanggotaan/_standar.png";
+				} else {
+					$foto	= base_url("assets/")."gambar/keanggotaan/".$result["keterangan"]["username"].".png";
+				}
+
 				$data = @array_merge($data,
 					array(
 						"data" => array(
@@ -70,6 +76,7 @@ class C_PKeanggotaan extends CI_Controller {
 							"keterangan" => $result["keterangan"]["keterangan"],
 							"periode" => $result["keterangan"]["periode"],
 							"username" => $result["keterangan"]["username"],
+							"foto" => $foto,
 							"nama" => $result["keterangan"]["nama"],
 							"angkatan" => $result["keterangan"]["angkatan"],
 							"divisi" => $result["keterangan"]["divisi"],
@@ -106,7 +113,8 @@ class C_PKeanggotaan extends CI_Controller {
 					"data" => array(
 						"daftar_periode" => $periode["keterangan"],
 						"daftar_divisi" => $divisi["keterangan"],
-						"periode" => ""
+						"periode" => "",
+						"foto" => base_url("assets/")."gambar/keanggotaan/_standar.png"
 					)
 				)
 			);

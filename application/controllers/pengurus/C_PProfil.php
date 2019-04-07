@@ -23,6 +23,7 @@ class C_PProfil extends CI_Controller {
 							"keterangan" => $result["keterangan"]["keterangan"],
 							"periode" => $result["keterangan"]["periode"],
 							"username" => $result["keterangan"]["username"],
+							"foto" => $result["keterangan"]["foto"],
 							"nama" => $result["keterangan"]["nama"],
 							"angkatan" => $result["keterangan"]["angkatan"],
 							"divisi" => $result["keterangan"]["divisi"],

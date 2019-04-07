@@ -3,8 +3,8 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="logo text-left">
                     <h1>
-                        <a class="navbar-brand" href="<?= base_url() ?>">
-                        <i class="fas fa-podcast"></i> <?= $organisasi["nama_pendek"] ?></a>
+                        <a class="navbar-brand d-flex align-items-center" href="<?= base_url() ?>" >
+                        <img src="<?= base_url("assets/") ?>gambar/organisasi/logo_<?= $organisasi["logo"] ?>.png" class="fas fa-podcast mr-2" style="height: 40px;"> <?= $organisasi["nama_pendek"] ?></a>
                     </h1>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

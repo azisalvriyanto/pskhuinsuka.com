@@ -145,8 +145,8 @@
                                                             <label for="motto">Motto</label>
                                                             <textarea class="form-control" name="motto" id="motto" rows="2" placeholder="Motto."></textarea>
                                                         </div>
-                                                        <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-danger" id="renew">
+                                                        <div class="text-center pt-3 pb-3">
+                                                            <button type="button" class="btn btn-danger col-md-12" id="renew">
                                                                 <i class="material-icons mr-1">autorenew</i>
                                                                 Ganti Kepenguruasan
                                                             </button>

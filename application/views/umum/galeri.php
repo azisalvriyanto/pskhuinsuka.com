@@ -35,7 +35,7 @@
 					$bulan = $array_bulan[date("n", $waktu)];
 					$tahun = date("Y", $waktu);?>
 	
-					<div class="col-md-4 proj_gallery_grid" data-aos="zoom-in" style="padding: 0px;">
+					<div class="col-md-4 proj_gallery_grid d-flex  align-items-center" data-aos="zoom-in" style="padding: 0px;">
 						<div class="section_1_gallery_grid" style="margin: 0px;">
 							<a title="<?= $data[$i]["caption"]["text"] ?>" target="_blank" href="<?= $data[$i]["link"] ?>">
 								<div class="section_1_gallery_grid1" style="padding: 1px;">

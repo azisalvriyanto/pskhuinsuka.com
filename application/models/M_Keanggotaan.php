@@ -40,6 +40,7 @@ class M_Keanggotaan extends CI_Model {
                 "keterangan" => array(
                     "keterangan" => $query->akun_keterangan,
                     "periode" => $query->keanggotaan_periode,
+                    "foto" => base_url("assets/")."gambar/keanggotaan/".$query->keanggotaan_username.".png",
                     "username" => $query->keanggotaan_username,
                     "nama" => $query->keanggotaan_nama,
                     "angkatan" => $query->keanggotaan_angkatan,

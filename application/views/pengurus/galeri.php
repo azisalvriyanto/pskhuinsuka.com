@@ -67,8 +67,8 @@
                                                                 <input type="text" class="form-control" id="instagram" placeholder="Akses token" aria-label="Akses token" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["instagram"] : "" ?>">
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-12 text-center pt-3 pb-3">
-                                                            <button type="button" class="btn btn-accent" id="perbarui">
+                                                        <div class="text-center pt-3 pb-3">
+                                                            <button type="button" class="btn btn-accent col-md-12" id="perbarui">
                                                                 <i class="far fa-save mr-1"></i>
                                                                 Perbarui Galeri
                                                             </button>

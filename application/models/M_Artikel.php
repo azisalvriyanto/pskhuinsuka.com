@@ -34,12 +34,19 @@ class M_Artikel extends CI_Model {
 
         if ($query->num_rows() > 0) {
             $query  = $query->row();
+            
+            if (!@is_file("./assets/gambar/keanggotaan/".$query->artikel_penerbit.".png")) {
+                $foto	= base_url("assets/")."gambar/keanggotaan/_standar.png";
+            } else {
+                $foto	= base_url("assets/")."gambar/keanggotaan/".$query->artikel_penerbit.".png";
+            }
             return array(
                 "status" => 200,
                 "keterangan" => array(
                     "id" => $query->artikel_id,
                     "keterangan" => $query->artikel_keterangan_keterangan,
                     "waktu" => $query->artikel_waktu,
+                    "foto" => $foto,
                     "penerbit_nama" => $query->keanggotaan_nama,
                     "penerbit_divisi" => $query->divisi_keterangan,
                     "judul" => $query->artikel_judul,

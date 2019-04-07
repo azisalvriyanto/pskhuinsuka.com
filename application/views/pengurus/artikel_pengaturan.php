@@ -93,8 +93,16 @@
                                     <div class="card-body p-0">
                                         <ul class="list-group list-group-flush text-center">
                                             <li class="list-group-item px-3 pb-2">
-                                                <div class="m-2 mx-auto">
-                                                    <img class="rounded-circle" src="http://localhost/pskhuinsuka.com/assets/pengurus/images/avatars/0.jpg" alt="User Avatar" width="110">
+                                                <div class="m-2 mx-auto"><?php
+                                                if ($menu["judul_sub"] === "Tambah") {
+                                                    if (@is_file("./assets/gambar/keanggotaan/".$pengguna["username"].".png")) {
+                                                        $data["foto"] = base_url("assets/")."gambar/keanggotaan/".$pengguna["username"].".png";
+                                                    } else {
+                                                        $data["foto"] = base_url("assets/")."gambar/keanggotaan/_standar.png";
+                                                    }
+                                                } ?>
+
+                                                    <img class="rounded-circle" src="<?= $data["foto"] ?>" alt="User Avatar" height="110" width="110">
                                                 </div>
                                                 <div class="m-1 mx-auto">
                                                     <span class="d-block text-center"><?= $menu["judul_sub"] === "Tambah" ? $pengguna["nama"] : $data["penerbit_nama"] ?></span>
