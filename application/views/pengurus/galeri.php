@@ -57,7 +57,19 @@
                                         <li class="list-group-item p-3">
                                             <div class="row">
                                                 <div class="col">
-                                                    <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
+                                                    <div hidden="true">
+                                                        <form id="form-landscape" enctype="multipart/form-data">
+                                                            <input type="text" id="landscape_periode" name="landscape_periode" class="form-control" value="<?= $data["periode_keterangan"] ?>" hidden>
+                                                            <input type="file" id="landscape_file" name="landscape_file" class="form-control">
+                                                        </form>
+
+                                                        <form id="form-portrait" enctype="multipart/form-data">
+                                                            <input type="text" id="portrait_periode" name="portrait_periode" class="form-control" value="<?= $data["periode_keterangan"] ?>" hidden>
+                                                            <input type="file" id="portrait_file" name="portrait_file" class="form-control">
+                                                        </form>
+                                                    </div>
+
+                                                    <form id="form-instagram"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-group">
                                                             <label for="instagram">Instagram</label>
                                                             <div class="input-group mb-3">
@@ -67,7 +79,29 @@
                                                                 <input type="text" class="form-control" id="instagram" placeholder="Akses token" aria-label="Akses token" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["instagram"] : "" ?>">
                                                             </div>
                                                         </div>
-                                                        <div class="text-center pt-3 pb-3">
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-7">
+                                                                <label for="landscape">Foto Landscape</label>
+                                                                <div class="input-group">
+                                                                    <button type="button" class="btn btn-secondary" id="landscape" style="position: absolute; margin: 100px;">
+                                                                        <i class="fas fa-pencil-alt mr-1"></i>
+                                                                        Ubah
+                                                                    </button>
+                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode_keterangan"])."_landscape.png" ? $data["periode_keterangan"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-5">
+                                                                <label for="portrait">Foto Portrait</label>
+                                                                <div class="input-group">
+                                                                    <button type="button" class="btn btn-secondary" id="portrait" style="position: absolute; margin: 100px;">
+                                                                        <i class="fas fa-pencil-alt mr-1"></i>
+                                                                        Ubah
+                                                                    </button>
+                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode_keterangan"])."_portrait.png" ? $data["periode_keterangan"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-center  pt-3 pb-3">
                                                             <button type="button" class="btn btn-accent col-md-12" id="perbarui">
                                                                 <i class="far fa-save mr-1"></i>
                                                                 Perbarui Galeri
@@ -75,7 +109,7 @@
                                                         </div>
                                                     </form>
 
-                                                    <div id="profil-keterangan" class="col-md-12 text-center pt-2"<?= !empty($data["periode"]) ? " hidden" : "" ?>>
+                                                    <div id="form-keterangan" class="col-md-12 text-center pt-2"<?= !empty($data["periode"]) ? " hidden" : "" ?>>
                                                          <label>Galeri organisasi tidak ditemukan.</label>
                                                      </div>
                                                 </div>
@@ -114,14 +148,14 @@
                         success: function(response) {
                             if (response.status === 200) {
                                 $("#status").html(``);
-                                $("#profil-form").removeAttr("hidden");
-                                $("#profil-keterangan").attr("hidden", "true");
+                                $("#form-instagram").removeAttr("hidden");
+                                $("#form-keterangan").attr("hidden", "true");
 
                                 var data = response.keterangan;
                                 $("input[id=instagram]").val(data.instagram);
                             } else {
-                                $("#profil-form").attr("hidden", "true");
-                                $("#profil-keterangan").removeAttr("hidden");
+                                $("#form-instagram").attr("hidden", "true");
+                                $("#form-keterangan").removeAttr("hidden");
 
                                 $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                                     <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
@@ -133,8 +167,8 @@
                             }
                         },
                         error: function (jqXHR, exception) {
-                            $("#profil-form").attr("hidden", "true");
-                            $("#profil-keterangan").removeAttr("hidden");
+                            $("#form-instagram").attr("hidden", "true");
+                            $("#form-keterangan").removeAttr("hidden");
 
                             if (jqXHR.status === 0) {
                                 keterangan = "Not connect (Verify Network).";
@@ -217,6 +251,168 @@
                                 <i class="fa fa-info mx-2"></i>
                                 <strong>`+keterangan+`</strong>
                             </div>`);
+                        }
+                    });
+                });
+
+                $("#landscape").click(function() {
+                    var form_foto = $("#form-landscape")[0];
+
+                    swal({
+                        icon: "warning",
+                        title: "Anda akan mengganti foto landscape?",
+                        content: form_foto,
+						buttons: [
+					 		true,
+					 		{
+					 			text: "Unggah",
+					 			closeModal: false,
+					 		}
+                        ],
+                    })
+                    .then((yes) => {
+                        if (yes) {
+                            $.ajax({
+                                url: site_api+"/organisasi/landscape",
+                                dataType: "json",
+                                method: "POST",
+                                data: new FormData(form_foto),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(response) {
+                                    if (response.status === 200) {
+                                        swal({
+                                            title: "Foto landscape berhasil diperbarui.",
+                                            icon: "success",
+                                            button: "Tutup"
+                                        })
+                                        .then((yes) => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        swal({
+                                            title: "Foto landscape gagal diperbarui.",
+                                            text: response.keterangan,
+                                            icon: "error",
+                                            button: "Tutup"
+                                        });
+                                    }
+                                },
+                                error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 0) {
+                                        keterangan = "Not connect (verify network).";
+                                    } else if (jqXHR.status == 404) {
+                                        keterangan = "Requested page not found.";
+                                    } else if (jqXHR.status == 500) {
+                                        keterangan = "Internal Server Error.";
+                                    } else if (exception === "parsererror") {
+                                        keterangan = "Requested JSON parse failed.";
+                                    } else if (exception === "timeout") {
+                                        keterangan = "Time out error.";
+                                    } else if (exception === "abort") {
+                                        keterangan = "Ajax request aborted.";
+                                    } else {
+                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                    }
+
+                                    swal({
+                                        title: "Foto landscape gagal diperbarui.",
+                                        text: response.keterangan,
+                                        icon: "error",
+                                        button: "Tutup"
+                                    });
+
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <i class="fa fa-info mx-2"></i>
+                                        <strong>`+keterangan+`</strong>
+                                    </div>`);
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $("#portrait").click(function() {
+                    var form_foto = $("#form-portrait")[0];
+
+                    swal({
+                        icon: "warning",
+                        title: "Anda akan mengganti foto portrait?",
+                        content: form_foto,
+						buttons: [
+					 		true,
+					 		{
+					 			text: "Unggah",
+					 			closeModal: false,
+					 		}
+                        ],
+                    })
+                    .then((yes) => {
+                        if (yes) {
+                            $.ajax({
+                                url: site_api+"/organisasi/portrait",
+                                dataType: "json",
+                                method: "POST",
+                                data: new FormData(form_foto),
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                success: function(response) {
+                                    if (response.status === 200) {
+                                        swal({
+                                            title: "Foto portrait berhasil diperbarui.",
+                                            icon: "success",
+                                            button: "Tutup"
+                                        })
+                                        .then((yes) => {
+                                            location.reload();
+                                        });
+                                    } else {
+                                        swal({
+                                            title: "Foto portrait gagal diperbarui.",
+                                            text: response.keterangan,
+                                            icon: "error",
+                                            button: "Tutup"
+                                        });
+                                    }
+                                },
+                                error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 0) {
+                                        keterangan = "Not connect (verify network).";
+                                    } else if (jqXHR.status == 404) {
+                                        keterangan = "Requested page not found.";
+                                    } else if (jqXHR.status == 500) {
+                                        keterangan = "Internal Server Error.";
+                                    } else if (exception === "parsererror") {
+                                        keterangan = "Requested JSON parse failed.";
+                                    } else if (exception === "timeout") {
+                                        keterangan = "Time out error.";
+                                    } else if (exception === "abort") {
+                                        keterangan = "Ajax request aborted.";
+                                    } else {
+                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                    }
+
+                                    swal({
+                                        title: "Foto portrait gagal diperbarui.",
+                                        text: response.keterangan,
+                                        icon: "error",
+                                        button: "Tutup"
+                                    });
+
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <i class="fa fa-info mx-2"></i>
+                                        <strong>`+keterangan+`</strong>
+                                    </div>`);
+                                }
+                            });
                         }
                     });
                 });

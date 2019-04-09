@@ -35,12 +35,18 @@ class M_Keanggotaan extends CI_Model {
         if ($query->num_rows() > 0) {
             $query  = $query->row();
 
+            if (@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$query->keanggotaan_username.".png")) {
+                $foto	= "assets/gambar/keanggotaan/".$query->keanggotaan_username.".png";
+            } else {
+                $foto	= "assets/gambar/keanggotaan/_standar.png";
+            }
+
             return array(
                 "status" => 200,
                 "keterangan" => array(
                     "keterangan" => $query->akun_keterangan,
                     "periode" => $query->keanggotaan_periode,
-                    "foto" => base_url("assets/")."gambar/keanggotaan/".$query->keanggotaan_username.".png",
+                    "foto" => $foto,
                     "username" => $query->keanggotaan_username,
                     "nama" => $query->keanggotaan_nama,
                     "angkatan" => $query->keanggotaan_angkatan,

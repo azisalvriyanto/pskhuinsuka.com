@@ -57,34 +57,27 @@ class C_PKeanggotaan extends CI_Controller {
 			);
 			$data		= $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
 
-			$periode	= $this->M_Periode->daftar();
-			$divisi 	= $this->M_Divisi->daftar();
-
-			$result		= $this->M_Keanggotaan->lihat($username);
-			if ($result["status"] === 200) {
-				if (!@is_file("./assets/gambar/keanggotaan/".$result["keterangan"]["username"].".png")) {
-					$foto	= base_url("assets/")."gambar/keanggotaan/_standar.png";
-				} else {
-					$foto	= base_url("assets/")."gambar/keanggotaan/".$result["keterangan"]["username"].".png";
-				}
-
+			$periode		= $this->M_Periode->daftar();
+			$divisi 		= $this->M_Divisi->daftar();
+			$keanggotaan	= $this->M_Keanggotaan->lihat($username);
+			if ($periode["status"] === 200 && $divisi["status"] === 200 && $keanggotaan["status"] === 200) {
 				$data = @array_merge($data,
 					array(
 						"data" => array(
 							"daftar_periode" => $periode["keterangan"],
 							"daftar_divisi" => $divisi["keterangan"],
-							"keterangan" => $result["keterangan"]["keterangan"],
-							"periode" => $result["keterangan"]["periode"],
-							"username" => $result["keterangan"]["username"],
-							"foto" => $foto,
-							"nama" => $result["keterangan"]["nama"],
-							"angkatan" => $result["keterangan"]["angkatan"],
-							"divisi" => $result["keterangan"]["divisi"],
-							"jabatan" => $result["keterangan"]["jabatan"],
-							"jabatan_x" => $result["keterangan"]["jabatan_x"],
-							"email" => $result["keterangan"]["email"],
-							"telepon" => $result["keterangan"]["telepon"],
-							"motto" => $result["keterangan"]["motto"]
+							"keterangan" => $keanggotaan["keterangan"]["keterangan"],
+							"periode" => $keanggotaan["keterangan"]["periode"],
+							"username" => $keanggotaan["keterangan"]["username"],
+							"foto" => $keanggotaan["keterangan"]["foto"],
+							"nama" => $keanggotaan["keterangan"]["nama"],
+							"angkatan" => $keanggotaan["keterangan"]["angkatan"],
+							"divisi" => $keanggotaan["keterangan"]["divisi"],
+							"jabatan" => $keanggotaan["keterangan"]["jabatan"],
+							"jabatan_x" => $keanggotaan["keterangan"]["jabatan_x"],
+							"email" => $keanggotaan["keterangan"]["email"],
+							"telepon" => $keanggotaan["keterangan"]["telepon"],
+							"motto" => $keanggotaan["keterangan"]["motto"]
 						)
 					)
 				);
@@ -114,7 +107,7 @@ class C_PKeanggotaan extends CI_Controller {
 						"daftar_periode" => $periode["keterangan"],
 						"daftar_divisi" => $divisi["keterangan"],
 						"periode" => "",
-						"foto" => base_url("assets/")."gambar/keanggotaan/_standar.png"
+						"foto" => "assets/gambar/keanggotaan/_standar.png"
 					)
 				)
 			);

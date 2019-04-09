@@ -1,5 +1,5 @@
 <title><?= $organisasi["nama_lengkap"] ?></title>
-    <link href="<?= base_url("assets/") ?>gambar/organisasi/logo_<?= $organisasi["logo"] ?>.png" rel="icon" type="image/x-icon">
+    <link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">

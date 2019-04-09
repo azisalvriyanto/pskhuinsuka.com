@@ -49,6 +49,7 @@
 
                                                             echo "<option value=\"".$data["daftar_periode"][$i]["periode_id"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["periode_keterangan"])."</option>";
                                                         } ?>
+
                                                 </select>
                                             </div><? } ?>
 
@@ -67,7 +68,7 @@
                                                     <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img class="change-img rounded-circle" src="<?= base_url("assets/") ?>gambar/organisasi/logo_<?= $data["periode"] ?>.png" alt="User Avatar" height="140" width="140">
+                                                                <img class="change-img rounded-circle" src="<?= !empty($data["periode"]) ? base_url().$data["logo"] : base_url("assets/")."gambar/organisasi/_standar.png" ?>" alt="User Avatar" height="140" width="140">
                                                                 <button type="button" class="btn btn-secondary" id="perbarui-logo" style="margin-top: 70px; margin-left:-50px;">
                                                                     <i class="fas fa-pencil-alt mr-1"></i>
                                                                     Ubah

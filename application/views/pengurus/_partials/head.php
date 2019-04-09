@@ -2,7 +2,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
 		<title><?= $menu["judul"] ." &mdash; ". $organisasi["nama_panjang"] ?></title>
-		<link href="<?= $organisasi["logo"] ?>" rel="icon" type="image/x-icon">
+		<link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
 		<meta name="description" content="Pusat Studi dan Konsultasi Hukum">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

@@ -47,7 +47,7 @@
 
                                     <div class="card-header border-bottom text-center">
                                         <div class="mb-3 mx-auto">
-                                            <img class="rounded-circle" src="<?= $data["foto"] ?>" alt="User Avatar" width="110" height="110"><?php
+                                            <img class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="User Avatar" width="110" height="110"><?php
                                             if ($menu["judul_sub"] !== "Tambah") { ?>
 
                                                 <button type="button" class="btn btn-secondary" id="perbarui-foto" style="margin-top: 60px; margin-left:-60px;">
@@ -367,7 +367,7 @@
 
                     swal({
                         icon: "warning",
-                        title: "Anda akan mengganti logo?",
+                        title: "Anda akan mengganti foto profil?",
                         content: form_foto,
                         dangerMode: true,
 						buttons: [

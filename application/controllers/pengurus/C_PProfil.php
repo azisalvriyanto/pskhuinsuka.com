@@ -12,9 +12,8 @@ class C_PProfil extends CI_Controller {
 			
 			$periode	= $this->M_Periode->daftar();
 			$divisi 	= $this->M_Divisi->daftar();
-
 			$result		= $this->M_Keanggotaan->lihat($this->session->userdata("username"));
-			if ($result["status"] === 200) {
+			if ($periode["status"] === 200 && $divisi["status"] === 200 && $result["status"] === 200) {
 				$data = @array_merge($data,
 					array(
 						"data" => array(
@@ -36,7 +35,7 @@ class C_PProfil extends CI_Controller {
 					)
 				);
 			} else {
-				redirect(base_url("pengurus/")."keanggotaan");
+				redirect(base_url("pengurus"));
 			}
 
 			$this->load->view("pengurus/profil", $data);
