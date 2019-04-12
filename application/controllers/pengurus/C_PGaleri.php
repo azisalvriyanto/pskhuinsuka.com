@@ -8,39 +8,23 @@ class C_PGaleri extends CI_Controller {
                 "judul" => "Galeri",
                 "judul_sub" => "Keterangan"
             );
-            $data  = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+            $data  			= $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+			$data["data"]	= array();
 
-			$periode    = $this->M_Periode->daftar();
-			if ($periode["status"] === 200) {
-                $galeri     = $this->M_Galeri->lihat($periode["keterangan"][count($periode["keterangan"])-1]["periode_id"]);
-				if ($galeri["status"] === 200) {
-					$data = @array_merge($data,
-						array(
-							"data" => $galeri["keterangan"]
-						)
-					);
-					$data["data"] = @array_merge($data["data"],
-						array(
-							"daftar_periode" => $periode["keterangan"]
-						)
-					);
-				} else {
-					$data = @array_merge($data,
-						array(
-							"data" => array(
-								"daftar_periode" => $periode["keterangan"],
-								"periode" => ""
-							)
-						)
-					);
-				}
-			} else {
-				$data = @array_merge($data,
+			$periode    = $this->M_Organisasi->periode_daftar();
+			$galeri     = $this->M_Galeri->lihat($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"]);
+			if ($periode["status"] === 200 && $galeri["status"] === 200) {
+				$data["data"] = @array_merge($data["data"],
 					array(
-						"data" => array(
-							"daftar_periode" => "",
-							"periode" => ""
-						)
+						"daftar_periode" => $periode["keterangan"]
+					)
+				);
+				$data["data"] = @array_merge($data["data"], $galeri["keterangan"]);
+			} else {
+				$data["data"] = @array_merge($data["data"],
+					array(
+						"daftar_periode" => "",
+						"periode" => ""
 					)
 				);
 			}

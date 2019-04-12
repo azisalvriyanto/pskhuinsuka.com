@@ -29,6 +29,8 @@
     
     <!-- field -->
     <section class="services">
+
+    <div class="container">
         <div class="container">
             <h3 class="tittle">Kontak Kami</h3>
 
@@ -75,6 +77,7 @@
                         </div>
                     </a>
                 </div>
+
                 <div class="col-sm-4" style="padding: 10px;">
                     <a href="//www.facebook.com/<?= !empty($organisasi["kontak"]["facebook"]) ? $organisasi["kontak"]["facebook"] : ""  ?>">
                         <div class="icon_info" style="background: black; height: 100%;">

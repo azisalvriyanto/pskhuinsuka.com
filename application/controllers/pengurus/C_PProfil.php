@@ -9,33 +9,34 @@ class C_PProfil extends CI_Controller {
 				"judul_sub" => "Profil"
 			);
 			$data  = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+			$data["data"]	= array();
 			
-			$periode	= $this->M_Periode->daftar();
-			$divisi 	= $this->M_Divisi->daftar();
-			$result		= $this->M_Keanggotaan->lihat($this->session->userdata("username"));
-			if ($periode["status"] === 200 && $divisi["status"] === 200 && $result["status"] === 200) {
-				$data = @array_merge($data,
+			$periode	= $this->M_Organisasi->periode_daftar();
+			$keanggotaan		= $this->M_Keanggotaan->lihat($this->session->userdata("username"));
+			if ($periode["status"] === 200 && $keanggotaan["status"] === 200) {
+				$data["data"]	= @array_merge($data["data"],
 					array(
-						"data" => array(
-							"daftar_periode" => $periode["keterangan"],
-							"daftar_divisi" => $divisi["keterangan"],
-							"keterangan" => $result["keterangan"]["keterangan"],
-							"periode" => $result["keterangan"]["periode"],
-							"username" => $result["keterangan"]["username"],
-							"foto" => $result["keterangan"]["foto"],
-							"nama" => $result["keterangan"]["nama"],
-							"angkatan" => $result["keterangan"]["angkatan"],
-							"divisi" => $result["keterangan"]["divisi"],
-							"jabatan" => $result["keterangan"]["jabatan"],
-							"jabatan_x" => $result["keterangan"]["jabatan_x"],
-							"email" => $result["keterangan"]["email"],
-							"telepon" => $result["keterangan"]["telepon"],
-							"motto" => $result["keterangan"]["motto"]
-						)
+						"daftar_periode" => $periode["keterangan"]
+					)
+				);
+				$data["data"]	= @array_merge($data["data"], $keanggotaan["keterangan"]);
+			} else {
+				redirect(base_url("pengurus/")."keanggotaan/beranda");
+			}
+
+			$divisi	= $this->M_Divisi->daftar();
+			if ($divisi["status"] === 200) {
+				$data["data"] = @array_merge($data["data"],
+					array(
+						"daftar_divisi" => $divisi["keterangan"]
 					)
 				);
 			} else {
-				redirect(base_url("pengurus"));
+				$data["data"] = @array_merge($data["data"],
+					array(
+						"daftar_divisi" => ""
+					)
+				);
 			}
 
 			$this->load->view("pengurus/profil", $data);

@@ -22,14 +22,29 @@ $route["galeri"]                = "Umum/galeri";
 
 //pengurus
 $route["pengurus"]  = "pengurus/C_PMasuk/index";
+
 $route["pengurus/beranda"]  = "pengurus/C_PBeranda/index";
+
 $route["pengurus/organisasi"]   = "pengurus/C_POrganisasi/index";
+
 $route["pengurus/keanggotaan"]          = "pengurus/C_PKeanggotaan/index";
 $route["pengurus/keanggotaan/tambah"]   = "pengurus/C_PKeanggotaan/tambah";
 $route["pengurus/keanggotaan/(:any)"]   = "pengurus/C_PKeanggotaan/lihat/$1";
-$route["pengurus/profil"]       = "pengurus/C_PProfil/index";
+$route["pengurus/profil"]       =    "pengurus/C_PProfil/index";
+
+$route["pengurus/keuangan"]                 = "pengurus/C_PKeuangan/index";
+$route["pengurus/keuangan/tambah"]          = "pengurus/C_PKeuangan/tambah";
+$route["pengurus/keuangan/(:any)"]          = "pengurus/C_PKeuangan/cetak/$1";
+$route["pengurus/keuangan/(:any)/(:num)"]   = "pengurus/C_PKeuangan/cetak/$1/$2";
+
 $route["pengurus/artikel"]          = "pengurus/C_PArtikel/index";
 $route["pengurus/artikel/tambah"]   = "pengurus/C_PArtikel/tambah";
 $route["pengurus/artikel/(:num)"]   = "pengurus/C_PArtikel/perbarui/$1";
+
+$route["pengurus/berita"]           = "pengurus/C_PBerita/index";
+$route["pengurus/berita/tambah"]    = "pengurus/C_PBerita/tambah";
+$route["pengurus/berita/(:num)"]    = "pengurus/C_PBerita/perbarui/$1";
+
 $route["pengurus/galeri"]       = "pengurus/C_PGaleri/index";
+
 $route["pengurus/pengaturan"]   = "pengurus/C_PPengaturan/index";

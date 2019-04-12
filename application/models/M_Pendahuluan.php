@@ -9,15 +9,14 @@ class M_Pendahuluan extends CI_Model {
             )
         );
 
-        $organisasi = $this->db->select("periode_keterangan, organisasi.*")
+        $organisasi = $this->db->select("*")
         ->from("organisasi")->order_by("organisasi_periode", "desc")
-        ->join("periode", "organisasi.organisasi_periode=periode.periode_id")->order_by("periode_id", "desc")
         ->get();
         if ($organisasi->num_rows() > 0) {
             $organisasi = $organisasi->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->periode_keterangan."_logo.png")) {
-                $logo	= "assets/gambar/organisasi/".$organisasi->periode_keterangan."_logo.png";
+            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+                $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";
             }
@@ -27,7 +26,7 @@ class M_Pendahuluan extends CI_Model {
                     "organisasi" => array(
                         "periode" => $organisasi->organisasi_periode,
                         "logo" => $logo,
-                        "nama_lengkap" => $organisasi->organisasi_nama_lengkap,
+                        "nama_panjang" => $organisasi->organisasi_nama_panjang,
                         "nama_pendek" => $organisasi->organisasi_nama_pendek,
                         "visi" => $organisasi->organisasi_visi,
                         "misi" => $organisasi->organisasi_misi,
@@ -88,16 +87,13 @@ class M_Pendahuluan extends CI_Model {
             "api" => base_url("..")."/pskhuinsuka.com.api"
         );
 
-        $organisasi = $this->db->select("organisasi_periode, periode_keterangan, organisasi_nama_lengkap, organisasi_nama_pendek")
-        ->from("organisasi")->order_by("organisasi_periode", "desc")
-        ->join("periode", "organisasi.organisasi_periode=periode.periode_id")->order_by("periode_id", "desc")
-        ->get();
+        $organisasi = $this->db->select("organisasi_periode, organisasi_nama_panjang, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
 
         if ($organisasi->num_rows() > 0) {
             $organisasi = $organisasi->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->periode_keterangan."_logo.png")) {
-                $logo	= "assets/gambar/organisasi/".$organisasi->periode_keterangan."_logo.png";
+            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+                $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";
             }
@@ -106,7 +102,7 @@ class M_Pendahuluan extends CI_Model {
                 array(
                     "organisasi" => array(
                         "logo" => $logo,
-                        "nama_panjang" => $organisasi->organisasi_nama_lengkap,
+                        "nama_panjang" => $organisasi->organisasi_nama_panjang,
                         "nama_pendek" => $organisasi->organisasi_nama_pendek
                     )
                 )
@@ -133,12 +129,13 @@ class M_Pendahuluan extends CI_Model {
             if (@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$keanggotaan->keanggotaan_username.".png")) {
                 $foto	= "assets/gambar/keanggotaan/".$keanggotaan->keanggotaan_username.".png";
             } else {
-                $foto	= "assets/gambar/keanggotaan/_standar_logo.png";
+                $foto	= "assets/gambar/keanggotaan/_standar.png";
             }
 
             $data = @array_merge($data,
                 array(
                     "pengguna" => array(
+                        "periode" => $keanggotaan->keanggotaan_periode,
                         "username" => $keanggotaan->keanggotaan_username,
                         "foto" => $foto,
                         "nama" => $keanggotaan->keanggotaan_nama,
@@ -152,12 +149,52 @@ class M_Pendahuluan extends CI_Model {
             $data = @array_merge($data,
                 array(
                     "pengguna" => array(
+                        "periode" => "",
                         "username" => "",
                         "foto" => "assets/gambar/keanggotaan/_standar_logo.png",
                         "nama" => "",
                         "keterangan" => "",
                         "divisi" => "",
                         "jabatan" => ""
+                    )
+                )
+            );
+        }
+
+        return $data;
+    }
+
+    public function masuk() {
+        $data = array(
+            "judul" => "Masuk",
+            "api" => base_url("..")."/pskhuinsuka.com.api"
+        );
+
+        $organisasi = $this->db->select("organisasi_periode, organisasi_nama_panjang")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
+        if ($organisasi->num_rows() > 0) {
+            $organisasi = $organisasi->row();
+
+            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+                $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
+            } else {
+                $logo	= "assets/gambar/organisasi/_standar_logo.png";
+            }
+
+            $data = @array_merge($data,
+                array(
+                    "organisasi" => array(
+                        "logo" => $logo,
+                        "nama_panjang" => $organisasi->organisasi_nama_panjang
+                    )
+                )
+            );
+        }
+        else {
+            $data = @array_merge($data,
+                array(
+                    "organisasi" => array(
+                        "logo" => "assets/gambar/organisasi/_standar_logo.png",
+                        "nama_panjang" => ""
                     )
                 )
             );

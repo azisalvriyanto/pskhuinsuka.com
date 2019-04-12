@@ -4,10 +4,56 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class M_Artikel extends CI_Model {
     public function daftar()
     {
-        $query = $this->db->select("keanggotaan_nama, keanggotaan_divisi, divisi_keterangan, artikel_keterangan_keterangan, artikel.*")->from("artikel")
+        $query = $this->db->select("keanggotaan_nama, divisi_keterangan, artikel_keterangan_keterangan, artikel.artikel_id, artikel.artikel_waktu, artikel.artikel_penerbit, artikel.artikel_judul")->from("artikel")
         ->join("keanggotaan", "keanggotaan.keanggotaan_username=artikel.artikel_penerbit")
         ->join("divisi", "divisi.divisi_id=keanggotaan.keanggotaan_divisi")
-        ->join("artikel_keterangan", "artikel_keterangan_id=artikel.artikel_keterangan")
+        ->join("artikel_keterangan", "artikel_keterangan.artikel_keterangan_id=artikel.artikel_keterangan")
+        ->get();
+
+        if ($query->num_rows() > 0) {
+            return array(
+                "status" => 200,
+                "keterangan" => json_decode(json_encode($query->result()), TRUE)
+            );
+        }
+        else {
+            return array(
+                "status" => 204,
+                "keterangan" => "Artikel tidak ditemukan."
+            );
+        }
+    }
+
+    public function daftar_terbit()
+    {
+        $query = $this->db->select("keanggotaan_nama, divisi_keterangan, artikel_keterangan_keterangan, artikel.artikel_id, artikel.artikel_waktu, artikel.artikel_penerbit, artikel.artikel_judul")->from("artikel")
+        ->join("keanggotaan", "keanggotaan.keanggotaan_username=artikel.artikel_penerbit")
+        ->join("divisi", "divisi.divisi_id=keanggotaan.keanggotaan_divisi")
+        ->join("artikel_keterangan", "artikel_keterangan.artikel_keterangan_id=artikel.artikel_keterangan")
+        ->where("artikel_keterangan", "1")
+        ->get();
+
+        if ($query->num_rows() > 0) {
+            return array(
+                "status" => 200,
+                "keterangan" => json_decode(json_encode($query->result()), TRUE)
+            );
+        }
+        else {
+            return array(
+                "status" => 204,
+                "keterangan" => "Artikel tidak ditemukan."
+            );
+        }
+    }
+
+    public function daftar_draf()
+    {
+        $query = $this->db->select("keanggotaan_nama, divisi_keterangan, artikel_keterangan_keterangan, artikel.artikel_id, artikel.artikel_waktu, artikel.artikel_penerbit, artikel.artikel_judul")->from("artikel")
+        ->join("keanggotaan", "keanggotaan.keanggotaan_username=artikel.artikel_penerbit")
+        ->join("divisi", "divisi.divisi_id=keanggotaan.keanggotaan_divisi")
+        ->join("artikel_keterangan", "artikel_keterangan.artikel_keterangan_id=artikel.artikel_keterangan")
+        ->where("artikel_keterangan", 2)
         ->get();
 
         if ($query->num_rows() > 0) {
@@ -29,7 +75,7 @@ class M_Artikel extends CI_Model {
         $query = $this->db->select("keanggotaan_nama, keanggotaan_divisi, divisi_keterangan, artikel_keterangan_keterangan, artikel.*")->from("artikel")
         ->join("keanggotaan", "keanggotaan.keanggotaan_username=artikel.artikel_penerbit")
         ->join("divisi", "keanggotaan.keanggotaan_divisi=divisi.divisi_id")
-        ->join("artikel_keterangan", "artikel_keterangan_id=artikel.artikel_keterangan")
+        ->join("artikel_keterangan", "artikel_keterangan.artikel_keterangan_id=artikel.artikel_keterangan")
         ->where("artikel_id", $id)->get();
 
         if ($query->num_rows() > 0) {

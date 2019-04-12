@@ -6,9 +6,7 @@ class C_PMasuk extends CI_Controller {
 		if($this->session->userdata("username")) {
 			redirect("pengurus/beranda");
 		} else {
-			$data  = array(
-				"api" => base_url("..")."/pskhuinsuka.com.api"
-      );
+			$data	= $this->M_Pendahuluan->masuk();
 
 			$this->load->view("pengurus/masuk", $data);
 		}

@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <div class="copyrightbottom" data-aos="fade-right">
-                <p><?= $organisasi["nama_lengkap"] ?> © <?= date("Y") ?> | Made with
+                <p><?= $organisasi["nama_panjang"] ?> © <?= date("Y") ?> | Made with
                     <a href="//hmkk.org"><span class="fa fa-heart" aria-hidden="true"></span></a>
                     by
                     <a href="//www.facebook.com/tegal6etar" target="_blank">Teknik Informatika 2016</a>

@@ -8,21 +8,14 @@ class C_PArtikel extends CI_Controller {
                 "judul" => "Artikel",
                 "judul_sub" => "Daftar"
             );
-            $data  = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+            $data           = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+			$data["data"]	= array();
 
-            $result	= $this->M_Artikel->daftar();
-            if ($result["status"] === 200) {
-                $data = @array_merge($data,
-                    array(
-                        "data" => $result["keterangan"]
-                    )
-                );
+            $artikel    = $this->M_Artikel->daftar();
+            if ($artikel["status"] === 200) {
+                $data["data"] = @array_merge($data["data"], $artikel["keterangan"]);
             } else {
-                $data = @array_merge($data,
-                    array(
-                        "data" => ""
-                    )
-                );
+                $data["data"] = @array_merge($data["data"], "");
             }
 
             $this->load->view("pengurus/artikel", $data);
@@ -37,15 +30,13 @@ class C_PArtikel extends CI_Controller {
                 "judul" => "Artikel",
                 "judul_sub" => "Tambah"
             );
-            $data  = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+            $data           = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+			$data["data"]	= array();
 
-            $result		= $this->M_Divisi->lihat($data["pengguna"]["divisi"]);
-            if ($result["status"] === 200) {
-                $data = @array_merge($data,
-                    array(
-                        "data" => array(
-                            "divisi" => $result["keterangan"]["keterangan"]
-                        )
+            $divisi		= $this->M_Divisi->lihat($data["pengguna"]["divisi"]);
+            if ($divisi["status"] === 200) {
+                $data["data"] = @array_merge($data["data"], array(
+                        "divisi" => $divisi["keterangan"]["keterangan"]
                     )
                 );
             } else {
@@ -64,15 +55,12 @@ class C_PArtikel extends CI_Controller {
                 "judul" => "Artikel",
                 "judul_sub" => "Sunting"
             );
-            $data  = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+            $data           = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
+			$data["data"]	= array();
 
-            $result    = $this->M_Artikel->lihat($id);
-            if ($result["status"] === 200) {
-                $data = @array_merge($data,
-                    array(
-                        "data" => $result["keterangan"]
-                    )
-                );
+            $artikel    = $this->M_Artikel->lihat($id);
+            if ($artikel["status"] === 200) {
+                $data["data"] = @array_merge($data["data"], $artikel["keterangan"]);
             } else {
                 redirect("pengurus/artikel/tambah");
             }

@@ -136,10 +136,11 @@ $autoload['language'] = array();
 $autoload["model"] = array(
     "M_Pendahuluan",
     "M_Organisasi",
-    "M_Periode",
     "M_Divisi",
     "M_JPendapat",
     "M_Keanggotaan",
+    "M_Keuangan",
     "M_Artikel",
+    "M_Berita",
     "M_Galeri",
 );

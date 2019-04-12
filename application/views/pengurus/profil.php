@@ -47,7 +47,7 @@
 
                                     <div class="card-header border-bottom text-center">
                                         <div class="mb-3 mx-auto">
-                                            <img class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="User Avatar" width="110" height="110"><?php
+                                            <img class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110"><?php
                                             if ($menu["judul_sub"] !== "Tambah") { ?>
 
                                                 <button type="button" class="btn btn-secondary" id="perbarui-foto" style="margin-top: 60px; margin-left:-60px;">
@@ -91,30 +91,28 @@
                                                                         $data["keterangan"] = "";
                                                                     } ?>
 
-                                                                <option value="1"<?= $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
-                                                                <option value="0"<?= $data["keterangan"] === "0" ? " selected" : "" ?>>Tidak Aktif</option>
+                                                                <option value="1"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
+                                                                <option value="0"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "0" ? " selected" : "" ?>>Tidak Aktif</option>
                                                             </select>
                                                         </div><?php } ?>
 
                                                         <div class="form-group col-md-3">
                                                             <label for="periode">Periode</label>
-                                                            <select id="periode" class="form-control">
-                                                            <?php
+                                                            <select id="periode" class="form-control"> <?php
                                                                 if (empty($data["periode"])) {
                                                                     echo "<option value=\"\" selected>Pilih...</option>";
                                                                 }
                                                                 
                                                                 if (!empty($data["daftar_periode"])) {
                                                                     for ($i=0; $i<count($data["daftar_periode"]); $i++) {
-                                                                        if ($data["periode"] === $data["daftar_periode"][$i]["periode_id"] && !empty($data["periode"])) {
+                                                                        if (!empty($data["periode"] && $data["periode"] === $data["daftar_periode"][$i]["organisasi_periode"])) {
                                                                             $selected = " selected";
                                                                         }
                                                                         else {
                                                                             $selected = "";
-                                                                        }
-    
-                                                                        echo "
-                                                                    <option value=\"".$data["daftar_periode"][$i]["periode_id"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["periode_keterangan"])."</option>";
+                                                                        } ?>
+
+                                                                    <option value="<?= $data["daftar_periode"][$i]["organisasi_periode"] ?>"<?= $selected ?>><?= @str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"]) ?></option><?php
                                                                     } 
                                                                 } ?>
 
@@ -159,7 +157,7 @@
                                                                     }
 
                                                                     if (!empty($data["daftar_periode"])) {
-                                                                        if ($pengguna["divisi"] === "1") {
+                                                                        if ($pengguna["divisi"] === "1" && $pengguna["jabatan"] === "1") {
                                                                             $divisi_dari = 0;
                                                                         }
                                                                         else {
@@ -369,7 +367,6 @@
                         icon: "warning",
                         title: "Anda akan mengganti foto profil?",
                         content: form_foto,
-                        dangerMode: true,
 						buttons: [
 					 		true,
 					 		{
@@ -700,7 +697,7 @@
                                     $("#jabatan").empty();
                                     $("#jabatan").append(new Option("Pilih...", ""));
                                     for (const index in response.keterangan) {
-                                        var option = new Option(response.keterangan[index].jabatan_keterangan, response.keterangan[index].jabatan_x_jabatan);
+                                        var option = new Option(response.keterangan[index].jabatan_keterangan, response.keterangan[index].divisi_relasi_jabatan);
                                         $("#jabatan").append(option);
                                     }
                                 } else {

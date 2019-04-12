@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-		<title><?= $menu["judul"] ." &mdash; ". $organisasi["nama_panjang"] ?></title>
+		<title><?= $menu["judul"]." &mdash; ".$organisasi["nama_panjang"] ?></title>
 		<link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
 		<meta name="description" content="Pusat Studi dan Konsultasi Hukum">

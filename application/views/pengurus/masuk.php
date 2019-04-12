@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pusat Studi dan Konsultasi Hukum</title>
+    <title><?= $judul." &mdash; ".$organisasi["nama_panjang"] ?></title>
+		<link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
   <style>
   .sly-login {
@@ -334,8 +335,6 @@ $(document).ready(function() {
       },
       success: function(response) {
           if (response.status === 200) {
-            $("#login").html("Proses masuk berhasil.");
-
             window.location.assign(`<?= base_url("pengurus/")."beranda" ?>`);
           } else {
             $("#login").html("Masuk");

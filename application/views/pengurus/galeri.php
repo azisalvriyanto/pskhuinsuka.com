@@ -38,14 +38,14 @@
                                                 <select id="periode" class="form-control">
                                                     <?php
                                                         for ($i=0; $i<count($data["daftar_periode"]); $i++) {
-                                                            if ($i === count($data["daftar_periode"])-1) {
+                                                            if (!empty($data["periode"] && $data["periode"] === $data["daftar_periode"][$i]["organisasi_periode"])) {
                                                                 $selected = " selected";
                                                             }
                                                             else {
                                                                 $selected = "";
                                                             }
 
-                                                            echo "<option value=\"".$data["daftar_periode"][$i]["periode_id"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["periode_keterangan"])."</option>";
+                                                            echo "<option value=\"".$data["daftar_periode"][$i]["organisasi_periode"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"])."</option>";
                                                         } ?>
 
                                                 </select>
@@ -59,19 +59,22 @@
                                                 <div class="col">
                                                     <div hidden="true">
                                                         <form id="form-landscape" enctype="multipart/form-data">
-                                                            <input type="text" id="landscape_periode" name="landscape_periode" class="form-control" value="<?= $data["periode_keterangan"] ?>" hidden>
+                                                            <input type="text" id="landscape_periode" name="landscape_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
                                                             <input type="file" id="landscape_file" name="landscape_file" class="form-control">
                                                         </form>
 
                                                         <form id="form-portrait" enctype="multipart/form-data">
-                                                            <input type="text" id="portrait_periode" name="portrait_periode" class="form-control" value="<?= $data["periode_keterangan"] ?>" hidden>
+                                                            <input type="text" id="portrait_periode" name="portrait_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
                                                             <input type="file" id="portrait_file" name="portrait_file" class="form-control">
                                                         </form>
                                                     </div>
 
                                                     <form id="form-instagram"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-group">
-                                                            <label for="instagram">Instagram</label>
+                                                            <label for="instagram">
+                                                                Instagram
+                                                                <br><small>*Berikut tutorial cara mendapatkan akses token Instagram: <a href="https://www.youtube.com/watch?v=-BmTKA1xCm8" target="_blank">https://www.youtube.com/watch?v=-BmTKA1xCm8</a> (46:40)</small>
+                                                            </label>
                                                             <div class="input-group mb-3">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text">Akses token</span>
@@ -81,23 +84,29 @@
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-7">
-                                                                <label for="landscape">Foto Landscape</label>
+                                                                <label for="landscape">
+                                                                    Foto Landscape
+                                                                    <br><small>*Untuk mendapatkan hasil yang bagus gunakan rasio gambar 1680 x 900 px</small>
+                                                                </label>
                                                                 <div class="input-group">
                                                                     <button type="button" class="btn btn-secondary" id="landscape" style="position: absolute; margin: 100px;">
                                                                         <i class="fas fa-pencil-alt mr-1"></i>
                                                                         Ubah
                                                                     </button>
-                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode_keterangan"])."_landscape.png" ? $data["periode_keterangan"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
+                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_landscape.png" ? $data["periode"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-5">
-                                                                <label for="portrait">Foto Portrait</label>
+                                                                <label for="portrait">
+                                                                    Foto Portrait
+                                                                    <br><small>*Untuk mendapatkan hasil yang bagus gunakan rasio gambar 380 x 640 px</small>
+                                                                </label>
                                                                 <div class="input-group">
                                                                     <button type="button" class="btn btn-secondary" id="portrait" style="position: absolute; margin: 100px;">
                                                                         <i class="fas fa-pencil-alt mr-1"></i>
                                                                         Ubah
                                                                     </button>
-                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode_keterangan"])."_portrait.png" ? $data["periode_keterangan"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
+                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_portrait.png" ? $data["periode"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -273,7 +282,7 @@
                     .then((yes) => {
                         if (yes) {
                             $.ajax({
-                                url: site_api+"/organisasi/landscape",
+                                url: site_api+"/galeri/landscape",
                                 dataType: "json",
                                 method: "POST",
                                 data: new FormData(form_foto),
@@ -354,7 +363,7 @@
                     .then((yes) => {
                         if (yes) {
                             $.ajax({
-                                url: site_api+"/organisasi/portrait",
+                                url: site_api+"/galeri/portrait",
                                 dataType: "json",
                                 method: "POST",
                                 data: new FormData(form_foto),

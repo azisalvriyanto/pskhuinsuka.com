@@ -39,15 +39,22 @@
 
                             <div id="artikel_<?= $artikel['artikel_id'] ?>" class="col-lg-4">
                                 <div class="card card-small card-post mb-4">
-                                    <a href="#" class="text-muted" onclick="sunting(`<?= $artikel['artikel_id'] ?>`, `<?= $artikel['artikel_judul'] ?>`)">
-                                        <div class="card-body text-justify">
-                                            <h5 class="card-title"><?= !empty($artikel["artikel_judul"]) ? $artikel["artikel_judul"] : "&nbsp;" ?></h5>
-                                            <?= !empty($artikel["artikel_isi"]) ? substr($artikel["artikel_isi"], 0, 120)."..." : "&nbsp;" ?>
+                                    <a href="#<?= $artikel['artikel_judul'] ?>" class="text-muted mt-4 mb-2 mr-3 ml-3" onclick="sunting(`<?= $artikel['artikel_id'] ?>`, `<?= $artikel['artikel_judul'] ?>`)">
+                                        <div class="text-justify">
+                                            <h5 class="card-title"><?php  if (!empty($artikel["artikel_judul"])) {
+                                                if (@strlen($artikel["artikel_judul"]) <= 34) {
+                                                    echo $artikel["artikel_judul"];
+                                                } else {
+                                                    echo @substr($artikel["artikel_judul"], 0, 32)."...";
+                                                }
+                                            } else {
+                                                echo "&nbsp;";
+                                            } ?></h5>
                                         </div>
                                     </a>
                                     <div class="card-footer border-top d-flex">
                                         <div class="card-post__author d-flex">
-                                            <span class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('<?= base_url("assets/")."gambar/keanggotaan/".(!@is_file("./assets/gambar/keanggotaan/".$artikel["artikel_penerbit"].".png") ? "_standar" : $artikel["artikel_penerbit"]).".png" ?>');">Written by <?= $artikel["keanggotaan_nama"] ?></span>
+                                            <span class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('<?= base_url("assets/")."gambar/keanggotaan/".(@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$artikel["artikel_penerbit"].".png") ? $artikel["artikel_penerbit"] : "_standar" ).".png" ?>');">Written by <?= $artikel["keanggotaan_nama"] ?></span>
                                             <div class="d-flex flex-column justify-content-center ml-3">
                                                 <span class="card-post__author-name"><?= $artikel["keanggotaan_nama"] ?></span>
                                                 <small class="text-muted"><?= $artikel["divisi_keterangan"] ?></small>
@@ -105,7 +112,6 @@
                     text: "Anda akan menyunting data dari artikel yang berjudul \""+judul+"\".",
                     icon: "warning",
                     buttons: true,
-                    dangerMode: true,
                 })
                 .then((yes) => {
                     if (yes) {

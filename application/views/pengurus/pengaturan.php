@@ -46,9 +46,9 @@
                                                                         <select id="periode" class="form-control">
                                                                             <option value="">Pilih...</option>
                                                                             <?php
-                                                                                for ($i=0; $i<count($data["daftar_periode"]["keterangan"]); $i++) {
+                                                                                for ($i=0; $i<count($data["daftar_periode"]); $i++) {
 
-                                                                                    echo "<option value=\"".$data["daftar_periode"]["keterangan"][$i]["periode_id"]."\">".@str_replace("-", "/", $data["daftar_periode"]["keterangan"][$i]["periode_keterangan"])."</option>";
+                                                                                    echo "<option value=\"".$data["daftar_periode"][$i]["organisasi_periode"]."\">".@str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"])."</option>";
                                                                                 } ?>
                                                                         </select>
                                                                     </div>
@@ -87,7 +87,7 @@
                                                         <div class="form-row">
                                                             <div class="col-md-4">
                                                                 <label for="periode_sekarang">Periode Sekarang</label>
-                                                                <input type="text" class="form-control text-center" id="periode_sekarang" placeholder="Periode Sekarang" value="<?= !empty($data["periode"]) ? @str_replace("-", "/", $data["periode"]) : "" ?>" readonly>
+                                                                <input type="text" class="form-control text-center" id="periode_sekarang" placeholder="Periode sekarang tidak ada." value="<?= !empty($data["periode"]) ? @str_replace("-", "/", $data["periode"]) : "" ?>" readonly>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <label>Periode Baru</label>
@@ -207,7 +207,7 @@
                                             button: "Tutup"
                                         })
                                         .then((yes) => {
-                                            if (periode === `<?= !empty($data["periode"]) ? @str_replace("-", "/", $data["periode"]) : "" ?>`) {
+                                            if (periode === `<?= $pengguna["periode"] ?>`) {
                                                 $.ajax({
                                                     url: `<?= $api ?>`+`/otentikasi/keluar`,
                                                     dataType: "json",
@@ -340,6 +340,7 @@
                                 dataType: "json",
                                 type: "POST",
                                 data : {
+                                    "periode_sekarang": $("#periode_sekarang").val(),
                                     "tahun_awal": tahun_awal,
                                     "tahun_akhir": tahun_akhir,
                                     "username": $("#username").val(),

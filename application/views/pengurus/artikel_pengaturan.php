@@ -39,7 +39,13 @@
                                     <div class="card-body">
                                         <form class="add-new-post">
                                             <input id="judul" class="form-control form-control-lg mb-3" type="text" placeholder="Judul Artikel" value="<?= $menu["judul_sub"] === "Tambah" ? "" : $data["judul"] ?>">
-                                            <div id="editor-container" class="add-new-post__editor mb-1"></div>
+                                            <div id="editor-container" class="add-new-post__editor mb-3"></div>
+                                            <div class="form-control mb-3 text-center">
+                                                <input type="file" id="gambar" class="col-md-12">
+                                            </div>
+                                            <div class="form-control mb-0 text-center">
+                                                <img id="gambar_pratinjau" src="#" class="col-sm-12 mt-3 mb-3" alt="&nbsp;&nbsp;Gambar artikel">
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -151,18 +157,39 @@
                 });
 
                 $("#kembali").click(function() {
-                    swal({
-                        title: "Apakah anda yakin?",
-                        text: "Data yang anda sunting tidak akan disimpan.",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((yes) => {
-                        if (yes) {
-                            window.location.assign(`<?= base_url("pengurus/")."artikel" ?>`);
+                    if ($("#keterangan_status").val() !== "Belum disimpan") {
+                        window.location.assign(`<?= base_url("pengurus/")."artikel" ?>`);
+                    } else {
+                        swal({
+                            title: "Apakah anda yakin?",
+                            text: "Data yang anda sunting tidak akan disimpan.",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                        .then((yes) => {
+                            if (yes) {
+                                window.location.assign(`<?= base_url("pengurus/")."artikel" ?>`);
+                            }
+                        });
+                    }
+                });
+
+
+                function pratinjau(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#gambar_pratinjau').attr("src", e.target.result);
                         }
-                    });
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#gambar").change(function() {
+                    pratinjau(this);
                 });
             });
 

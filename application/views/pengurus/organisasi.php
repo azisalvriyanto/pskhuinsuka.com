@@ -32,23 +32,21 @@
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
                                         <div class="form-row">
-                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-8" : "col-md-12" ?> mt-2 mb-2">
+                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-8" : "col-md-12" ?> d-flex align-items-center">
                                                 <h6 class="m-0">Profil</h6>
                                             </div><?php if (!empty($data["daftar_periode"])) { ?>
 
-                                            <div class="col-md-4 pt-1">
-                                                <select id="periode" class="form-control">
-                                                    <?php
+                                            <div class="col-md-4 d-flex align-items-center text-center">
+                                                <select id="periode" class="form-control"><?php
                                                         for ($i=0; $i<count($data["daftar_periode"]); $i++) {
                                                             if ($i === count($data["daftar_periode"])-1) {
                                                                 $selected = " selected";
                                                             }
                                                             else {
                                                                 $selected = "";
-                                                            }
+                                                            } ?>
 
-                                                            echo "<option value=\"".$data["daftar_periode"][$i]["periode_id"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["periode_keterangan"])."</option>";
-                                                        } ?>
+                                                    <option value="<?= $data["daftar_periode"][$i]["organisasi_periode"]?>"<?= $selected ?>><?= @str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"]) ?></option><?php } ?>
 
                                                 </select>
                                             </div><? } ?>
@@ -68,7 +66,7 @@
                                                     <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img class="change-img rounded-circle" src="<?= !empty($data["periode"]) ? base_url().$data["logo"] : base_url("assets/")."gambar/organisasi/_standar.png" ?>" alt="User Avatar" height="140" width="140">
+                                                                <img class="change-img rounded-circle" src="<?= !empty($data["periode"]) ? base_url().$data["logo"] : base_url()."gambar/organisasi/_standar.png" ?>" alt="User Avatar" height="140" width="140">
                                                                 <button type="button" class="btn btn-secondary" id="perbarui-logo" style="margin-top: 70px; margin-left:-50px;">
                                                                     <i class="fas fa-pencil-alt mr-1"></i>
                                                                     Ubah
@@ -76,8 +74,8 @@
                                                             </div>
                                                             <div class="form-group col-md-7">
                                                                 <div class="form-group">
-                                                                    <label for="nama_lengkap">Nama Lengkap</label>
-                                                                    <input type="text" class="form-control" id="nama_lengkap" placeholder="Nama Lengkap" value="<?= !empty($data["periode"]) ? $data["nama_lengkap"] : "" ?>">
+                                                                    <label for="nama_panjang">Nama Lengkap</label>
+                                                                    <input type="text" class="form-control" id="nama_panjang" placeholder="Nama Lengkap" value="<?= !empty($data["periode"]) ? $data["nama_panjang"] : "" ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="nama_pendek">Nama Pendek</label>
@@ -352,7 +350,8 @@
 
                                 var data = response.keterangan;
                                 $("input[id=logo_periode]").val(data.periode);
-                                $("input[id=nama_lengkap]").val(data.nama_lengkap);
+                                $("img[id=logo]").val(`<?= base_url() ?>`+data.logo);
+                                $("input[id=nama_panjang]").val(data.nama_panjang);
                                 $("input[id=nama_pendek]").val(data.nama_pendek);
                                 $("textarea[id=visi]").val(data.visi);
                                 $("textarea[id=misi]").val(data.misi);
@@ -416,7 +415,7 @@
                         type: "POST",
                         data : {
                             "periode": $("#periode").val(),
-                            "nama_lengkap": $("#nama_lengkap").val(),
+                            "nama_panjang": $("#nama_panjang").val(),
                             "nama_pendek": $("#nama_pendek").val(),
                             "visi": $("#visi").val(),
                             "misi": $("#misi").val(),

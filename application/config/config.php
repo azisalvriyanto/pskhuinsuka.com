@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 date_default_timezone_set("Asia/Jakarta");
+$hari   = array(0 => "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+$bulan  = array(1 => "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember");
 
 /*
 |--------------------------------------------------------------------------

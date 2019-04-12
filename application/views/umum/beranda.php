@@ -86,7 +86,7 @@
     <!-- //banner -->
 
     <!-- field --><?php if (
-        !empty($organisasi["sejarah"]) && !empty($organisasi["nama_lengkap"])
+        !empty($organisasi["sejarah"]) && !empty($organisasi["nama_panjang"])
         && !empty($organisasi["visi"]) && !empty($organisasi["misi"])) { ?>
 
     <!-- organisasi -->
@@ -95,7 +95,7 @@
             <div class="row inner-sec-wthree"><?php if (!empty($organisasi["sejarah"])) { ?>
 
                 <div class="col-lg-5 bt-bottom-info" data-aos="fade-right">
-                    <h5><?= $organisasi["nama_lengkap"] ?></h5>
+                    <h5><?= $organisasi["nama_panjang"] ?></h5>
                 </div>
                 <div class="col-lg-7 bt-bottom-info" data-aos="fade-left">
                     <pre><p><?= $organisasi["sejarah"] ?><p></pre>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 grid_info_main mid" data-aos="flip-down">
-                    <img src="<?= base_url("assets/umum/") ?>images/ab.jpg" class="img-fluid" alt=" ">
+                    <img src="<?= base_url().$data["portrait"] ?>" class="img-fluid" alt=" ">
                 </div>
                 <div class="col-lg-4 grid_info_main" data-aos="flip-right">
                     <div class="grid_info">

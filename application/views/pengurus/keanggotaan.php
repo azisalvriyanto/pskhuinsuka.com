@@ -51,11 +51,10 @@
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
                                         <div class="form-row">
-                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-6" : "col-md-12" ?>  mt-2 mb-2">
+                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-6" : "col-md-12" ?> d-flex align-items-center">
                                                 <h6 class="m-0">Daftar Anggota</h6>
                                             </div><?php if (!empty($data["daftar_periode"])) { ?>
-
-                                            <div class="col-md-3 text-center">
+                                            <div class="col-md-3 d-flex align-items-center">
                                                 <select id="periode" class="form-control">
                                                     <?php
                                                         for ($i=0; $i<count($data["daftar_periode"]); $i++) {
@@ -66,13 +65,13 @@
                                                                 $selected = "";
                                                             }
 
-                                                            echo "<option value=\"".$data["daftar_periode"][$i]["periode_id"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["periode_keterangan"])."</option>";
+                                                            echo "<option value=\"".$data["daftar_periode"][$i]["organisasi_periode"]."\"".$selected.">".@str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"])."</option>";
                                                         } ?>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 pt-1 text-center">
-                                                <a href="<?= base_url("pengurus/") ?>keanggotaan/tambah">
-                                                    <button type="button" class="btn btn-accent" id="tambah">
+                                            <div class="col-md-3 d-flex align-items-center">
+                                                <a href="<?= base_url("pengurus/") ?>keanggotaan/tambah" class="col-md-12">
+                                                    <button type="button" class="btn btn-accent col-md-12" id="tambah">
                                                         <i class="fas fa-user-plus mr-1"></i>
                                                         Tambah Anggota
                                                     </button>
@@ -82,11 +81,11 @@
                                         </div>
                                     </div>
                                     <div class="card-body p-0 pb-3 text-center">
-                                                        
                                         <table class="table mb-0" id="table"<?= !empty($data["daftar"]) ? "" : " hidden" ?>>
                                             <thead class="bg-light">
                                                 <tr>
                                                     <th scope="col" class="border-0">#</th>
+                                                    <th scope="col" class="border-0">Keterangan</th>
                                                     <th scope="col" class="border-0">Nama Lengkap</th>
                                                     <th scope="col" class="border-0">Bidang</th>
                                                     <th scope="col" class="border-0">Jabatan</th>
@@ -97,10 +96,16 @@
                                             <tbody id="tbody"><?php
                                             if (!empty($data["daftar"])) {
                                                 $daftar = $data["daftar"];
-                                                for ($i=0; $i<count($data["daftar"]); $i++) { ?>
+                                                for ($i=0; $i<count($data["daftar"]); $i++) {
+                                                    if ($daftar[$i]["akun_keterangan"] === "1") {
+                                                        $keterangan = "Aktif";
+                                                    } else {
+                                                        $keterangan = "Tidak aktif";
+                                                    } ?>
 
                                                 <tr id="<?= $daftar[$i]["keanggotaan_username"] ?>">
                                                     <td><?= $i+1 ?></td>
+                                                    <td><?= $keterangan ?></td>
                                                     <td><?= $daftar[$i]["keanggotaan_nama"] ?></td>
                                                     <td><?= $daftar[$i]["divisi_keterangan"] ?></td>
                                                     <td><?= $daftar[$i]["jabatan_keterangan"] ?></td>
@@ -121,7 +126,7 @@
                                         </table>
 
                                         <div id="keterangan" class="row"<?= !empty($data["daftar"]) ? " hidden" : "" ?>>
-                                            <div class="col-md-12 text-center pt-3">
+                                            <div class="col-md-12 text-center pt-4">
                                                 <label>Daftar anggota tidak ditemukan.</label>
                                             </div>
                                         </div>
@@ -164,8 +169,15 @@
                                 var data = response.keterangan;
                                 for (const index in response.keterangan) {
                                     var nomor = parseInt(index)+parseInt(1);
+                                    if (data[index].jabatan_keterangan === "1") {
+                                        var keterangan = "Aktif";
+                                    } else {
+                                        var keterangan = "Tidak aktif";
+                                    }
+
                                     $("#tbody").append(`<tr id="`+data[index].keanggotaan_username+`">
                                                     <td>`+nomor+`</td>
+                                                    <td>`+keterangan+`</td>
                                                     <td>`+data[index].keanggotaan_nama+`</td>
                                                     <td>`+data[index].divisi_keterangan+`</td>
                                                     <td>`+data[index].jabatan_keterangan+`</td>
@@ -225,7 +237,7 @@
 
                 swal({
                     title: "Apakah anda yakin?",
-                    text: "Anda akan menyunting data "+nama+".",
+                    text: "Anda akan menyunting profil dari \""+nama+"\".",
                     icon: "warning",
                     buttons: true,
                 })
@@ -244,7 +256,7 @@
 
                 swal({
                     title: "Apakah anda yakin?",
-                    text: "Setelah dihapus, anda tidak dapat memulihkan data "+nama+".",
+                    text: "Setelah dihapus, anda tidak dapat memulihkan profil dari \""+nama+"\".",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

@@ -7,42 +7,48 @@ class Umum extends CI_Controller {
 			"judul" => "Beranda"
 		);
 		$data		= $this->M_Pendahuluan->umum($menu);
+		$data["data"]	= array();
 
 		$divisi = $this->M_Divisi->daftar();
 		if ($divisi["status"] === 200) {
-			$data = @array_merge($data,
-					array(
-						"data" => array(
-							"divisi" => $divisi["keterangan"],
-						)
-					)
-				);
+			$data["data"] = @array_merge($data["data"],
+				array(
+					"divisi" => $divisi["keterangan"],
+				)
+			);
 		} else {
-			$data = @array_merge($data,
-					array(
-						"data" => array(
-							"divisi" => "",
-						)
-					)
-				);
+			$data["data"] = @array_merge($data["data"],
+				array(
+					"divisi" => "",
+				)
+			);
 		}
 
 		$jpendapat = $this->M_JPendapat->daftar();
 		if ($divisi["status"] === 200) {
 			$data["data"] = @array_merge($data["data"],
-					 array(
-							"jpendapat" => $jpendapat["keterangan"],
-						)
-				);
+				array(
+					"jpendapat" => $jpendapat["keterangan"],
+				)
+			);
 		} else {
-			$data = @array_merge($data,
-					array(
-						"data" => array(
-							"jpendapat" => "",
-						)
-					)
-				);
+			$data["data"] = @array_merge($data["data"],
+				array(
+					"jpendapat" => ""
+				)
+			);
 		}
+		
+		if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$data["organisasi"]["periode"]."_portrait.png")) {
+			$foto	= "assets/gambar/organisasi/".$data["organisasi"]["periode"]."_portrait.png";
+		} else {
+			$foto	= "assets/gambar/keanggotaan/_standar_portrait.png";
+		}
+		$data["data"] = @array_merge($data["data"],
+			array(
+				"portrait" => $foto
+			)
+		);
 
 		$this->load->view("umum/beranda", $data);
 	}
@@ -61,7 +67,12 @@ class Umum extends CI_Controller {
 			"judul" => "Artikel"
 		);
 		$data		= $this->M_Pendahuluan->umum($menu);
+		$data["data"]	= array();
 
+		$artikel	= $this->M_Artikel->daftar_terbit();
+		$data["data"] = @array_merge($data["data"], $artikel["keterangan"]);
+		//print_r($data); exit;
+		//echo 7 % 6; exit;
 		$this->load->view("umum/artikel", $data);
 	}
 
@@ -98,40 +109,22 @@ class Umum extends CI_Controller {
 			"judul" => "Galeri"
 		);
 		$data		= $this->M_Pendahuluan->umum($menu);
+		$data["data"]	= array();
 
-		$periode_daftar	= $this->M_Periode->daftar();
-		if ($periode_daftar["status"] === 200) {//$periode["keterangan"][count($periode["keterangan"])-1]["periode_id"]
-			$galeri     = $this->M_Galeri->lihat($periode_daftar["keterangan"][count($periode_daftar["keterangan"])-1]["periode_id"]);
-			if ($galeri["status"] === 200) {
-				$instagram_aksestoken	= $galeri["keterangan"]["instagram"];
-				$instagram				= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagram_aksestoken);
+		$periode	= $this->M_Organisasi->periode_terakhir();
+		$galeri     = $this->M_Galeri->lihat($periode["keterangan"]);
 
-				if ($instagram["meta"]["code"] === 200) {
-					$data = @array_merge($data,
-						array(
-							"data" => $instagram["data"]
-						)
-					);
-				} else {
-					$data = @array_merge($data,
-						array(
-							"data" => ""
-						)
-					);
-				}
+		if ($periode["status"] === 200 && $galeri["status"] === 200) {
+			$instagram_aksestoken	= $galeri["keterangan"]["instagram"];
+			$instagram				= curl_get("https://api.instagram.com/v1/users/self/media/recent/?access_token=".$instagram_aksestoken);
+
+			if ($instagram["meta"]["code"] === 200) {
+				$data["data"] = @array_merge($data["data"], $instagram["data"]);
 			} else {
-				$data = @array_merge($data,
-					array(
-						"data" => ""
-					)
-				);
+				$data["data"] = @array_merge($data["data"], "");
 			}
 		} else {
-			$data = @array_merge($data,
-				array(
-					"data" => ""
-				)
-			);
+			$data["data"] = @array_merge($data["data"], "");
 		}
 
 		$this->load->view("umum/galeri", $data);

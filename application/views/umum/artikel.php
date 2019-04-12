@@ -1,5 +1,8 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
+
+    $array_hari   = array(0 => "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+    $array_bulan  = array(1 => "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember");
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,8 +28,121 @@
     <section class="services">
         <div class="container">
             <h3 class="tittle">Artikel</h3>
-            <div class="row inner-sec-wthree">
+            <div class="row inner-sec-wthree"><?php
+            foreach ($data as $key => $artikel) {
+                $key = $key+1;
+
+                if (($key%6) === 1 || ($key%6) === 4) { ?>
+                    
                 <div class="col-lg-8 blog-sp" data-aos="zoom-in">
+                    <article class="blog-x row">
+                        <div class="col-md-6 blog-img">
+                            <a href="single.html">
+								<img src="<?= base_url("assets/umum/") ?>images/b1.jpg" alt="" class="img-responsive" />
+							</a>
+                        </div>
+                        <div class="col-md-6 blog_info">
+                            <h5 class="text-justify" style="word-wrap: break-word;">
+                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                    if (@strlen($artikel["artikel_judul"]) <= 70) {
+                                        echo $artikel["artikel_judul"];
+                                    } else {
+                                        echo @substr($artikel["artikel_judul"], 0, 68)."...";
+                                    }
+                                } else {
+                                    echo "&nbsp;";
+                                } ?></a>
+                            </h5>
+                            <p>
+                                Penerbit:
+                                <a><?= $artikel["keanggotaan_nama"] ?></a>
+                                <br><?= $artikel["divisi_keterangan"] ?>
+                            </p><?php
+                                $hari       = $array_hari[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("w")];
+                                $tanggal    = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("d");
+                                $bulan      = $array_bulan[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("n")];
+                                $tahun      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("Y");
+                                $waktu      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("(H:i:s")." WIB)";
+                            ?>
+
+                            <h4><?= $hari.", ".$tanggal." ".$bulan." ".$tahun."<br>".$waktu ?></h4>
+                        </div>
+                    </article><?php }
+                else if (($key%6) === 2 || ($key%6) === 5) { ?>
+
+                    <article class="blog-x br-mar row">
+                        <div class="col-md-6 blog_info">
+                            <h5 class="text-justify" style="word-wrap: break-word;">
+                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                    if (@strlen($artikel["artikel_judul"]) <= 70) {
+                                        echo $artikel["artikel_judul"];
+                                    } else {
+                                        echo @substr($artikel["artikel_judul"], 0, 68)."...";
+                                    }
+                                } else {
+                                    echo "&nbsp;";
+                                } ?></a>
+                            </h5>
+                            <p>
+                                Penerbit:
+                                <a><?= $artikel["keanggotaan_nama"] ?></a>
+                                <br><?= $artikel["divisi_keterangan"] ?>
+                            </p><?php
+                                $hari       = $array_hari[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("w")];
+                                $tanggal    = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("d");
+                                $bulan      = $array_bulan[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("n")];
+                                $tahun      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("Y");
+                                $waktu      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("(H:i:s")." WIB)";
+                            ?>
+
+                            <h4><?= $hari.", ".$tanggal." ".$bulan." ".$tahun."<br>".$waktu ?></h4>
+                        </div>
+                        <div class="col-md-6 blog-img img1">
+                            <a href="single.html">
+								<img src="<?= base_url("assets/umum/") ?>images/b2.jpg" alt="" class="img-responsive" />
+							</a>
+                        </div>
+                    </article>
+                </div><?php }
+                else if (($key%6) === 3 || ($key%6) === 0) { ?>
+
+                <div class="col-lg-4 blog-side blog-top-right" data-aos="zoom-in">
+                    <article class="blog-top-right">
+                        <div class="blog-img">
+                            <a href="single.html">
+								<img src="<?= base_url("assets/umum/") ?>images/b3.jpg" alt="" class="img-responsive" />
+							</a>
+                        </div>
+                        <div class="blog_info  blog-right">
+                            <h5 class="text-justify" style="word-wrap: break-word;">
+                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                    if (@strlen($artikel["artikel_judul"]) <= 70) {
+                                        echo $artikel["artikel_judul"];
+                                    } else {
+                                        echo @substr($artikel["artikel_judul"], 0, 68)."...";
+                                    }
+                                } else {
+                                    echo "&nbsp;";
+                                } ?></a>
+                            </h5>
+                            <p>
+                                Penerbit:
+                                <a><?= $artikel["keanggotaan_nama"] ?></a>
+                                <br><?= $artikel["divisi_keterangan"] ?>
+                            </p><?php
+                                $hari       = $array_hari[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("w")];
+                                $tanggal    = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("d");
+                                $bulan      = $array_bulan[DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("n")];
+                                $tahun      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("Y");
+                                $waktu      = DateTime::createFromFormat("Y-m-d H:i:s", $artikel["artikel_waktu"])->format("(H:i:s")." WIB)";
+                            ?>
+
+                            <h4><?= $hari.", ".$tanggal." ".$bulan." ".$tahun."<br>".$waktu ?></h4>
+                        </div>
+                    </article>
+                </div><?php }
+            } ?>
+                <!-- <div class="col-lg-8 blog-sp" data-aos="zoom-in">
                     <article class="blog-x row">
                         <div class="col-md-6 blog-img">
                             <a href="single.html">
@@ -64,7 +180,6 @@
                             </ul>
                             <h4>July 3,2018</h4>
                         </div>
-
                     </article>
                     <article class="blog-x br-mar row">
                         <div class="col-md-6 blog_info">
@@ -274,7 +389,7 @@
 							</a>
                         </div>
                     </article>
-                </div>
+                </div> -->
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
