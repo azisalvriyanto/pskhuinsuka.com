@@ -262,21 +262,21 @@
 
                                                 <tr id="<?= $keuangan['keuangan_id']; ?>">
                                                     <td><?= date("d/m/Y", strtotime($keuangan["keuangan_tanggal"])); ?></td>
-                                                    <td><?= $keuangan["keuangan_judul"] ?></td>
+                                                    <td class="text-left"><?= $keuangan["keuangan_judul"] ?></td>
                                                     <td><?= $keuangan["keuangan_jumlah"] ?></td><?php if($keuangan["keuangan_keterangan"] === "1") { ?>
 
-                                                    <td><?= "Rp".number_format($keuangan["keuangan_nominal"], 2, ',', '.'); ?></td>
+                                                    <td class="text-right"><?= "Rp".number_format($keuangan["keuangan_nominal"], 2, ',', '.'); ?></td>
                                                     <td></td><?php } else { ?>
 
                                                     <td></td>
-                                                    <td><?= "Rp".number_format($keuangan["keuangan_nominal"], 2, ',', '.'); ?></td><?php } ?><?php 
+                                                    <td class="text-right"><?= "Rp".number_format($keuangan["keuangan_nominal"], 2, ',', '.'); ?></td><?php } ?><?php 
                                                         if($keuangan["keuangan_keterangan"] === "1") {
                                                             $debet = $debet+$keuangan["keuangan_nominal"];
                                                         } else {
                                                             $kredit = $kredit+$keuangan["keuangan_nominal"];
                                                         } ?>
 
-                                                    <td><?= "Rp".number_format($debet-$kredit, 2, ',', '.'); ?></td>
+                                                    <td class="text-right"><?= "Rp".number_format($debet-$kredit, 2, ',', '.'); ?></td>
                                                     <td class="text-nowrap">
                                                         <button class="btn btn-sm btn-outline-info mr-1" onclick="sunting(`<?= $keuangan['keuangan_id']; ?>`)">
                                                             <i class="fas fa-pencil-alt mr-1"></i>
@@ -293,10 +293,10 @@
                                             <tfoot class="bg-light mb-0">
                                                 <tr>
                                                     <th colspan="3">Total</th>
-                                                    <th>
+                                                    <th class="text-right">
                                                         <span id="debet"><?= "Rp" . number_format($debet, 2, ',' , '.'); ?></span>
                                                     </th>
-                                                    <th>
+                                                    <th class="text-right">
                                                         <span id="kredit"><?= "Rp" . number_format($kredit, 2, ',', '.'); ?></span>
                                                     </th>
                                                     <th colspan="2">
@@ -612,10 +612,10 @@
 
                                     $("#table tbody").append(`<tr id="`+keuangan[index].keuangan_id+`">
                                         <td>`+tanggal+`</td>
-                                        <td>`+keuangan[index].keuangan_judul+`</td>
+                                        <td class="text-left">`+keuangan[index].keuangan_judul+`</td>
                                         <td>`+keuangan[index].keuangan_jumlah+`</td>`
-                                        +(keuangan[index].keuangan_keterangan === "1" ? `<td>Rp`+number_format(keuangan[index].keuangan_nominal, 2, ',', '.')+`</td><td></td>` : `<td></td><td>Rp`+number_format(keuangan[index].keuangan_nominal, 2, ',', '.')+`</td>`)+`
-                                        <td>Rp`+number_format(debet-kredit, 2, ',', '.')+`</td>
+                                        +(keuangan[index].keuangan_keterangan === "1" ? `<td class="text-right">Rp`+number_format(keuangan[index].keuangan_nominal, 2, ',', '.')+`</td><td></td>` : `<td></td><td class="text-right">Rp`+number_format(keuangan[index].keuangan_nominal, 2, ',', '.')+`</td>`)+`
+                                        <td class="text-right">Rp`+number_format(debet-kredit, 2, ',', '.')+`</td>
                                         <td class="text-nowrap">`+tombol+`</td>
                                     </tr>`);
                                 }
