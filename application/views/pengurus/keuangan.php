@@ -1,7 +1,7 @@
 <?php
     $debet = $kredit = $saldo = 0;
-    if (!empty($data["daftar"])) {
-        foreach($data["daftar"] as $keuangan){
+    if (!empty($data["daftar_semua"])) {
+        foreach($data["daftar_semua"] as $keuangan){
             if($keuangan["keuangan_keterangan"] === "1") {
                 $debet = $debet+$keuangan["keuangan_nominal"];
             } else {
@@ -141,7 +141,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-6 col-md-4 mb-4">
-                                    <a href="#pemasukkan" class="custom-card" id="pemasukkan">
+                                    <a href="#tambah" class="custom-card" id="pemasukkan">
                                         <div class="stats-small stats-small--1 card card-small panel card-hover hover-effect">
                                             <div class="card-body p-0 d-flex">
                                                 <div class="col-md-12 d-flex flex-column m-auto">
@@ -158,7 +158,7 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-md-4 mb-4">
-                                    <a href="#pengeluaran" class="custom-card" id="pengeluaran">
+                                    <a href="#tambah" class="custom-card" id="pengeluaran">
                                         <div class="stats-small stats-small--1 card card-small panel card-hover hover-effect">
                                             <div class="card-body p-0 d-flex">
                                                 <div class="col-md-12 d-flex flex-column m-auto">
@@ -189,11 +189,11 @@
                             <div class="col-sm-12">
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
-                                        <div class="form-row">
-                                            <div class="col-md-4 mt-2 mb-2">
+                                        <div class="form-row d-flex align-items-center">
+                                            <div class="col-md-3 mt-2 mb-2">
                                                 <h6 class="m-0">Laporan Keuangan</h6>
                                             </div>
-                                            <div class="col-md-2 d-flex align-items-center">
+                                            <div class="col-md-3">
                                                 <select id="periode" class="form-control">
                                                     <?php
                                                     for ($i=0; $i<count($data["daftar_periode"]); $i++) {
@@ -209,7 +209,7 @@
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-2 d-flex align-items-center text-center">
+                                            <div class="col-md-2 text-center">
                                                 <select id="bulan" class="form-control" <?= !empty($data["daftar_bulan"]) ? "" : " disabled" ?>>
                                                     <option value="">Semua</option><?php
                                                     if(!empty($data["daftar_bulan"])){
@@ -234,7 +234,7 @@
 
                                                 </select>
                                             </div>
-                                            <div class="col-md-4 d-flex align-items-center">
+                                            <div class="col-md-4">
                                                 <button type="button" class="btn btn-accent col-md-12" id="cetak">
                                                     <i class="fas fa-download fa-md text-white-50"></i>
                                                     Cetak Laporan
@@ -287,7 +287,7 @@
                                                             Hapus
                                                         </button>
                                                     </td>
-                                                </tr><?php endforeach; }?>
+                                                </tr><?php endforeach; } ?>
 
                                             </tbody>
                                             <tfoot class="bg-light mb-0">
@@ -300,7 +300,7 @@
                                                         <span id="kredit"><?= "Rp" . number_format($kredit, 2, ',', '.'); ?></span>
                                                     </th>
                                                     <th colspan="2">
-                                                        <span id="total"><?= "Rp" . number_format($total, 2, ',' , '.'); ?></span>
+                                                        <span id="total"><?= "Rp" . number_format($debet-$kredit, 2, ',' , '.'); ?></span>
                                                     </th>
                                                 </tr>
                                             </tfoot>
@@ -334,7 +334,7 @@
             var site_api = `<?= $api ?>`;
 
             $(document).ready(function () {
-                $("#tanggal, #pengaturan_tanggal").datepicker({
+                $("#pengaturan_tanggal").datepicker({
                     format: "dd/mm/yyyy",
                     autoclose: true
                 });
@@ -575,13 +575,13 @@
                         dataType    : "json",
                         type        : "GET",
                         success : function(response) {
-                            var keuangan = response.keterangan;
                             if (response.status === 200) {
                                 $("#status").html(``);
                                 $("#table").removeAttr("hidden");
                                 $("#keterangan").attr("hidden", "true");
                                 $("#tbody").html(``);
 
+                                var keuangan = response.keterangan;
                                 var debet = kredit = saldo = 0;
                                 for (const index in keuangan) {
                                     var date    = new Date(keuangan[index].keuangan_tanggal),
@@ -860,7 +860,7 @@
                             success: function(response) {
                                 if (response.status === 200) {
                                     swal({
-                                        title: "Data Berhasil dihapus.",
+                                        title: "Data berhasil dihapus.",
                                         icon: "success",
                                         button: "Tutup"
                                     })

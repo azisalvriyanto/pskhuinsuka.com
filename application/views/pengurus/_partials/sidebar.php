@@ -39,6 +39,18 @@
 								</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link<?= (@strtolower($menu["judul"]) == "kegiatan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>kegiatan">
+									<i class="material-icons">event_note</i>
+									<span>Kegiatan</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link<?= (@strtolower($menu["judul"]) == "berkas") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>berkas">
+								<i class="material-icons">receipt</i>
+									<span>Berkas</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "artikel") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>artikel">
 									<i class="material-icons">assignment</i>
 									<span>Artikel</span>
@@ -48,12 +60,6 @@
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "berita") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>berita">
 									<i class="material-icons">library_books</i>
 									<span>Berita</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link<?= (@strtolower($menu["judul"]) == "kegiatan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>kegiatan">
-									<i class="material-icons">event_note</i>
-									<span>Kegiatan</span>
 								</a>
 							</li>
 							<li class="nav-item">

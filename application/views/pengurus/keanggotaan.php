@@ -50,11 +50,11 @@
                             <div class="col">
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
-                                        <div class="form-row">
-                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-6" : "col-md-12" ?> d-flex align-items-center">
+                                        <div class="form-row d-flex align-items-center">
+                                            <div class="<?= !empty($data["daftar_periode"]) ? "col-md-5" : "col-md-12" ?>">
                                                 <h6 class="m-0">Daftar Anggota</h6>
                                             </div><?php if (!empty($data["daftar_periode"])) { ?>
-                                            <div class="col-md-3 d-flex align-items-center">
+                                            <div class="col-md-3">
                                                 <select id="periode" class="form-control">
                                                     <?php
                                                         for ($i=0; $i<count($data["daftar_periode"]); $i++) {
@@ -69,8 +69,8 @@
                                                         } ?>
                                                 </select>
                                             </div>
-                                            <div class="col-md-3 d-flex align-items-center">
-                                                <a href="<?= base_url("pengurus/") ?>keanggotaan/tambah" class="col-md-12">
+                                            <div class="col-md-4">
+                                                <a href="<?= base_url("pengurus/") ?>keanggotaan/tambah">
                                                     <button type="button" class="btn btn-accent col-md-12" id="tambah">
                                                         <i class="fas fa-user-plus mr-1"></i>
                                                         Tambah Anggota

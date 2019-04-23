@@ -18,16 +18,18 @@ class C_PKeuangan extends CI_Controller {
 			
 			$periode	= $this->M_Organisasi->periode_daftar();
 			if ($periode["status"] === 200) {
-				$bulan 		= $this->M_Keuangan->bulan_daftar($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"]);
-				$keuangan	= $this->M_Keuangan->daftar($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"], date("n"));
-				if ($bulan["status"] === 200 && $keuangan["status"] === 200) {
+				$bulan 			= $this->M_Keuangan->bulan_daftar($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"]);
+				$keuangan		= $this->M_Keuangan->daftar($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"], date("n"));
+				$keuangan_semua	= $this->M_Keuangan->daftar($periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"], "");
+				if ($bulan["status"] === 200 && $keuangan["status"] === 200 && $keuangan_semua["status"] === 200) {
 					if ($keuangan["status"] === 200) {
 						$data["data"]	= @array_merge($data["data"],
 							array(
 								"daftar_periode" => $periode["keterangan"],
 								"daftar_bulan" => $bulan["keterangan"],
 								"periode" => $periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"],
-								"daftar" => $keuangan["keterangan"]
+								"daftar" => $keuangan["keterangan"],
+								"daftar_semua" => $keuangan_semua["keterangan"]
 							)
 						);
 					}
@@ -37,7 +39,8 @@ class C_PKeuangan extends CI_Controller {
 							"daftar_periode" => $periode["keterangan"],
 							"daftar_bulan" => "",
 							"periode" => $periode["keterangan"][count($periode["keterangan"])-1]["organisasi_periode"],
-							"daftar" => ""
+							"daftar" => "",
+							"daftar_semua" => ""
 						)
 					);
 				}
@@ -48,7 +51,8 @@ class C_PKeuangan extends CI_Controller {
 						"daftar_periode" => "",
 						"daftar_bulan" => "",
 						"periode" => "",
-						"daftar" => ""
+						"daftar" => "",
+						"daftar_semua" => ""
 					)
 				);
 			}

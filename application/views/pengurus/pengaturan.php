@@ -55,7 +55,7 @@
                                                                     <div class="col-md-5">
                                                                         <button type="button" class="col-md-12 btn btn-danger" id="hapus">
                                                                             <i class="fas fa-trash-alt mr-1"></i>
-                                                                            Hapus Kepenguruasan
+                                                                            Hapus Kepengurusan
                                                                         </button>
                                                                     </div>
                                                                 </div>
