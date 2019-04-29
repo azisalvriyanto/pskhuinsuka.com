@@ -15,14 +15,20 @@ $route["translate_uri_dashes"]	= FALSE;
 //umum
 $route["beranda"]               = "Umum/index";
 $route["kontak"]                = "Umum/kontak";
-$route["artikel"]               = "Umum/artikel";
-$route["berita"]                            = "publik/C_UBerita/index";
-$route["berita/(:num)"]                     = "publik/C_UBerita/daftar/$1";
-$route["berita/(:num)/(:num)"]              = "publik/C_UBerita/daftar/$1/$2";
-$route["berita/(:num)/(:num)/(:num)"]       = "publik/C_UBerita/index";
-$route["berita/(:num)/(:num)/(:num)/(any)"] = "publik/C_UBerita/lihat/$1/$2/$3/$4";
+$route["artikel"]                               = "Umum/artikel";
+$route["artikel/(:num)"]                        = "Umum/artikel/$1";
+$route["artikel/(:num)/(:num)"]                 = "Umum/artikel/$1/$2";
+$route["artikel/(:num)/(:any)/(:num)/(:any)"]   = "Umum/artikel/$1/$2/$3/$4";
+$route["berita"]                                = "Umum/berita";
+$route["berita/(:num)"]                         = "Umum/berita/$1";
+$route["berita/(:num)/(:num)"]                  = "Umum/berita/$1/$2";
+$route["berita/(:num)/(:any)/(:num)/(:any)"]    = "Umum/berita/$1/$2/$3/$4";
 $route["kegiatan"]              = "Umum/kegiatan";
 $route["galeri"]                = "Umum/galeri";
+$route["berkas"]                = "Umum/berkas";
+
+//pendaftaran
+$route["pendaftaran"]               = "Umum/pendaftaran";
 
 //pengurus
 $route["pengurus"]  = "pengurus/C_PMasuk/index";

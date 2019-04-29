@@ -2,7 +2,116 @@
 <html class="no-js h-100" lang="en">
 	<head>
         <?php $this->load->view("pengurus/_partials/head.php") ?>
-    
+        <style>
+            .switch {
+                position: relative;
+                display: block;
+                vertical-align: top;
+                width: 100px;
+                height: 30px;
+                padding: 3px;
+                margin: 0 10px 10px 0;
+                background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
+                background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
+                border-radius: 18px;
+                box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+                cursor: pointer;
+            }
+
+            .switch-input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                }
+                .switch-label {
+                position: relative;
+                display: block;
+                height: inherit;
+                font-size: 10px;
+                text-transform: uppercase;
+                background: #eceeef;
+                border-radius: inherit;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+            }
+
+            .switch-label:before, .switch-label:after {
+                position: absolute;
+                top: 50%;
+                margin-top: -.5em;
+                line-height: 1;
+                -webkit-transition: inherit;
+                -moz-transition: inherit;
+                -o-transition: inherit;
+                transition: inherit;
+                }
+                .switch-label:before {
+                content: attr(data-off);
+                right: 11px;
+                color: #aaaaaa;
+                text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+            }
+
+            .switch-label:after {
+                content: attr(data-on);
+                left: 11px;
+                color: #FFFFFF;
+                text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+                opacity: 0;
+            }
+
+            .switch-input:checked ~ .switch-label {
+                background: #0088cc;
+                border-color: #0088cc;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+            }
+
+            .switch-input:checked ~ .switch-label:before {
+                opacity: 0;
+            }
+
+            .switch-input:checked ~ .switch-label:after {
+                opacity: 1;
+            }
+
+            .switch-handle {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                width: 28px;
+                height: 28px;
+                background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+                background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+                border-radius: 100%;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .switch-handle:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -6px 0 0 -6px;
+                width: 12px;
+                height: 12px;
+                background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+                background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+                border-radius: 6px;
+                box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+            }
+
+            .switch-input:checked ~ .switch-handle {
+                left: 74px;
+                box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .switch-label, .switch-handle {
+                transition: All 0.3s ease;
+                -webkit-transition: All 0.3s ease;
+                -moz-transition: All 0.3s ease;
+                -o-transition: All 0.3s ease;
+            }
+        </style>
     </head>
 	<body class="h-100">
 		<div class="container-fluid">
@@ -26,8 +135,33 @@
 
 						<!-- field -->
 						<div class="row">
+                            <div class="col-md-3">
+                                <div class="card card-small mb-4">
+                                    <div class="card-header border-bottom">
+                                        <h6 class="m-0">Tautan Pendaftaran</h6>
+                                        <small>*Untuk mengaktifkan atau mematikan tautan pendaftaran.</small>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item p-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-row">
+                                                        <div class="col-md-12 d-flex justify-content-center mt-1">
+                                                            <label class="switch">
+                                                            <input id="pendaftaran" class="switch-input" type="checkbox" <?= $data["pendaftaran"] == 1 ? "checked" : "" ?> />
+                                                            <span class="switch-label" data-on="on" data-off="off"></span> 
+                                                            <span class="switch-handle"></span> 
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                            <div class="col-lg-12">
+                            <div class="col-md-9">
                                 <div class="card card-small mb-4">
                                     <div class="card-header border-bottom">
                                         <h6 class="m-0">Hapus Kepengurusan</h6>
@@ -178,6 +312,51 @@
             var site_api = `<?= $api ?>`;
             
             $(document).ready(function() {
+                $("#pendaftaran").change(function () {
+                    var pendaftaran = $("#pendaftaran").is(":checked") ? "1" : "0";
+                    $.ajax({
+                        url: site_api+"/pengaturan/pendaftaran",
+                        dataType: "json",
+                        type: "POST",
+                        data : {
+                            "periode": `<?= $data["periode"] ?>`,
+                            "pendaftaran": pendaftaran
+                        },
+                        error: function (jqXHR, exception) {
+                                    if (jqXHR.status === 0) {
+                                        keterangan = "Not connect (verify network).";
+                                    } else if (jqXHR.status == 404) {
+                                        keterangan = "Requested page not found.";
+                                    } else if (jqXHR.status == 500) {
+                                        keterangan = "Internal Server Error.";
+                                    } else if (exception === "parsererror") {
+                                        keterangan = "Requested JSON parse failed.";
+                                    } else if (exception === "timeout") {
+                                        keterangan = "Time out error.";
+                                    } else if (exception === "abort") {
+                                        keterangan = "Ajax request aborted.";
+                                    } else {
+                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                    }
+
+									swal({
+										title: "Silahkan coba lagi!",
+										text: keterangan,
+										icon: "error",
+										button: "Tutup"
+									});
+
+                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <i class="fa fa-info mx-2"></i>
+                                        <strong>`+keterangan+`</strong>
+                                    </div>`);
+                                }
+                    })
+                });
+
                 $("#hapus").click(function () {
                     var periode = $("#periode option:selected").text();
                     swal({

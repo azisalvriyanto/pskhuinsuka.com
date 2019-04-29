@@ -57,70 +57,65 @@
                                         <li class="list-group-item p-3">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div hidden="true">
-                                                        <form id="form-logo" enctype="multipart/form-data">
-                                                            <input type="text" id="logo_periode" name="logo_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
-                                                            <input type="file" id="logo_file" name="logo_file" class="form-control">
-                                                        </form>
-                                                    </div>
                                                     <form id="profil-form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img class="change-img rounded-circle" src="<?= !empty($data["periode"]) ? base_url().$data["logo"] : base_url()."gambar/organisasi/_standar.png" ?>" alt="User Avatar" height="140" width="140">
-                                                                <button type="button" class="btn btn-secondary" id="perbarui-logo" style="margin-top: 70px; margin-left:-50px;">
+                                                                <img id="logo_pratinjau" class="change-img rounded-circle" src="<?= !empty($data["periode"]) ? base_url().$data["logo"] : base_url()."gambar/organisasi/_standar.png" ?>" alt="User Avatar" height="140" width="140">
+                                                                <input type="file" id="logo" name="logo" class="btn btn-secondary" style="margin-top: 85px; margin-left:-210px;">
+                                                                <!-- <button type="button" class="btn btn-secondary" id="perbarui-logo" style="margin-top: 70px; margin-left:-50px;">
                                                                     <i class="fas fa-pencil-alt mr-1"></i>
                                                                     Ubah
-                                                                </button>
+                                                                </button> -->
                                                             </div>
                                                             <div class="form-group col-md-7">
                                                                 <div class="form-group">
                                                                     <label for="nama_panjang">Nama Lengkap</label>
-                                                                    <input type="text" class="form-control" id="nama_panjang" placeholder="Nama Lengkap" value="<?= !empty($data["periode"]) ? $data["nama_panjang"] : "" ?>">
+                                                                    <input type="text" class="form-control" id="nama_panjang" name="nama_panjang" placeholder="Nama Lengkap" value="<?= !empty($data["periode"]) ? $data["nama_panjang"] : "" ?>">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="nama_pendek">Nama Pendek</label>
-                                                                    <input type="text" class="form-control" id="nama_pendek" placeholder="Nama Pendek" value="<?= !empty($data["periode"]) ? $data["nama_pendek"] : "" ?>">
+                                                                    <input type="text" class="form-control" id="nama_pendek" name="nama_pendek" placeholder="Nama Pendek" value="<?= !empty($data["periode"]) ? $data["nama_pendek"] : "" ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
                                                                 <label for="visi">Visi</label>
-                                                                <textarea class="form-control" id="visi" rows="4" placeholder="Visi organisasi."><?= !empty($data["periode"]) ? $data["visi"] : "" ?></textarea>
+                                                                <textarea class="form-control" id="visi" name="visi" rows="4" placeholder="Visi organisasi."><?= !empty($data["periode"]) ? $data["visi"] : "" ?></textarea>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label for="misi">Misi</label>
-                                                                <textarea class="form-control" id="misi" rows="4" placeholder="Misi organisasi."><?= !empty($data["periode"]) ? $data["misi"] : "" ?></textarea>
+                                                                <textarea class="form-control" id="misi" name="misi" rows="4" placeholder="Misi organisasi."><?= !empty($data["periode"]) ? $data["misi"] : "" ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5">
                                                                 <div class="form-group">
                                                                     <label for="tentang">Tentang</label>
-                                                                    <textarea class="form-control" id="tentang" rows="2" placeholder="Sesuatu hal tentang organisasi."><?= !empty($data["periode"]) ? $data["tentang"] : "" ?></textarea>
+                                                                    <textarea class="form-control" id="tentang" name="tentang" rows="2" placeholder="Sesuatu hal tentang organisasi."><?= !empty($data["periode"]) ? $data["tentang"] : "" ?></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="deskripsi">Deskripsi</label>
-                                                                    <textarea class="form-control" id="deskripsi" rows="3" placeholder="Deskripsi organisasi."><?= !empty($data["periode"]) ? $data["deskripsi"] : "" ?></textarea>
+                                                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Deskripsi organisasi."><?= !empty($data["periode"]) ? $data["deskripsi"] : "" ?></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-7">
                                                                 <label for="sejarah">Sejarah</label>
-                                                                <textarea class="form-control" id="sejarah" rows="8" placeholder="Sejarah singkat organisasi."><?= !empty($data["periode"]) ? $data["sejarah"] : "" ?></textarea>
+                                                                <textarea class="form-control" id="sejarah" name="sejarah" rows="8" placeholder="Sejarah singkat organisasi."><?= !empty($data["periode"]) ? $data["sejarah"] : "" ?></textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
                                                                 <label for="alamat">Alamat</label>
-                                                                <input type="text" class="form-control" id="alamat" placeholder="Alamat lengkap" value="<?= !empty($data["periode"]) ? $data["kontak"]["alamat"] : "" ?>">
+                                                                <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat lengkap" value="<?= !empty($data["periode"]) ? $data["kontak"]["alamat"] : "" ?>">
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label for="email">Email</label>
-                                                                <input type="email" class="form-control" id="email" placeholder="alvri@example.com" value="<?= !empty($data["periode"]) ? $data["kontak"]["email"] : "" ?>">
+                                                                <input type="email" class="form-control" id="email" name="email" placeholder="alvri@example.com" value="<?= !empty($data["periode"]) ? $data["kontak"]["email"] : "" ?>">
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label for="telepon">Telepon</label>
-                                                                <input type="text" class="form-control" id="telepon" placeholder="+628..." value="<?= !empty($data["periode"]) ? $data["kontak"]["telepon"] : "" ?>">
+                                                                <input type="text" class="form-control" id="telepon" name="telepon" placeholder="+628..." value="<?= !empty($data["periode"]) ? $data["kontak"]["telepon"] : "" ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
@@ -130,7 +125,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">https://facebook.com/</span>
                                                                     </div>
-                                                                    <input type="text" class="form-control" id="facebook" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["facebook"] : "" ?>">
+                                                                    <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["facebook"] : "" ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -139,7 +134,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">https://twitter.com/</span>
                                                                     </div>
-                                                                    <input type="text" class="form-control"  id="twitter" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["twitter"] : "" ?>">
+                                                                    <input type="text" class="form-control"  id="twitter" name="twitter" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["twitter"] : "" ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -148,7 +143,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">https://instagram.com/</span>
                                                                     </div>
-                                                                    <input type="text" class="form-control" id="instagram" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["instagram"] : "" ?>">
+                                                                    <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["instagram"] : "" ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -159,12 +154,12 @@
                                                                     <div class="input-group-prepend">
                                                                         <span class="input-group-text">https://youtube.com/channel/</span>
                                                                     </div>
-                                                                    <input type="text" class="form-control" id="youtube" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["youtube"] : "" ?>">
+                                                                    <input type="text" class="form-control" id="youtube" name="youtube" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["youtube"] : "" ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label for="peta">Google Maps</label>
-                                                                <input type="text" class="form-control" id="peta" placeholder="https://www.google.com/maps/embed?pb=!1h33!7m42!1k5!1k998" aria-label="Peta" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["peta"] : "" ?>">
+                                                                <input type="text" class="form-control" id="peta" name="peta" placeholder="https://www.google.com/maps/embed?pb=!1h33!7m42!1k5!1k998" aria-label="Peta" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["kontak"]["peta"] : "" ?>">
                                                             </div>
                                                         </div>
                                                         <div class="text-center pt-3 pb-3">
@@ -194,26 +189,27 @@
                                         <li class="list-group-item p-3">
                                             <div class="row">
                                                 <div class="col">
-                                                    <form><?php for ($i=0; $i<count($data["jpendapat"]); $i++) { ?>
+                                                    <form id="jpendapat-form"><?php for ($i=0; $i<count($data["jpendapat"]); $i++) { ?>
 
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img class="rounded-circle" src="<?= base_url("assets/pengurus/") ?>images/avatars/0.jpg" alt="User Avatar" width="140">
+                                                                <img id="<?= $i+1 ?>_foto_pratinjau" class="rounded-circle" src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../pskhuinsuka.com/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt="User Avatar" height="140" width="140">
+                                                                <input type="file" id="<?= $i+1 ?>_foto" name="<?= $i+1 ?>_foto" class="btn btn-secondary" style="margin-top: 85px; margin-left:-210px;">
                                                             </div>
                                                             <div class="form-group col-md-7">
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-7">
                                                                         <label for="<?= $i ?>_nama">Nama</label>
-                                                                        <input type="text" class="form-control" id="<?= $i+1 ?>_nama" placeholder="Nama" value="<?= $data["jpendapat"][$i]["jpendapat_nama"]; ?>">
+                                                                        <input type="text" class="form-control" id="<?= $i+1 ?>_nama" name="<?= $i+1 ?>_nama" placeholder="Nama" value="<?= $data["jpendapat"][$i]["jpendapat_nama"]; ?>">
                                                                     </div>
                                                                     <div class="form-group col-md-5">
                                                                         <label for="<?= $i ?>_jabatan">Jabatan</label>
-                                                                        <input type="text" class="form-control" id="<?= $i+1 ?>_jabatan" placeholder="Jabatan" value="<?= $data["jpendapat"][$i]["jpendapat_jabatan"]; ?>">
+                                                                        <input type="text" class="form-control" id="<?= $i+1 ?>_jabatan" name="<?= $i+1 ?>_jabatan" placeholder="Jabatan" value="<?= $data["jpendapat"][$i]["jpendapat_jabatan"]; ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="<?= $i ?>_pendapat">Pendapat</label>
-                                                                    <textarea class="form-control" id="<?= $i+1 ?>_pendapat" rows="2" placeholder="Pendapat" value="Pendapat"><?= $data["jpendapat"][$i]["jpendapat_pendapat"]; ?></textarea>
+                                                                    <textarea class="form-control" id="<?= $i+1 ?>_pendapat" name="<?= $i+1 ?>_pendapat" rows="2" placeholder="Pendapat" value="Pendapat"><?= $data["jpendapat"][$i]["jpendapat_pendapat"]; ?></textarea>
                                                                 </div>
                                                             </div>
                                                         </div><?php } ?>
@@ -251,88 +247,32 @@
             var site_api = `<?= $api ?>`;
             
             $(document).ready(function() {
-                $("#perbarui-logo").click(function() {
-                    var form_logo = $("#form-logo")[0];
+                function pratinjau(input, id_pratinjau) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
 
-                    swal({
-                        icon: "warning",
-                        title: "Anda akan mengganti logo?",
-                        content: form_logo,
-						buttons: [
-					 		true,
-					 		{
-					 			text: "Unggah",
-					 			closeModal: false,
-					 		}
-                        ],
-                    })
-                    .then((yes) => {
-                        if (yes) {
-                            $.ajax({
-                                url: site_api+"/organisasi/logo",
-                                dataType: "json",
-                                method: "POST",
-                                data: new FormData(form_logo),
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                success: function(response) {
-                                    if (response.status === 200) {
-                                        swal({
-                                            title: "Logo berhasil diperbarui.",
-                                            icon: "success",
-                                            button: "Tutup"
-                                        })
-                                        .then((yes) => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        swal({
-                                            title: "Logo gagal diperbarui.",
-                                            text: response.keterangan,
-                                            icon: "error",
-                                            button: "Tutup"
-                                        })
-                                        .then((yes) => {
-                                            location.reload();
-                                        });
-                                    }
-                                },
-                                error: function (jqXHR, exception) {
-                                    if (jqXHR.status === 0) {
-                                        keterangan = "Not connect (verify network).";
-                                    } else if (jqXHR.status == 404) {
-                                        keterangan = "Requested page not found.";
-                                    } else if (jqXHR.status == 500) {
-                                        keterangan = "Internal Server Error.";
-                                    } else if (exception === "parsererror") {
-                                        keterangan = "Requested JSON parse failed.";
-                                    } else if (exception === "timeout") {
-                                        keterangan = "Time out error.";
-                                    } else if (exception === "abort") {
-                                        keterangan = "Ajax request aborted.";
-                                    } else {
-                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-                                    }
-
-                                    swal({
-                                        title: "Logo gagal diperbarui.",
-                                        text: response.keterangan,
-                                        icon: "error",
-                                        button: "Tutup"
-                                    });
-
-                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <i class="fa fa-info mx-2"></i>
-                                        <strong>`+keterangan+`</strong>
-                                    </div>`);
-                                }
-                            });
+                        reader.onload = function(e) {
+                            $("#"+id_pratinjau).attr("src", e.target.result);
                         }
-                    });
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#logo").change(function() {
+                    pratinjau(this, "logo_pratinjau");
+                });
+
+                $("#1_foto").change(function() {
+                    pratinjau(this, "1_foto_pratinjau");
+                });
+
+                $("#2_foto").change(function() {
+                    pratinjau(this, "2_foto_pratinjau");
+                });
+
+                $("#3_foto").change(function() {
+                    pratinjau(this, "3_foto_pratinjau");
                 });
 
                 $("#periode").change(function(){
@@ -409,28 +349,16 @@
                 });
 
                 $("#profil-submit").click(function() {
+                    var form = new FormData($("#profil-form")[0]);
+                    form.append("periode", $("#periode").val());
+
                     $.ajax({
                         url: site_api+"/organisasi/perbarui",
                         dataType: "json",
                         type: "POST",
-                        data : {
-                            "periode": $("#periode").val(),
-                            "nama_panjang": $("#nama_panjang").val(),
-                            "nama_pendek": $("#nama_pendek").val(),
-                            "visi": $("#visi").val(),
-                            "misi": $("#misi").val(),
-                            "tentang": $("#tentang").val(),
-                            "deskripsi": $("#deskripsi").val(),
-                            "sejarah": $("#sejarah").val(),
-                            "alamat": $("#alamat").val(),
-                            "email": $("#email").val(),
-                            "telepon": $("#telepon").val(),
-                            "facebook": $("#facebook").val(),
-                            "twitter": $("#twitter").val(),
-                            "instagram": $("#instagram").val(),
-                            "youtube": $("#youtube").val(),
-                            "peta": $("#peta").val()
-                        },
+                        data : form,
+                        contentType: false,
+                        processData: false,
                         beforeSend: function (e) {
                             $("#profil-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
@@ -485,21 +413,14 @@
                 });
 
                 $("#jpendapat-submit").click(function() {
+                    var form = new FormData($("#jpendapat-form")[0]);
                     $.ajax({
                         url: site_api+"/jpendapat/simpan",
                         dataType: "json",
                         type: "POST",
-                        data : {
-                            "1_nama": $("#1_nama").val(),
-                            "1_jabatan": $("#1_jabatan").val(),
-                            "1_pendapat": $("#1_pendapat").val(),
-                            "2_nama": $("#2_nama").val(),
-                            "2_jabatan": $("#2_jabatan").val(),
-                            "2_pendapat": $("#2_pendapat").val(),
-                            "3_nama": $("#3_nama").val(),
-                            "3_jabatan": $("#3_jabatan").val(),
-                            "3_pendapat": $("#3_pendapat").val()
-                        },
+                        data : form,
+                        contentType: false,
+                        processData: false,
                         beforeSend: function (e) {
                             $("#jpendapat-submit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },

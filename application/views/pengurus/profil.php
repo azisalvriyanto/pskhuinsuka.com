@@ -33,35 +33,21 @@
                                     Kembali
                                 </button>
                             </div><?php } ?>
-
                             <div class="col-lg-4">
-                                <div class="card card-small mb-4 pt-3"><?php
-                                    if ($menu["judul_sub"] !== "Tambah") { ?>
-
-                                    <div hidden="true">
-                                        <form id="form-foto" enctype="multipart/form-data">
-                                            <input type="text" id="foto_username" name="foto_username" class="form-control" value="<?= $data["username"] ?>" hidden>
-                                            <input type="file" id="foto_file" name="foto_file" class="form-control">
-                                        </form>
-                                    </div><?php } ?>
-
-                                    <div class="card-header border-bottom text-center">
-                                        <div class="mb-3 mx-auto">
-                                            <img class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110"><?php
-                                            if ($menu["judul_sub"] !== "Tambah") { ?>
-
-                                                <button type="button" class="btn btn-secondary" id="perbarui-foto" style="margin-top: 60px; margin-left:-60px;">
-                                                    <i class="fas fa-pencil-alt mr-1"></i>
-                                                    Ubah
-                                                </button><?php } ?>
-
+                                <div class="card card-small mb-4 pt-3">
+                                    <form id="form">
+                                        <div class="card-header border-bottom text-center">
+                                            <div class="mb-3 mx-auto">
+                                                <img id="foto_pratinjau" class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110">
+                                                <input type="file" id="foto" name="foto" class="btn btn-secondary col-md-12 mt-2">
+                                            </div>
+                                            <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "{ Nama }" ?></h4>
+                                            <span class="text-muted d-block mb-2">
+                                                <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "{ Divisi }" ?></span>
+                                                (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "{ Jabatan }" ?></span>)
+                                            </span>
                                         </div>
-                                        <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "{ Nama }" ?></h4>
-                                        <span class="text-muted d-block mb-2">
-                                            <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "{ Divisi }" ?></span>
-                                            (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "{ Jabatan }" ?></span>)
-                                        </span>
-                                    </div>
+                                    </form>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-4">
                                         <div class="progress-wrapper">
@@ -79,149 +65,141 @@
                                     <li class="list-group-item p-3">
                                         <div class="row">
                                             <div class="col">
-                                                <form>
-                                                    <div class="form-row"><?php if ($menu["judul"] === "Keanggotaan") { ?>
+                                                <div class="form-row"><?php if ($menu["judul"] === "Keanggotaan") { ?>
 
-                                                        <div class="form-group col-md-3">
-                                                            <label for="keterangan">Keterangan</label>
-                                                            <select id="keterangan" class="form-control">
-                                                                <?php
-                                                                    if ($data["keterangan"] === NULL) {
-                                                                        echo "<option value=\"\" selected>Pilih...</option>";
-                                                                        $data["keterangan"] = "";
+                                                    <div class="form-group col-md-3">
+                                                        <label for="keterangan">Keterangan</label>
+                                                        <select id="keterangan" class="form-control">
+                                                            <?php
+                                                                if ($data["keterangan"] === NULL) {
+                                                                    echo "<option value=\"\" selected>Pilih...</option>";
+                                                                    $data["keterangan"] = "";
+                                                                } ?>
+
+                                                            <option value="1"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
+                                                            <option value="0"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "0" ? " selected" : "" ?>>Tidak Aktif</option>
+                                                        </select>
+                                                    </div><?php } ?>
+
+                                                    <div class="form-group col-md-3">
+                                                        <label for="periode">Periode</label>
+                                                        <select id="periode" class="form-control"> <?php
+                                                            if (empty($data["periode"])) {
+                                                                echo "<option value=\"\" selected>Pilih...</option>";
+                                                            }
+                                                            
+                                                            if (!empty($data["daftar_periode"])) {
+                                                                for ($i=0; $i<count($data["daftar_periode"]); $i++) {
+                                                                    if (!empty($data["periode"] && $data["periode"] === $data["daftar_periode"][$i]["organisasi_periode"])) {
+                                                                        $selected = " selected";
+                                                                    }
+                                                                    else {
+                                                                        $selected = "";
                                                                     } ?>
 
-                                                                <option value="1"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "1" ? " selected" : "" ?>>Aktif</option>
-                                                                <option value="0"<?= $data["keterangan"] !== NULL && $data["keterangan"] === "0" ? " selected" : "" ?>>Tidak Aktif</option>
-                                                            </select>
-                                                        </div><?php } ?>
+                                                                <option value="<?= $data["daftar_periode"][$i]["organisasi_periode"] ?>"<?= $selected ?>><?= @str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"]) ?></option><?php
+                                                                } 
+                                                            } ?>
 
-                                                        <div class="form-group col-md-3">
-                                                            <label for="periode">Periode</label>
-                                                            <select id="periode" class="form-control"> <?php
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group <?= $menu["judul"] === "Keanggotaan" ? "col-md-6" : "col-md-9" ?>">
+                                                        <label for="nama">Nama</label>
+                                                        <input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= !empty($data["periode"]) ? $data["nama"] : "" ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="username">Username</label>
+                                                        <div class="input-group input-group-seamless">
+                                                            <span class="input-group-prepend">
+                                                                <span class="input-group-text">
+                                                                    <i class="material-icons">person</i>
+                                                                </span>
+                                                            </span>
+                                                            <input type="text" class="form-control" id="username" placeholder="Username" value="<?= !empty($data["periode"]) ? $data["username"] : "" ?>" <?= !empty($data["periode"]) ? "onclick=\"ubah_username()\" readonly" : "" ?>>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="password">Password</label>
+                                                        <div class="input-group input-group-seamless">
+                                                            <input type="password" class="form-control <?= !empty($data["periode"]) ? "text-center": "" ?>" id="password" <?= !empty($data["periode"]) ? "placeholder=\"Ubah password\" onclick=\"ubah_password()\" readonly" : "placeholder=\"Password\" value=\"\"" ?>>
+                                                            <span class="input-group-append">
+                                                                <span class="input-group-text">
+                                                                    <i class="material-icons">lock</i>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="divisi">Divisi</label>
+                                                        <select id="divisi" class="form-control"<?= 
+                                                                    ($pengguna["divisi"] === "1" && ($pengguna["jabatan"] === "1" || $pengguna["jabatan"] === "2")) ? "" : " disabled"?>>
+                                                            <?php
                                                                 if (empty($data["periode"])) {
                                                                     echo "<option value=\"\" selected>Pilih...</option>";
                                                                 }
-                                                                
+
                                                                 if (!empty($data["daftar_periode"])) {
-                                                                    for ($i=0; $i<count($data["daftar_periode"]); $i++) {
-                                                                        if (!empty($data["periode"] && $data["periode"] === $data["daftar_periode"][$i]["organisasi_periode"])) {
-                                                                            $selected = " selected";
-                                                                        }
-                                                                        else {
-                                                                            $selected = "";
+                                                                    for ($i=0; $i<count($data["daftar_divisi"]) ; $i++) {
+                                                                        if ($menu["judul_sub"] !== "Tambah") {
+                                                                            if ($data["divisi"] === $data["daftar_divisi"][$i]["divisi_keterangan"] && !empty($data["divisi"])) {
+                                                                                $selected = " selected";
+                                                                            }
+                                                                            else {
+                                                                                $selected = "";
+                                                                            }
                                                                         } ?>
 
-                                                                    <option value="<?= $data["daftar_periode"][$i]["organisasi_periode"] ?>"<?= $selected ?>><?= @str_replace("-", "/", $data["daftar_periode"][$i]["organisasi_periode"]) ?></option><?php
-                                                                    } 
-                                                                } ?>
+                                                            <option value="<?= $data["daftar_divisi"][$i]["divisi_id"] ?>" <?= $selected ?>><?= $data["daftar_divisi"][$i]["divisi_keterangan"] ?></option><?php } } ?>
 
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group <?= $menu["judul"] === "Keanggotaan" ? "col-md-6" : "col-md-9" ?>">
-                                                            <label for="nama">Nama</label>
-                                                            <input type="text" class="form-control" id="nama" placeholder="Nama" value="<?= !empty($data["periode"]) ? $data["nama"] : "" ?>">
-                                                        </div>
+                                                        </select>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="username">Username</label>
-                                                            <div class="input-group input-group-seamless">
-                                                                <span class="input-group-prepend">
-                                                                    <span class="input-group-text">
-                                                                        <i class="material-icons">person</i>
-                                                                    </span>
-                                                                </span>
-                                                                <input type="text" class="form-control" id="username" placeholder="Username" value="<?= !empty($data["periode"]) ? $data["username"] : "" ?>" <?= !empty($data["periode"]) ? "onclick=\"ubah_username()\" readonly" : "" ?>>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="password">Password</label>
-                                                            <div class="input-group input-group-seamless">
-                                                                <input type="password" class="form-control <?= !empty($data["periode"]) ? "text-center": "" ?>" id="password" <?= !empty($data["periode"]) ? "placeholder=\"Ubah password\" onclick=\"ubah_password()\" readonly" : "placeholder=\"Password\" value=\"\"" ?>>
-                                                                <span class="input-group-append">
-                                                                    <span class="input-group-text">
-                                                                        <i class="material-icons">lock</i>
-                                                                    </span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="jabatan">Jabatan</label>
+                                                        <select id="jabatan" class="form-control" disabled>
+                                                            <?
+                                                                if (!empty($data["periode"])) {
+                                                                    echo "<option value=\"".$data["jabatan_x"]."\">".$data["jabatan"]."</option>";
+                                                                } else {
+                                                                    echo "<option value=\"\">Pilih...</option>";
+                                                                }
+                                                            ?>
+
+                                                        </select>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-6">
-                                                            <label for="divisi">Divisi</label>
-                                                            <select id="divisi" class="form-control">
-                                                                <?php
-                                                                    if (empty($data["periode"])) {
-                                                                        echo "<option value=\"\" selected>Pilih...</option>";
-                                                                    }
-
-                                                                    if (!empty($data["daftar_periode"])) {
-                                                                        if ($pengguna["divisi"] === "1" && $pengguna["jabatan"] === "1") {
-                                                                            $divisi_dari = 0;
-                                                                        }
-                                                                        else {
-                                                                            $divisi_dari = 1;
-                                                                        }
-
-                                                                        for ($i=$divisi_dari; $i<count($data["daftar_divisi"]) ; $i++) {
-                                                                            if ($menu["judul_sub"] !== "Tambah") {
-                                                                                if ($data["divisi"] === $data["daftar_divisi"][$i]["divisi_keterangan"] && !empty($data["divisi"])) {
-                                                                                    $selected = " selected";
-                                                                                }
-                                                                                else {
-                                                                                    $selected = "";
-                                                                                }
-                                                                            } ?>
-
-                                                                <option value="<?= $data["daftar_divisi"][$i]["divisi_id"] ?>" <?= $selected ?>><?= $data["daftar_divisi"][$i]["divisi_keterangan"] ?></option><?php } } ?>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-6">
-                                                            <label for="jabatan">Jabatan</label>
-                                                            <select id="jabatan" class="form-control" disabled>
-                                                                <?
-                                                                    if (!empty($data["periode"])) {
-                                                                        echo "<option value=\"".$data["jabatan_x"]."\">".$data["jabatan"]."</option>";
-                                                                    } else {
-                                                                        echo "<option value=\"\">Pilih...</option>";
-                                                                    }
-                                                                ?>
-
-                                                            </select>
-                                                        </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-7">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" class="form-control" id="email" placeholder="Email" value="<?= !empty($data["periode"]) ? $data["email"] : "" ?>">
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-7">
-                                                            <label for="email">Email</label>
-                                                            <input type="email" class="form-control" id="email" placeholder="Email" value="<?= !empty($data["periode"]) ? $data["email"] : "" ?>">
-                                                        </div>
-                                                        <div class="form-group col-md-5">
-                                                            <label for="telepon">Telepon</label>
-                                                            <input type="text" class="form-control" id="telepon" placeholder="Telepon" value="<?= !empty($data["periode"]) ? $data["telepon"] : "" ?>">
-                                                        </div>
+                                                    <div class="form-group col-md-5">
+                                                        <label for="telepon">Telepon</label>
+                                                        <input type="text" class="form-control" id="telepon" placeholder="Telepon" value="<?= !empty($data["periode"]) ? $data["telepon"] : "" ?>">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="motto">Motto</label>
-                                                        <textarea class="form-control" name="motto" id="motto" rows="2" placeholder="Motto."><?= !empty($data["periode"]) ? $data["motto"] : "" ?></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="motto">Motto</label>
+                                                    <textarea class="form-control" name="motto" id="motto" rows="2" placeholder="Motto."><?= !empty($data["periode"]) ? $data["motto"] : "" ?></textarea>
+                                                </div>
+                                                <div class="form-row pt-3">
+                                                    <div class="form-group <?= $menu["judul_sub"] === "Tambah" ? "col-md-12" : " col-md-6" ?> text-center">
+                                                        <button type="button" class="btn btn-accent<?= $menu["judul_sub"] === "Tambah" ? " col-md-12" : "" ?>" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "<i class=\"far fa-save mr-1\"></i> Perbarui Profil" : "<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil" ?></button>
                                                     </div>
-                                                    <div class="form-row pt-3">
-                                                        <div class="form-group <?= $menu["judul_sub"] === "Tambah" ? "col-md-12" : " col-md-6" ?> text-center">
-                                                            <button type="button" class="btn btn-accent<?= $menu["judul_sub"] === "Tambah" ? " col-md-12" : "" ?>" id="<?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "perbarui" : "tambah" ?>"><?= !empty($data["periode"]) || $menu["judul"] === "Profil" ? "<i class=\"far fa-save mr-1\"></i> Perbarui Profil" : "<i class=\"fas fa-user-plus mr-1\"></i> Tambah Profil" ?></button>
-                                                        </div>
-                                                        <?php
-                                                            if (!empty($data["periode"])) {
-                                                                echo "<div class=\"form-group col-md-6 text-center\">
-                                                            <button type=\"button\" class=\"btn btn-danger\" id=\"hapus\"><i class=\"fas fa-trash-alt mr-1\"></i> Hapus Profil</button>
-                                                        </div>";
-                                                            } else {
-                                                                echo "";
-                                                            }
-                                                        ?>
+                                                    <?php
+                                                        if (!empty($data["periode"])) {
+                                                            echo "<div class=\"form-group col-md-6 text-center\">
+                                                        <button type=\"button\" class=\"btn btn-danger\" id=\"hapus\"><i class=\"fas fa-trash-alt mr-1\"></i> Hapus Profil</button>
+                                                    </div>";
+                                                        } else {
+                                                            echo "";
+                                                        }
+                                                    ?>
 
-                                                    </div>
-                                                </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </li>
@@ -248,6 +226,22 @@
             var site_api = `<?= $api ?>`;
 
             $(document).ready(function() {
+                function pratinjau(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $("#foto_pratinjau").attr("src", e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#foto").change(function() {
+                    pratinjau(this);
+                });
+
                 $("#nama").keyup(function() {
                     if ($("#nama").val() !== "") {
                         var nama = $("#nama").val();
@@ -289,22 +283,25 @@
                 });
 
                 $("#tambah").click(function() {
+                    var form = new FormData($("#form")[0]);
+                    form.append("keterangan", keterangan);
+                    form.append("periode", $("#periode").val());
+                    form.append("username", $("#username").val());
+                    form.append("password", $("#password").val());
+                    form.append("nama", $("#nama").val());
+                    form.append("divisi", $("#divisi").val());
+                    form.append("jabatan", $("#jabatan").val());
+                    form.append("email", $("#email").val());
+                    form.append("telepon", $("#telepon").val());
+                    form.append("motto", $("#motto").val());
+
                     $.ajax({
                         url: site_api+"/keanggotaan/tambah",
                         dataType: "json",
                         type: "POST",
-                        data : {
-                            "keterangan": $("#keterangan").val(),
-                            "periode": $("#periode").val(),
-                            "username": $("#username").val(),
-                            "password": $("#password").val(),
-                            "nama": $("#nama").val(),
-                            "divisi": $("#divisi").val(),
-                            "jabatan": $("#jabatan").val(),
-                            "email": $("#email").val(),   
-                            "telepon": $("#telepon").val(),
-                            "motto": $("#motto").val()
-                        },
+                        data : form,
+                        contentType: false,
+                        processData: false,
                         beforeSend: function (e) {
                             $("#tambah").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan penambahan...");
                         },
@@ -360,109 +357,31 @@
                     });
                 });
 
-                $("#perbarui-foto").click(function() {
-                    var form_foto = $("#form-foto")[0];
-
-                    swal({
-                        icon: "warning",
-                        title: "Anda akan mengganti foto profil?",
-                        content: form_foto,
-						buttons: [
-					 		true,
-					 		{
-					 			text: "Unggah",
-					 			closeModal: false,
-					 		}
-                        ],
-                    })
-                    .then((yes) => {
-                        if (yes) {
-                            $.ajax({
-                                url: site_api+"/keanggotaan/foto",
-                                dataType: "json",
-                                method: "POST",
-                                data: new FormData(form_foto),
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                success: function(response) {
-                                    if (response.status === 200) {
-                                        swal({
-                                            title: "Foto profil berhasil diperbarui.",
-                                            icon: "success",
-                                            button: "Tutup"
-                                        })
-                                        .then((yes) => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        swal({
-                                            title: "Foto profil gagal diperbarui.",
-                                            text: response.keterangan,
-                                            icon: "error",
-                                            button: "Tutup"
-                                        });
-                                    }
-                                },
-                                error: function (jqXHR, exception) {
-                                    if (jqXHR.status === 0) {
-                                        keterangan = "Not connect (verify network).";
-                                    } else if (jqXHR.status == 404) {
-                                        keterangan = "Requested page not found.";
-                                    } else if (jqXHR.status == 500) {
-                                        keterangan = "Internal Server Error.";
-                                    } else if (exception === "parsererror") {
-                                        keterangan = "Requested JSON parse failed.";
-                                    } else if (exception === "timeout") {
-                                        keterangan = "Time out error.";
-                                    } else if (exception === "abort") {
-                                        keterangan = "Ajax request aborted.";
-                                    } else {
-                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-                                    }
-
-                                    swal({
-                                        title: "Logo gagal diperbarui.",
-                                        text: response.keterangan,
-                                        icon: "error",
-                                        button: "Tutup"
-                                    });
-
-                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <i class="fa fa-info mx-2"></i>
-                                        <strong>`+keterangan+`</strong>
-                                    </div>`);
-                                }
-                            });
-                        }
-                    });
-                });
-
                 $("#perbarui").click(function() {
                     if ($("#keterangan").val()+"" !== "undefined") {
                         var keterangan = $("#keterangan").val();
                     } else {
                         var keterangan = Number(`<?= !empty($data["keterangan"]) ?>`);
                     }
+                    
+                    var form = new FormData($("#form")[0]);
+                    form.append("keterangan", keterangan);
+                    form.append("periode", $("#periode").val());
+                    form.append("username", $("#username").val());
+                    form.append("nama", $("#nama").val());
+                    form.append("divisi", $("#divisi").val());
+                    form.append("jabatan", $("#jabatan").val());
+                    form.append("email", $("#email").val());
+                    form.append("telepon", $("#telepon").val());
+                    form.append("motto", $("#motto").val());
 
                     $.ajax({
                         url: site_api+"/keanggotaan/perbarui",
                         dataType: "json",
                         type: "POST",
-                        data : {
-                            "keterangan": keterangan,
-                            "periode": $("#periode").val(),
-                            "username": $("#username").val(),
-                            "nama": $("#nama").val(),
-                            "divisi": $("#divisi").val(),
-                            "jabatan": $("#jabatan").val(),
-                            "email": $("#email").val(),   
-                            "telepon": $("#telepon").val(),
-                            "motto": $("#motto").val()
-                        },
+                        data : form,
+                        contentType: false,
+                        processData: false,
                         beforeSend: function (e) {
                             $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
@@ -949,7 +868,7 @@
                                                 type: "GET",
                                                 success: function(response) {
                                                     if (response.status === 200) {
-                                                        window.location.assign(`<?= base_url("administrator") ?>`);
+                                                        window.location.assign(`<?= base_url("pengurus") ?>`);
                                                     } else {
                                                         swal({
                                                             title: "Silahkan coba lagi!",

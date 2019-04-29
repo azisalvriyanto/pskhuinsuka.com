@@ -57,19 +57,7 @@
                                         <li class="list-group-item p-3">
                                             <div class="row">
                                                 <div class="col">
-                                                    <div hidden="true">
-                                                        <form id="form-landscape" enctype="multipart/form-data">
-                                                            <input type="text" id="landscape_periode" name="landscape_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
-                                                            <input type="file" id="landscape_file" name="landscape_file" class="form-control">
-                                                        </form>
-
-                                                        <form id="form-portrait" enctype="multipart/form-data">
-                                                            <input type="text" id="portrait_periode" name="portrait_periode" class="form-control" value="<?= $data["periode"] ?>" hidden>
-                                                            <input type="file" id="portrait_file" name="portrait_file" class="form-control">
-                                                        </form>
-                                                    </div>
-
-                                                    <form id="form-instagram"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
+                                                    <form id="form"<?= !empty($data["periode"]) ? "" : " hidden" ?>>
                                                         <div class="form-group">
                                                             <label for="instagram">
                                                                 Instagram
@@ -79,7 +67,7 @@
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text">Akses token</span>
                                                                 </div>
-                                                                <input type="text" class="form-control" id="instagram" placeholder="Akses token" aria-label="Akses token" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["instagram"] : "" ?>">
+                                                                <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Akses token" aria-label="Akses token" aria-describedby="basic-addon1" value="<?= !empty($data["periode"]) ? $data["instagram"] : "" ?>">
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
@@ -89,11 +77,8 @@
                                                                     <br><small>*Untuk mendapatkan hasil yang bagus gunakan rasio gambar 1680 x 900 px</small>
                                                                 </label>
                                                                 <div class="input-group">
-                                                                    <button type="button" class="btn btn-secondary" id="landscape" style="position: absolute; margin: 100px;">
-                                                                        <i class="fas fa-pencil-alt mr-1"></i>
-                                                                        Ubah
-                                                                    </button>
-                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_landscape.png" ? $data["periode"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
+                                                                    <input type="file" id="landscape" name="landscape" class="btn btn-secondary col-md-12 mb-2">
+                                                                    <img id="landscape_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_landscape.png" ? $data["periode"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-5">
@@ -102,11 +87,8 @@
                                                                     <br><small>*Untuk mendapatkan hasil yang bagus gunakan rasio gambar 380 x 640 px</small>
                                                                 </label>
                                                                 <div class="input-group">
-                                                                    <button type="button" class="btn btn-secondary" id="portrait" style="position: absolute; margin: 100px;">
-                                                                        <i class="fas fa-pencil-alt mr-1"></i>
-                                                                        Ubah
-                                                                    </button>
-                                                                    <img src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_portrait.png" ? $data["periode"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
+                                                                    <input type="file" id="portrait" name="portrait" class="btn btn-secondary col-md-12 mb-2">
+                                                                    <img id="portrait_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_portrait.png" ? $data["periode"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -147,6 +129,26 @@
             var site_api = `<?= $api ?>`;
 
             $(document).ready(function() {
+                function pratinjau(input, id_pratinjau) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $("#"+id_pratinjau).attr("src", e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#landscape").change(function() {
+                    pratinjau(this, "landscape_pratinjau");
+                });
+
+                $("#portrait").change(function() {
+                    pratinjau(this, "portrait_pratinjau");
+                });
+
                 $("#periode").change(function(){
                     var periode = $(this).find(":selected").attr("value");
 
@@ -206,14 +208,16 @@
                 });
 
                 $("#perbarui").click(function() {
+                    var form = new FormData($("#form")[0]);
+                    form.append("periode", $("#periode").val());
+
                     $.ajax({
                         url: site_api+"/galeri/simpan",
                         dataType: "json",
                         type: "POST",
-                        data : {
-                            "periode": $("#periode").val(),
-                            "instagram": $("#instagram").val()
-                        },
+                        data : form,
+                        contentType: false,
+                        processData: false,
                         beforeSend: function (e) {
                             $("#perbarui").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan perubahan...");
                         },
@@ -260,168 +264,6 @@
                                 <i class="fa fa-info mx-2"></i>
                                 <strong>`+keterangan+`</strong>
                             </div>`);
-                        }
-                    });
-                });
-
-                $("#landscape").click(function() {
-                    var form_foto = $("#form-landscape")[0];
-
-                    swal({
-                        icon: "warning",
-                        title: "Anda akan mengganti foto landscape?",
-                        content: form_foto,
-						buttons: [
-					 		true,
-					 		{
-					 			text: "Unggah",
-					 			closeModal: false,
-					 		}
-                        ],
-                    })
-                    .then((yes) => {
-                        if (yes) {
-                            $.ajax({
-                                url: site_api+"/galeri/landscape",
-                                dataType: "json",
-                                method: "POST",
-                                data: new FormData(form_foto),
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                success: function(response) {
-                                    if (response.status === 200) {
-                                        swal({
-                                            title: "Foto landscape berhasil diperbarui.",
-                                            icon: "success",
-                                            button: "Tutup"
-                                        })
-                                        .then((yes) => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        swal({
-                                            title: "Foto landscape gagal diperbarui.",
-                                            text: response.keterangan,
-                                            icon: "error",
-                                            button: "Tutup"
-                                        });
-                                    }
-                                },
-                                error: function (jqXHR, exception) {
-                                    if (jqXHR.status === 0) {
-                                        keterangan = "Not connect (verify network).";
-                                    } else if (jqXHR.status == 404) {
-                                        keterangan = "Requested page not found.";
-                                    } else if (jqXHR.status == 500) {
-                                        keterangan = "Internal Server Error.";
-                                    } else if (exception === "parsererror") {
-                                        keterangan = "Requested JSON parse failed.";
-                                    } else if (exception === "timeout") {
-                                        keterangan = "Time out error.";
-                                    } else if (exception === "abort") {
-                                        keterangan = "Ajax request aborted.";
-                                    } else {
-                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-                                    }
-
-                                    swal({
-                                        title: "Foto landscape gagal diperbarui.",
-                                        text: response.keterangan,
-                                        icon: "error",
-                                        button: "Tutup"
-                                    });
-
-                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <i class="fa fa-info mx-2"></i>
-                                        <strong>`+keterangan+`</strong>
-                                    </div>`);
-                                }
-                            });
-                        }
-                    });
-                });
-
-                $("#portrait").click(function() {
-                    var form_foto = $("#form-portrait")[0];
-
-                    swal({
-                        icon: "warning",
-                        title: "Anda akan mengganti foto portrait?",
-                        content: form_foto,
-						buttons: [
-					 		true,
-					 		{
-					 			text: "Unggah",
-					 			closeModal: false,
-					 		}
-                        ],
-                    })
-                    .then((yes) => {
-                        if (yes) {
-                            $.ajax({
-                                url: site_api+"/galeri/portrait",
-                                dataType: "json",
-                                method: "POST",
-                                data: new FormData(form_foto),
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                success: function(response) {
-                                    if (response.status === 200) {
-                                        swal({
-                                            title: "Foto portrait berhasil diperbarui.",
-                                            icon: "success",
-                                            button: "Tutup"
-                                        })
-                                        .then((yes) => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        swal({
-                                            title: "Foto portrait gagal diperbarui.",
-                                            text: response.keterangan,
-                                            icon: "error",
-                                            button: "Tutup"
-                                        });
-                                    }
-                                },
-                                error: function (jqXHR, exception) {
-                                    if (jqXHR.status === 0) {
-                                        keterangan = "Not connect (verify network).";
-                                    } else if (jqXHR.status == 404) {
-                                        keterangan = "Requested page not found.";
-                                    } else if (jqXHR.status == 500) {
-                                        keterangan = "Internal Server Error.";
-                                    } else if (exception === "parsererror") {
-                                        keterangan = "Requested JSON parse failed.";
-                                    } else if (exception === "timeout") {
-                                        keterangan = "Time out error.";
-                                    } else if (exception === "abort") {
-                                        keterangan = "Ajax request aborted.";
-                                    } else {
-                                        keterangan = "Uncaught Error ("+jqXHR.responseText+").";
-                                    }
-
-                                    swal({
-                                        title: "Foto portrait gagal diperbarui.",
-                                        text: response.keterangan,
-                                        icon: "error",
-                                        button: "Tutup"
-                                    });
-
-                                    $("#status").html(`<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                                        <button type="button" class="close mt-1" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                        <i class="fa fa-info mx-2"></i>
-                                        <strong>`+keterangan+`</strong>
-                                    </div>`);
-                                }
-                            });
                         }
                     });
                 });

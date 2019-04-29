@@ -197,7 +197,7 @@
                                             <button type="button" onclick="sunting(\``+kegiatan[index].kegiatan_id+`\`);" class="btn btn-sm btn-outline-info mr-1"><i class="fas fa-pencil-alt mr-1"></i> Sunting</button>
                                             <button type="button" onclick="hapus(\``+kegiatan[index].kegiatan_id+`\`, \``+kegiatan[index].kegiatan_nama+`\`);" class="btn btn-sm btn-outline-danger mr-1"><i class="fas fa-trash-alt mr-1"></i> Hapus</button>`;
                                     } else {
-                                        var tombol = `-`;
+                                        var tombol = `&mdash;`;
                                     }
 
                                     $("#tbody").append(`<tr id="`+kegiatan[index].kegiatan_id+`">

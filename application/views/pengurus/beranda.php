@@ -21,7 +21,7 @@
 					<!-- field -->
                     <div class="error">
                         <div class="error__content">
-                            <h2>Selamat datang,</h2>
+                            <h2>Selamat datang</h2>
                             <h3><?= $pengguna["nama"] ?>!</h3>
                             <p>Ini adalah portal pengurus <?= $organisasi["nama_panjang"] ?>.</p>
                         </div>

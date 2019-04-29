@@ -14,7 +14,11 @@
                     
                 </div>
                 <div class="col-lg-4 footer-grid-w3ls" data-aos="zoom-in"><?php
-                    if (!empty($organisasi["kontak"])) { ?>
+                    if (
+                        !empty($organisasi["kontak"]["alamat"])
+                        || !empty($organisasi["kontak"]["telepon"])
+                        || !empty($organisasi["kontak"]["email"])
+                    ) { ?>
 
                     <div class="footer-title">
                         <h3>Kontak Kami</h3>

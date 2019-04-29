@@ -19,37 +19,61 @@
 									<i class="material-icons">dashboard</i>
 									<span>Beranda</span>
 								</a>
-							</li>
+							</li><?php if (
+								$pengguna["jabatan"] === "1"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "organisasi") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>organisasi">
 									<i class="material-icons">account_balance</i>
 									<span>Organisasi</span>
 								</a>
-							</li>
+							</li><?php }
+							if (
+								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "2"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "keanggotaan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>keanggotaan">
 									<i class="material-icons">group</i>
 									<span>Keanggotaan</span>
 								</a>
-							</li>
+							</li><?php }
+							if (
+								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "3"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "keuangan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>keuangan">
 									<i class="material-icons">local_atm</i>
 									<span>Keuangan</span>
 								</a>
-							</li>
+							</li><?php }
+							if (
+								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "2"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "kegiatan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>kegiatan">
 									<i class="material-icons">event_note</i>
 									<span>Kegiatan</span>
 								</a>
-							</li>
+							</li><?php }
+							if (
+								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "2"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "berkas") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>berkas">
 								<i class="material-icons">receipt</i>
 									<span>Berkas</span>
 								</a>
-							</li>
+							</li><?php } ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "artikel") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>artikel">
 									<i class="material-icons">assignment</i>
@@ -61,19 +85,28 @@
 									<i class="material-icons">library_books</i>
 									<span>Berita</span>
 								</a>
-							</li>
+							</li><?php
+							if (
+								$pengguna["jabatan"] === "1"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "galeri") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>galeri">
 									<i class="material-icons">perm_media</i>
 									<span>Galeri</span>
 								</a>
-							</li>
+							</li><?php }
+							if (
+								$pengguna["jabatan"] === "1"
+							) { ?>
+
 							<li class="nav-item">
 								<a class="nav-link<?= (@strtolower($menu["judul"]) == "pengaturan") ? " active" : ""; ?>" href="<?= base_url("pengurus/") ?>pengaturan">
 									<i class="material-icons">autorenew</i>
 									<span>Pengaturan</span>
 								</a>
-							</li>
+							</li><?php } ?>
+
 						</ul>
 					</div>
 				</aside>

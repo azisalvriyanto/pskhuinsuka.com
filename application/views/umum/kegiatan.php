@@ -24,24 +24,28 @@
     
     <!-- field -->
     <section class="cd-horizontal-timeline">
-        <h3 class="tittle">Kegiatan</h3>
+        <h3 class="tittle">Kegiatan</h3><?php if (!empty($data)) { ?>
+
         <div class="timeline">
             <div class="events-wrapper">
                 <div class="events">
-                    <ol>
-                        <li><a href="#0" data-date="16/01/2014" class="selected">16 Jan</a></li>
-                        <li><a href="#0" data-date="28/02/2014">28 Feb</a></li>
-                        <li><a href="#0" data-date="20/04/2014">20 Mar</a></li>
-                        <li><a href="#0" data-date="20/05/2014">20 May</a></li>
-                        <li><a href="#0" data-date="09/07/2014">09 Jul</a></li>
-                        <li><a href="#0" data-date="30/08/2014">30 Aug</a></li>
-                        <li><a href="#0" data-date="15/09/2014">15 Sep</a></li>
-                        <li><a href="#0" data-date="01/11/2014">01 Nov</a></li>
-                        <li><a href="#0" data-date="10/12/2014">10 Dec</a></li>
-                        <li><a href="#0" data-date="19/01/2015">29 Jan</a></li>
-                        <li><a href="#0" data-date="03/03/2015">3 Mar</a></li>
-                    </ol>
+                    <ol><?php
+                    foreach ($data as $kegiatan) {
+                        if (strtotime($kegiatan["kegiatan_tanggal"]) <= strtotime(date("Y-m-d"))) {
+                            $selected = $kegiatan["kegiatan_tanggal"];
+                        }
+                    }
 
+                    foreach ($data as $kegiatan) { ?>
+
+                        <li>
+                            <a href="#0" data-date="<?= date("d/m/Y", strtotime($kegiatan["kegiatan_tanggal"])); ?>"<?= ($kegiatan["kegiatan_tanggal"] === $selected) ? " class=\"selected\"" : "" ?>>
+                                <?= date("d M", strtotime($kegiatan["kegiatan_tanggal"])); ?>
+
+                            </a>
+                        </li><?php } ?>
+
+                    </ol>
                     <span class="filling-line" aria-hidden="true"></span>
                 </div>
             </div>
@@ -53,96 +57,36 @@
         </div>
 
         <div class="events-content" data-aos="fade-right">
-            <ol>
-                <li class="selected" data-date="16/01/2014">
-                    <h2>Horizontal Timeline</h2>
-                    <em>January 16th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
+            <ol><?php
+                foreach ($data as $kegiatan) { ?>
 
-                <li data-date="28/02/2014">
-                    <h2>Event title here</h2>
-                    <em>February 28th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
+                <li data-date="<?= date("d/m/Y", strtotime($kegiatan["kegiatan_tanggal"])); ?>"<?= ($kegiatan["kegiatan_tanggal"] === $selected) ? " class=\"selected\"" : "" ?>>
+                    <h2><?= $kegiatan["kegiatan_nama"] ?></h2>
+                    <em><?= date("F d, Y", strtotime($kegiatan["kegiatan_tanggal"])); ?></em>
+                    <p><?= $kegiatan["kegiatan_keterangan"] ?></p>
+                </li><?php } ?>
 
-                <li data-date="20/04/2014">
-                    <h2>Event title here</h2>
-                    <em>March 20th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="20/05/2014">
-                    <h2>Event title here</h2>
-                    <em>May 20th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="09/07/2014">
-                    <h2>Event title here</h2>
-                    <em>July 9th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="30/08/2014">
-                    <h2>Event title here</h2>
-                    <em>August 30th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="15/09/2014">
-                    <h2>Event title here</h2>
-                    <em>September 15th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="01/11/2014">
-                    <h2>Event title here</h2>
-                    <em>November 1st, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="10/12/2014">
-                    <h2>Event title here</h2>
-                    <em>December 10th, 2014</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="19/01/2015">
-                    <h2>Event title here</h2>
-                    <em>January 19th, 2015</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
-
-                <li data-date="03/03/2015">
-                    <h2>Event title here</h2>
-                    <em>March 3rd, 2015</em>
-                    <p>	
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur aspernatur at, eaque hic repellendus sit dicta consequatur quae, ut harum ipsam molestias maxime non nisi reiciendis eligendi! Doloremque quia pariatur harum ea amet quibusdam quisquam, quae, temporibus dolores porro doloribus.
-                    </p>
-                </li>
             </ol>
-        </div>
+        </div><?php } else { ?>
+            <div class="row inner-sec-wthree">
+                <div class="col-sm-12 text-center">
+                    <h2>Kegiatan tidak ditemukan.</h2>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="events-wrapper">
+                    <div class="events">
+                        <ol>
+                            <li>
+                                <a href="#0" data-date="" class="selected"></a>
+                            </li>
+                        </ol>
+                        <span class="filling-line" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div><?php } ?>
+
     </section>
 
     <div class="flexslider">

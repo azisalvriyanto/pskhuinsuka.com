@@ -7,7 +7,7 @@
 <head>
     <?php $this->load->view("umum/_partials/head.php") ?>
     
-    <link href="<?= base_url("assets/umum/") ?>css/contact.css" rel='stylesheet' type='text/css' />
+    <link href="<?= base_url("assets/umum/") ?>css/contact.css" rel="stylesheet" type="text/css" />
 
     <style>
         .text-wrap {
@@ -47,7 +47,7 @@
                             </div>
                             <br>
                             <h3 class="sub-tittle" style="color: white;">Alamat</h3>
-                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : "-"  ?></p>
+                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["alamat"]) ? $organisasi["kontak"]["alamat"] : "&mdash;"  ?></p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             </div>
                             <br>
                             <h3 class="sub-tittle" style="color: white;">Telepon</h3>
-                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : "-"  ?></p>
+                            <p class="text-wrap"><?= !empty($organisasi["kontak"]["telepon"]) ? $organisasi["kontak"]["telepon"] : "&mdash;"  ?></p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                                 </div>
                                 <br>
                                 <h3 class="sub-tittle" style="color: white;">Email</h3>
-                                <p class="text-wrap"><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : "-"  ?></p>
+                                <p class="text-wrap"><?= !empty($organisasi["kontak"]["email"]) ? $organisasi["kontak"]["email"] : "&mdash;"  ?></p>
                             </div>
                         </div>
                     </a>
@@ -126,13 +126,11 @@
                     <h2>Silakan isi formulir ini untuk berkomunikasi dengan kami.</h2>
                     <form action="" method="POST">
                         <div class="contact_left_grid">
-                            <input type="text" name="nama" placeholder="Nama" required="">
-                            <input type="email" name="email" placeholder="Email" required="">
-                            <input type="text" name="judul" placeholder="Judul" required="">
-                            <textarea name="pesan" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Pesan...';}" required="">Pesan...</textarea>
-                            <input type="submit" value="Kirim">
-                            <input type="reset" value="Clear">
-                            <div class="clearfix"> </div>
+                            <input type="text" id="nama" name="nama" placeholder="Nama" required="">
+                            <input type="email" id="email" name="email" placeholder="Email" required="">
+                            <input type="text" id="judul" name="judul" placeholder="Judul" required="">
+                            <textarea id="pesan" name="pesan" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Pesan...';}" required="">Pesan...</textarea>
+                            <button type="button" id="kirim" class="col-md-12" style="background-color: #30c39e; outline: none; color: #fff; font-size: 14px; padding: 20px 0; border: none; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; font-weight: 600">Kirim</button>
                         </div>
                     </form>
                 </div>
@@ -164,6 +162,72 @@
     <!-- javascript -->
     <?php $this->load->view("umum/_partials/javascript.php") ?>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var site_api = `<?= $api ?>`;
+        
+        $(document).ready(function() {
+            $("#kirim").click(function() {
+                $.ajax({
+                    url: site_api+"/pesan",
+                    dataType: "json",
+                    type: "POST",
+                    data : {
+                        "nama": $("#nama").val(),
+                        "email": $("#email").val(),
+                        "judul": $("#judul").val(),
+                        "pesan": $("#pesan").val()
+                    },
+                    beforeSend: function (e) {
+                        $("#kirim").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan pengiriman pesan...");
+                    },
+                    success: function(response) {
+                        if (response.status === 200) {
+                            var judul = "Pesan berhasil dikirim."
+                            var icon = "success";
+                        } else {
+                            var judul = "Pesan gagal dikirim."
+                            var icon = "error";
+                        }
+
+                        swal({
+                            title: judul,
+                            text: response.keterangan,
+                            icon: icon,
+                            button: "Tutup",
+                        });
+                    },
+                    error: function (jqXHR, exception) {
+                        if (jqXHR.status === 0) {
+                            keterangan = "Not connect (verify network).";
+                        } else if (jqXHR.status == 404) {
+                            keterangan = "Requested page not found.";
+                        } else if (jqXHR.status == 500) {
+                            keterangan = "Internal Server Error.";
+                        } else if (exception === "parsererror") {
+                            keterangan = "Requested JSON parse failed.";
+                        } else if (exception === "timeout") {
+                            keterangan = "Time out error.";
+                        } else if (exception === "abort") {
+                            keterangan = "Ajax request aborted.";
+                        } else {
+                            keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                        }
+
+                        swal({
+                            title: "Pesan gagal dikirim.",
+                            text: keterangan,
+                            icon: "error",
+                            button: "Tutup",
+                        })
+                        .then((value) => {
+                            window.location.assign(`<?= base_url() ?>`);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
     <!-- //javascript -->
 </body>
 

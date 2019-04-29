@@ -5,6 +5,7 @@ class C_PKeuangan extends CI_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->library("pdf");
+		pengurus();
     }
 
     public function index() {

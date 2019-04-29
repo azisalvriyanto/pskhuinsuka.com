@@ -2,7 +2,12 @@
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class C_PBeranda extends CI_Controller {
-    public function index() {
+	public function __construct() {
+		parent::__construct();
+		pengurus();
+	}
+	
+	public function index() {
 		if($this->session->userdata("username")) {
 			$menu = array(
 				"judul" => "Beranda",

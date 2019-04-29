@@ -57,7 +57,7 @@
 			} else { ?>
 
 				<div class="col-sm-12 text-center">
-					<h4>Galeri tidak ditemukan.</h4>
+					<h2>Galeri tidak ditemukan.</h2>
 				</div><?php	} ?>
 			
 			</div>

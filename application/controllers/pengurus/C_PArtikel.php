@@ -2,6 +2,11 @@
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class C_PArtikel extends CI_Controller {
+	public function __construct() {
+		parent::__construct();
+		pengurus();
+    }
+
     public function index() {
         if($this->session->userdata("username")) {
             $menu = array(
@@ -11,7 +16,7 @@ class C_PArtikel extends CI_Controller {
             $data           = $this->M_Pendahuluan->pengurus($menu, $this->session->userdata("username"));
 			$data["data"]	= array();
 
-            $artikel    = $this->M_Artikel->daftar();
+            $artikel    = $this->M_Artikel->daftar($data["pengguna"]["username"], $data["pengguna"]["jabatan"]);
             if ($artikel["status"] === 200) {
                 $data["data"] = @array_merge($data["data"], $artikel["keterangan"]);
             } else {

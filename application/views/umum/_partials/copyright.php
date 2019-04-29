@@ -2,7 +2,12 @@
         <div class="container">
             <div class="copyrighttop" data-aos="fade-left">
                 <ul><?php
-                    if (!empty($organisasi["kontak"])) { ?>
+                    if (
+                        !empty($organisasi["kontak"]["facebook"])
+                        || !empty($organisasi["kontak"]["twitter"])
+                        || !empty($organisasi["kontak"]["instagram"])
+                        || !empty($organisasi["kontak"]["youtube"])
+                    ) { ?>
 
                     <li>
                         <h4>Ikuti kami di:</h4>
@@ -39,7 +44,7 @@
                 </ul>
             </div>
             <div class="copyrightbottom" data-aos="fade-right">
-                <p><?= $organisasi["nama_panjang"] ?> © <?= date("Y") ?> | Made with
+                <p><?= !empty($organisasi["nama_panjang"]) ? $organisasi["nama_panjang"] : "" ?> © <?= date("Y") ?> | Made with
                     <a href="//hmkk.org"><span class="fa fa-heart" aria-hidden="true"></span></a>
                     by
                     <a href="//www.facebook.com/tegal6etar" target="_blank">Teknik Informatika 2016</a>

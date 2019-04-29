@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?= $judul." &mdash; ".$organisasi["nama_panjang"] ?></title>
+    <title><?= $judul ?><?= !empty($organisasi["nama_panjang"]) ? " &mdash; ".$organisasi["nama_panjang"] : "" ?></title>
 		<link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
   <style>

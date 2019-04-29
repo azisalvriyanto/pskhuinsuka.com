@@ -44,4 +44,4 @@
         </script>
         <!-- //javascript -->
 	</body>
-</html>
+</html><?php exit; ?>

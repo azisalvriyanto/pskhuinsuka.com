@@ -37,9 +37,15 @@
                                 <!-- Berita -->
                                 <div class="card card-small mb-3">
                                     <div class="card-body">
-                                        <form class="add-new-post">
-                                            <input id="judul" class="form-control form-control-lg mb-3" type="text" placeholder="Judul Berita" value="<?= $menu["judul_sub"] === "Tambah" ? "" : $data["judul"] ?>">
+                                        <form class="add-new-post" id="form">
+                                            <input id="judul" name="judul" class="form-control form-control-lg mb-3" type="text" placeholder="Judul Berita" value="<?= $menu["judul_sub"] === "Tambah" ? "" : $data["judul"] ?>">
                                             <div id="editor-container" class="add-new-post__editor mb-1"></div>
+                                            <div class="form-control mb-3 text-center">
+                                                <input type="file" id="gambar" name="gambar" class="col-md-12">
+                                            </div>
+                                            <div class="form-control mb-0 text-center">
+                                                <img id="gambar_pratinjau" src="<?= $menu["judul_sub"] === "Tambah" ? "#" : $data["gambar"] ?>" class="col-sm-12 mt-3 mb-3" alt="&nbsp;&nbsp;Gambar artikel">
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -168,19 +174,37 @@
                         });
                     }
                 });
+
+                function pratinjau(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#gambar_pratinjau').attr("src", e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#gambar").change(function() {
+                    pratinjau(this);
+                });
             });
 
             function tambah(id) {
+                var form = new FormData($("#form")[0]);
+                form.append("keterangan", id);
+                form.append("penerbit", `<?= $pengguna["username"] ?>`);
+                form.append("isi", $(".ql-editor").html());
+
                 $.ajax({
                     url: site_api+"/berita/tambah",
                     dataType: "json",
                     type: "POST",
-                    data : {
-                        "keterangan": id,
-                        "penerbit": `<?= $pengguna["username"] ?>`,
-                        "judul": $("#judul").val(),
-                        "isi": $(".ql-editor").html()
-                    },
+                    data : form,
+                    contentType: false,
+                    processData: false,
                     beforeSend: function (e) {
                         if (id === 1) {
                             $("#terbit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Tunggu...");
@@ -256,16 +280,18 @@
             }
 
             function perbarui(id) {
+                var form = new FormData($("#form")[0]);
+                form.append("id", `<?= $data["id"] ?>`);
+                form.append("keterangan", id);
+                form.append("isi", $(".ql-editor").html());
+
                 $.ajax({
                     url: site_api+"/berita/perbarui",
                     dataType: "json",
                     type: "POST",
-                    data : {
-                        "id": `<?= $data["id"] ?>`,
-                        "keterangan": id,
-                        "judul": $("#judul").val(),
-                        "isi": $(".ql-editor").html()
-                    },
+                    data : form,
+                    contentType: false,
+                    processData: false,
                     beforeSend: function (e) {
                         if (id === 1) {
                             $("#terbit").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Tunggu...");

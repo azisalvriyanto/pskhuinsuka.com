@@ -34,6 +34,9 @@
                         <li class="nav-item<?= $menu["judul"] === "Galeri" ? " active": "" ?>">
                             <a class="nav-link" href="<?= base_url() ?>galeri">Galeri</a>
                         </li>
+                        <li class="nav-item<?= $menu["judul"] === "Berkas" ? " active": "" ?>">
+                            <a class="nav-link" href="<?= base_url() ?>berkas">Berkas</a>
+                        </li>
                         <li class="nav-item<?= $menu["judul"] === "Kontak" ? " active": "" ?>">
                             <a class="nav-link" href="<?= base_url() ?>kontak">Kontak</a>
                         </li>

@@ -270,7 +270,7 @@
                             success: function(response) {
                                 if (response.status === 200) {
                                     swal({
-                                        title: "Data Berhasil dihapus.",
+                                        title: "Data berhasil dihapus.",
                                         icon: "success",
                                         button: "Tutup"
                                     });

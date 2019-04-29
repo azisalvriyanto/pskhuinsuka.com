@@ -2,6 +2,11 @@
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class C_PPengaturan extends CI_Controller {
+	public function __construct() {
+		parent::__construct();
+		pengurus();
+    }
+
     public function index() {
         if($this->session->userdata("username")) {
             $menu = array(
@@ -37,6 +42,19 @@ class C_PPengaturan extends CI_Controller {
             } else {
                 $data["data"] = @array_merge($data["data"], array(
                         "divisi" => ""
+                    )
+                );
+            }
+
+            $pendaftaran = $this->M_Organisasi->pendaftaran($periode_daftar["keterangan"][count($periode_daftar["keterangan"])-1]["organisasi_periode"]);
+            if ($pendaftaran["status"] === 200) {
+                $data["data"] = @array_merge($data["data"], array(
+                        "pendaftaran" => $pendaftaran["keterangan"]
+                    )
+                );
+            } else {
+                $data["data"] = @array_merge($data["data"], array(
+                        "pendaftaran" => 0
                     )
                 );
             }

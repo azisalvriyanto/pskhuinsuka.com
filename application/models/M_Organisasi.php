@@ -81,4 +81,22 @@ class M_Organisasi extends CI_Model {
             );
         }
     }
+
+    public function pendaftaran($periode)
+    {
+        $pendaftaran = $this->db->select("organisasi_pendaftaran")->from("organisasi")->where("organisasi_periode", $periode)->get();
+        if ($pendaftaran->num_rows() > 0) {
+            $pendaftaran = $pendaftaran->row();
+            return array(
+                "status" => 200,
+                "keterangan" => $pendaftaran->organisasi_pendaftaran
+            );
+        }
+        else {
+            return array(
+                "status" => 204,
+                "keterangan" => "tidak ditemukan."
+            );
+        }
+    }
 }

@@ -212,7 +212,7 @@
                                             <div class="col-md-2 text-center">
                                                 <select id="bulan" class="form-control" <?= !empty($data["daftar_bulan"]) ? "" : " disabled" ?>>
                                                     <option value="">Semua</option><?php
-                                                    if(!empty($data["daftar_bulan"])){
+                                                    if(!empty($data["daftar_bulan"])) {
                                                         for ($i=0; $i<count($data["daftar_bulan"]); $i++) {
                                                             if ($data["daftar_bulan"][$i]["bulan_id"] === date("n")) {
                                                                 $selected = " selected";
@@ -510,6 +510,14 @@
                 $("#periode").change(function() {
                     var periode = $("#periode").val();
 
+                    var periode = $(this).find(":selected").attr("value");
+
+                    if (periode === `<?= $data["daftar_periode"][count($data["daftar_periode"])-1]["organisasi_periode"]; ?>`) {
+                        $("#tambah").removeAttr("disabled");
+                    } else {
+                        $("#tambah").attr("disabled", "true");
+                    }
+
                     $.ajax({
                         url     : site_api+"/keuangan/bulan/"+periode,
                         dataType: "json",
@@ -519,21 +527,23 @@
                             if (response.status === 200) {
                                 $("#bulan").removeAttr("disabled");
                                 $("#bulan").empty();
-                                $("#bulan").append(new Option("Semua...", ""));
+                                $("#bulan").append(new Option("Semua", ""));
                                 for (const index in bulan) {
-                                    var option = new Option(bulan[index].bulan_keterangan, bulan[index].bulan_id);
-                                    $("#bulan").append(option);
+                                    if ((parseInt(index)+1) < bulan.length) {
+                                        if (bulan[index].bulan_id !== bulan[(parseInt(index)+1)].bulan_id) {
+                                            var option = new Option(bulan[index].bulan_keterangan, bulan[index].bulan_id);
+                                            $("#bulan").append(option);
+                                        }
+                                    } else if (parseInt(index) < bulan.length) {
+                                        var option = new Option(bulan[index].bulan_keterangan, bulan[index].bulan_id);
+                                        $("#bulan").append(option);
+                                    }
                                 }
+
+                                $("#bulan").change();
                             } else {
-                                swal({
-                                    title: "Refresh halaman kembali.",
-                                    text: response.keterangan,
-                                    icon: "error",
-                                    button: "Tutup"
-                                })
-                                .then((yes) => {
-                                    location.reload();
-                                });
+                                $("#table").attr("hidden", "true");
+                                $("#keterangan").removeAttr("hidden");
                             }
                         },
                         error : function (jqXHR, exception) {
@@ -569,7 +579,7 @@
                 $("#bulan").change(function () {
                     var periode = $("#periode").val();
                     var bulan   = $("#bulan").val();
-                    
+
                     $.ajax({
                         url         : site_api + "/keuangan/" + periode + "/" + bulan,
                         dataType    : "json",
@@ -601,9 +611,9 @@
                                                     Hapus
                                                 </button>`;
                                     } else {
-                                        var tombol = `-`;
+                                        var tombol = `&mdash;`;
                                     }
-                                    
+
                                     if(keuangan[index].keuangan_keterangan === "1") {
                                         debet   = debet+Number(keuangan[index].keuangan_nominal);
                                     } else {

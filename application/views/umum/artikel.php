@@ -29,6 +29,7 @@
         <div class="container">
             <h3 class="tittle">Artikel</h3>
             <div class="row inner-sec-wthree"><?php
+            if (!empty($data)) {
             foreach ($data as $key => $artikel) {
                 $key = $key+1;
 
@@ -37,13 +38,13 @@
                 <div class="col-lg-8 blog-sp" data-aos="zoom-in">
                     <article class="blog-x row">
                         <div class="col-md-6 blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b1.jpg" alt="" class="img-responsive" />
+                            <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
+								<img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                         <div class="col-md-6 blog_info">
                             <h5 class="text-justify" style="word-wrap: break-word;">
-                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>"><?php  if (!empty($artikel["artikel_judul"])) {
                                     if (@strlen($artikel["artikel_judul"]) <= 70) {
                                         echo $artikel["artikel_judul"];
                                     } else {
@@ -73,7 +74,7 @@
                     <article class="blog-x br-mar row">
                         <div class="col-md-6 blog_info">
                             <h5 class="text-justify" style="word-wrap: break-word;">
-                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>"><?php  if (!empty($artikel["artikel_judul"])) {
                                     if (@strlen($artikel["artikel_judul"]) <= 70) {
                                         echo $artikel["artikel_judul"];
                                     } else {
@@ -98,8 +99,8 @@
                             <h4><?= $hari.", ".$tanggal." ".$bulan." ".$tahun."<br>".$waktu ?></h4>
                         </div>
                         <div class="col-md-6 blog-img img1">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b2.jpg" alt="" class="img-responsive" />
+                            <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
+                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                     </article>
@@ -109,13 +110,13 @@
                 <div class="col-lg-4 blog-side blog-top-right" data-aos="zoom-in">
                     <article class="blog-top-right">
                         <div class="blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b3.jpg" alt="" class="img-responsive" />
+                            <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
+                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                         <div class="blog_info  blog-right">
                             <h5 class="text-justify" style="word-wrap: break-word;">
-                                <a href="single.html"><?php  if (!empty($artikel["artikel_judul"])) {
+                                <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>"><?php  if (!empty($artikel["artikel_judul"])) {
                                     if (@strlen($artikel["artikel_judul"]) <= 70) {
                                         echo $artikel["artikel_judul"];
                                     } else {
@@ -141,257 +142,15 @@
                         </div>
                     </article>
                 </div><?php }
-            } ?>
-                <!-- <div class="col-lg-8 blog-sp" data-aos="zoom-in">
-                    <article class="blog-x row">
-                        <div class="col-md-6 blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b1.jpg" alt="" class="img-responsive" />
-							</a>
-                        </div>
-                        <div class="col-md-6 blog_info">
-                            <h5>Sadipisci velit sed quia non nuuam.</h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">James</a>
-                            </p>
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>July 3,2018</h4>
-                        </div>
-                    </article>
-                    <article class="blog-x br-mar row">
-                        <div class="col-md-6 blog_info">
-                            <h5>
-                                <a href="single.html">Sadipisci velit sed quia non nuuam.</a>
-                            </h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">james</a>
-                            </p>
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>Aug 3,2018</h4>
-                        </div>
-                        <div class="col-md-6 blog-img img1">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b2.jpg" alt="" class="img-responsive" />
-							</a>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-lg-4 blog-side blog-top-right" data-aos="zoom-in">
-                    <article class="blog-top-right">
-                        <div class="blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b3.jpg" alt="" class="img-responsive" />
-							</a>
-                        </div>
-                        <div class="blog_info  blog-right">
-                            <h5>
-                                <a href="single.html">Sadipisci velit sed quia non nuuam.</a>
-                            </h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">james</a>
-                            </p>
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>Aug 30,2018</h4>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-lg-4 blog-side blog-top-right two" data-aos="zoom-in">
-                    <article class="blog-top-right">
-                        <div class="blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b2.jpg" alt="" class="img-responsive" />
-							</a>
-                        </div>
-                        <div class="blog_info blog-right two">
-                            <h5>
-                                <a href="single.html">Sadipisci velit sed quia non nuuam.</a>
-                            </h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">james</a>
-                            </p>
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>Aug 30,2018</h4>
-                        </div>
+            } } else { ?>
 
-                    </article>
-                </div>
-                <div class="col-lg-8 blog-sp" data-aos="zoom-in">
-                    <article class="blog-x row">
-                        <div class="col-md-6 blog-img">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b1.jpg" alt="" class="img-responsive" />
-							</a>
+                    <article class="blog-top-right col-sm-12 text-center">
+                        <div class="col">
+                            <h2>Artikel tidak ditemukan.</h2>
                         </div>
-                        <div class="col-md-6 blog_info">
-                            <h5>
-                                <a href="single.html">Sadipisci velit sed quia non nuuam.</a>
-                            </h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">james</a>
-                            </p>
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>July 3,2018</h4>
-                        </div>
-                    </article>
-                    <article class="blog-x br-mar row">
-                        <div class="col-md-6 blog_info">
-                            <h5>
-                                <a href="single.html">Sadipisci velit sed quia non nuuam.</a>
-                            </h5>
-                            <p>
-                                By
-                                <a href="#" class="user-blog">james</a>
-                            </p>
+                    </article><?php } ?>
 
-                            <p>Pellentesque eleifend ultricies tellus,varius risus, id dignissim sapien velit id felis ac cursus eros.</p>
-                            <ul class="blog_list_info">
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-comment" aria-hidden="true"></span>
-                                        173
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-heart" aria-hidden="true"></span>
-                                        10
-                                    </a>
-                                    <i>|</i>
-                                </li>
-                                <li>
-                                    <a href="#">
-										<span class="fa fa-tag" aria-hidden="true"></span>
-                                        5
-                                    </a>
-                                </li>
-                            </ul>
-                            <h4>Aug 3,2018</h4>
-                        </div>
-                        <div class="col-md-6 blog-img img1">
-                            <a href="single.html">
-								<img src="<?= base_url("assets/umum/") ?>images/b3.jpg" alt="" class="img-responsive" />
-							</a>
-                        </div>
-                    </article>
-                </div> -->
-
-                <nav aria-label="Page navigation example">
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
                             <a class="page-link" href="#">Previous</a>
@@ -409,7 +168,7 @@
                             <a class="page-link" href="#">Next</a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </section>

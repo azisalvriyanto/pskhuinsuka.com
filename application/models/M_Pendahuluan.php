@@ -151,7 +151,7 @@ class M_Pendahuluan extends CI_Model {
                     "pengguna" => array(
                         "periode" => "",
                         "username" => "",
-                        "foto" => "assets/gambar/keanggotaan/_standar_logo.png",
+                        "foto" => "assets/gambar/keanggotaan/_standar.png",
                         "nama" => "",
                         "keterangan" => "",
                         "divisi" => "",

@@ -9,7 +9,7 @@
 
     <style>
         pre {
-            font-family: 'M PLUS Rounded 1c', sans-serif;
+            font-family: "M PLUS Rounded 1c", sans-serif;
             text-align: justify;
             font-size: 13pt;
             white-space: pre-wrap;       /* css-3 */
@@ -17,7 +17,46 @@
             white-space: -pre-wrap;      /* Opera 4-6 */
             white-space: -o-pre-wrap;    /* Opera 7 */
             word-wrap: break-word;       /* Internet Explorer 5.5+ */
-         }
+        }<?php
+    if (!empty($data["berita"])) {
+        $i = 1;
+        foreach ($data["berita"] as $berita) {
+            $berita_foto[$i] = base_url("assets/berita/");
+            if (@is_file("../pskhuinsuka.com/assets/berita/".$berita["berita_id"].".png")) {
+                $berita_foto[$i] .= $berita["berita_id"];
+            } else {
+                $berita_foto[$i] .= "_standar";
+            }
+            $berita_foto[$i] .= ".png"; ?>
+
+
+        .carousel-item<?= $i === 1 ? "" : ".item".$i ?> {
+            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto[$i] ?>) no-repeat;
+            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto[$i] ?>) no-repeat;
+            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto[$i] ?>) no-repeat;
+            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto[$i] ?>) no-repeat;
+            background-size: cover;
+        }<?php
+            $i++;
+        }
+    } else { 
+        $berita_foto = base_url("assets/gambar/organisasi/");
+        if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi["periode"]."_landscape.png")) {
+            $berita_foto .= $organisasi["periode"];
+        } else {
+            $berita_foto .= "_standar";
+        }
+        $berita_foto .= "_landscape.png"; ?>
+
+
+        .carousel-item {
+            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto ?>) no-repeat;
+            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto ?>) no-repeat;
+            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto ?>) no-repeat;
+            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $berita_foto ?>) no-repeat;
+            background-size: cover;
+        }<?php } ?>
+
     </style>
 </head>
 <body>    
@@ -29,50 +68,44 @@
     <!-- banner -->
     <div class="banner">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <ol class="carousel-indicators"><?php if (!empty($data["berita"]) && count($data["berita"]) > 1) {
+                $i = 1;
+                foreach ($data["berita"] as $berita) { ?>
+
+                <li data-target="#carouselExampleIndicators" data-slide-to="0"<?= $i === 1 ? " class=\"active\"" : "" ?>></li><?php $i++; } } ?>
+
             </ol>
-            <div class="carousel-inner" role="listbox">
+            <div class="carousel-inner" role="listbox"><?php if (!empty($data["berita"])) {
+                $i = 1;
+                foreach ($data["berita"] as $berita) { ?>
+
+                <div class="carousel-item <?= $i === 1 ? "active" : "item".$i ?>">
+                    <div class="carousel-caption">
+                        <a href="<?= base_url() . "berita/" . date("Y/m", strtotime($berita["berita_waktu"]))."/".$berita["berita_id"]."/".@substr($berita["berita_judul"], 0, 30) ?>">
+                        <h3 style="word-wrap: break-word; color: white;"><?= @strlen($berita["berita_judul"]) <= 48 ? $berita["berita_judul"] : @substr($berita["berita_judul"], 0, 47)."..." ?></h3>
+                        </a>
+                        <br><br>
+                        <h5>
+                            <i><?= date("l, d F Y", strtotime($berita["berita_waktu"])) ?> | <?= $berita["keanggotaan_nama"] ?></i>
+                        </h5>
+                    </div>
+                </div><?php $i++; } } else { ?>
+
                 <div class="carousel-item active">
                     <div class="carousel-caption">
-                        <h3>We Are More Than Industrial Company</h3>
+                        <h3 style="word-wrap: break-word;"></h3>
                         <br><br>
                         <h5>
-                            <i>Selasa, 28 Februari 2019 | Alvi Maslakhati</i>
+                            <i></i>
                         </h5>
                     </div>
                 </div>
-                <div class="carousel-item item2">
-                    <div class="carousel-caption">
-                        <h3>Turning big ideas into great products</h3>
-                        <br><br>
-                        <h5>
-                            <i>Kamis, 15 April 2019 | Alvriyanto Azis</i>
-                        </h5>
-                    </div>
-                </div>
-                <div class="carousel-item item3">
-                    <div class="carousel-caption">
-                        <h3>We Are More Than Industrial Company</h3>
-                        <br><br>
-                        <h5>
-                            <i>Senin, 28 Juni 2019 | Ratih N.F</i>
-                        </h5>
-                    </div>
-                </div>
-                <div class="carousel-item item4">
-                    <div class="carousel-caption">
-                        <h3>Turning big ideas into great products</h3>
-                        <br><br>
-                        <h5>
-                            <i>Sabtu, 17 Agustus 2019 | Manopo Amanda</i>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+
+                <?php } ?>
+
+            </div><?php
+            if (!empty($data["berita"]) && count($data["berita"]) > 1) { ?>
+
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
@@ -80,7 +113,8 @@
             <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="sr-only">Next</span>
-			</a>
+            </a><?php } ?>
+
         </div>
     </div>
     <!-- //banner -->
@@ -181,7 +215,7 @@
                         <li>
                             <div class="testimonials_grid">
                                 <div class="testimonials_grid-inn">
-                                    <img src="<?= base_url("assets/umum/") ?>images/t3.jpg" alt=" " class="img-fluid" />
+                                    <img src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../pskhuinsuka.com/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt=" " class="img-fluid" style="height: 90px; width: 90px;" />
                                 </div>
                                 <h3><?= $data["jpendapat"][$i]["jpendapat_nama"] ?></h3>
                                 <i><?= $data["jpendapat"][$i]["jpendapat_jabatan"] ?></i>
