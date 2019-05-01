@@ -1,4 +1,4 @@
-<title><?= $menu["judul"] ?><?= !empty($organisasi["nama_panjang"]) ? " &mdash; ".$organisasi["nama_panjang"] : "" ?></title>
+<title><?= $menu["judul"] !== "Beranda" ? $menu["judul"] : "" ?><?= $menu["judul"] !== "Beranda" && !empty($organisasi["nama_panjang"]) ? " &mdash; " : "" ?><?= !empty($organisasi["nama_panjang"]) ? $organisasi["nama_panjang"] : "" ?></title>
     <link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">

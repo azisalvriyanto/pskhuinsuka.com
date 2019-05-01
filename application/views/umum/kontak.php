@@ -124,12 +124,12 @@
                 <div class="contact_grid_right">
                     <br><br>
                     <h2>Silakan isi formulir ini untuk berkomunikasi dengan kami.</h2>
-                    <form action="" method="POST">
+                    <form id="form">
                         <div class="contact_left_grid">
-                            <input type="text" id="nama" name="nama" placeholder="Nama" required="">
-                            <input type="email" id="email" name="email" placeholder="Email" required="">
-                            <input type="text" id="judul" name="judul" placeholder="Judul" required="">
-                            <textarea id="pesan" name="pesan" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Pesan...';}" required="">Pesan...</textarea>
+                            <input type="text" id="nama" name="nama" placeholder="Nama">
+                            <input type="email" id="email" name="email" placeholder="Email">
+                            <input type="text" id="judul" name="judul" placeholder="Judul">
+                            <textarea id="pesan" name="pesan" placeholder="Pesan"></textarea>
                             <button type="button" id="kirim" class="col-md-12" style="background-color: #30c39e; outline: none; color: #fff; font-size: 14px; padding: 20px 0; border: none; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; font-weight: 600">Kirim</button>
                         </div>
                     </form>
@@ -182,9 +182,13 @@
                         $("#kirim").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan pengiriman pesan...");
                     },
                     success: function(response) {
+                        $("#kirim").html("Kirim");
+
                         if (response.status === 200) {
                             var judul = "Pesan berhasil dikirim."
                             var icon = "success";
+
+                            $("#form")[0].reset();
                         } else {
                             var judul = "Pesan gagal dikirim."
                             var icon = "error";
@@ -221,7 +225,7 @@
                             button: "Tutup",
                         })
                         .then((value) => {
-                            window.location.assign(`<?= base_url() ?>`);
+                            $("#kirim").html("Kirim");
                         });
                     }
                 });

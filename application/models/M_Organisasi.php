@@ -43,7 +43,7 @@ class M_Organisasi extends CI_Model {
         if ($query->num_rows() > 0) {
             $query = $query->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$query->organisasi_periode."_logo.png")) {
+            if (@is_file("../public_html/assets/gambar/organisasi/".$query->organisasi_periode."_logo.png")) {
                 $logo	= "assets/gambar/organisasi/".$query->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";

@@ -38,7 +38,7 @@
                                     <form id="form">
                                         <div class="card-header border-bottom text-center">
                                             <div class="mb-3 mx-auto">
-                                                <img id="foto_pratinjau" class="rounded-circle" src="<?= base_url().(@is_file("../pskhuinsuka.com/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110">
+                                                <img id="foto_pratinjau" class="rounded-circle" src="<?= base_url().(@is_file("../public_html/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110">
                                                 <input type="file" id="foto" name="foto" class="btn btn-secondary col-md-12 mt-2">
                                             </div>
                                             <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "{ Nama }" ?></h4>

@@ -39,7 +39,7 @@
                     <article class="blog-x row">
                         <div class="col-md-6 blog-img">
                             <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
-								<img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
+								<img src="<?= base_url("assets/")."artikel/".(@is_file("../public_html/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                         <div class="col-md-6 blog_info">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-md-6 blog-img img1">
                             <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
-                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
+                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../public_html/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                     </article>
@@ -111,7 +111,7 @@
                     <article class="blog-top-right">
                         <div class="blog-img">
                             <a href="<?= base_url().'artikel/'.date("Y/m", strtotime($artikel["artikel_waktu"]))."/".$artikel["artikel_id"]."/".@substr($artikel["artikel_judul"], 0, 30); ?>">
-                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../pskhuinsuka.com/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
+                                <img src="<?= base_url("assets/")."artikel/".(@is_file("../public_html/assets/artikel/".$artikel["artikel_id"].".png") ?  $artikel["artikel_id"] : "_standar").".png" ?>" class="img-responsive" style="height: 100%; width: 100%"/>
 							</a>
                         </div>
                         <div class="blog_info  blog-right">

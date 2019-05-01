@@ -32,7 +32,7 @@
                 <article class="row align-items-center icon_info" style="padding: 0em 0em 1em 0em; margin: 1em;">
                     <div class="col-md-4 section_1_gallery_grid" data-aos="fade-right">
                         <a title="<?= $berita["berita_judul"] ?>" href="<?= base_url() . "berita/" . date("Y/m", strtotime($berita["berita_waktu"]))."/".$berita["berita_id"]."/".@substr($berita["berita_judul"], 0, 30) ?>">
-                            <img src="<?= base_url("assets/berita/").(@is_file("../pskhuinsuka.com/assets/berita/".$berita["berita_id"].".png") ? $berita["berita_id"] : "_standar").".png"?>" class="img-fluid"  style="padding"/>
+                            <img src="<?= base_url("assets/berita/").(@is_file("../public_html/assets/berita/".$berita["berita_id"].".png") ? $berita["berita_id"] : "_standar").".png"?>" class="img-fluid"  style="padding"/>
                             <div class="proj_gallery_grid1_pos">
                                 <p><?= $berita["berita_waktu"] ?></p>
                             </div>

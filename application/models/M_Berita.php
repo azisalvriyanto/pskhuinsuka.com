@@ -87,6 +87,32 @@ class M_Berita extends CI_Model {
         }
     }
 
+    public function cari($kata)
+    {
+        $query = $this->db->select("keanggotaan_nama, divisi_keterangan, berita_keterangan_keterangan,berita.berita_id, berita.berita_waktu, berita.berita_penerbit, berita.berita_judul, berita.berita_isi")->from("berita")
+        ->join("keanggotaan", "keanggotaan.keanggotaan_username=berita.berita_penerbit")
+        ->join("divisi", "divisi.divisi_id=keanggotaan.keanggotaan_divisi")
+        ->join("berita_keterangan", "berita_keterangan.berita_keterangan_id=berita.berita_keterangan")
+        ->where("berita_keterangan", "1")
+        ->order_by("berita_waktu", "DESC")
+        ->like("berita.berita_judul", $kata)
+        ->like("berita.berita_isi", $kata)
+        ->get();
+        
+        if ($query->num_rows() > 0) {
+            return array(
+                "status" => 200,
+                "keterangan" => json_decode(json_encode($query->result()), TRUE)
+            );
+        }
+        else {
+            return array(
+                "status" => 204,
+                "keterangan" => "Berita tidak ditemukan."
+            );
+        }
+    }
+
     public function daftar_umum()
     {
         $query = $this->db->select("keanggotaan_nama, divisi_keterangan, berita.berita_id, berita.berita_waktu, berita.berita_judul")->from("berita")

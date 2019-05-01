@@ -22,7 +22,7 @@
         $i = 1;
         foreach ($data["berita"] as $berita) {
             $berita_foto[$i] = base_url("assets/berita/");
-            if (@is_file("../pskhuinsuka.com/assets/berita/".$berita["berita_id"].".png")) {
+            if (@is_file("../public_html/assets/berita/".$berita["berita_id"].".png")) {
                 $berita_foto[$i] .= $berita["berita_id"];
             } else {
                 $berita_foto[$i] .= "_standar";
@@ -41,7 +41,7 @@
         }
     } else { 
         $berita_foto = base_url("assets/gambar/organisasi/");
-        if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi["periode"]."_landscape.png")) {
+        if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi["periode"]."_landscape.png")) {
             $berita_foto .= $organisasi["periode"];
         } else {
             $berita_foto .= "_standar";
@@ -215,7 +215,7 @@
                         <li>
                             <div class="testimonials_grid">
                                 <div class="testimonials_grid-inn">
-                                    <img src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../pskhuinsuka.com/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt=" " class="img-fluid" style="height: 90px; width: 90px;" />
+                                    <img src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../public_html/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt=" " class="img-fluid" style="height: 90px; width: 90px;" />
                                 </div>
                                 <h3><?= $data["jpendapat"][$i]["jpendapat_nama"] ?></h3>
                                 <i><?= $data["jpendapat"][$i]["jpendapat_jabatan"] ?></i>

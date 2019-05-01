@@ -39,7 +39,7 @@ class Umum extends CI_Controller {
 			);
 		}
 		
-		if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$data["organisasi"]["periode"]."_portrait.png")) {
+		if (@is_file("../public_html/assets/gambar/organisasi/".$data["organisasi"]["periode"]."_portrait.png")) {
 			$foto	= "assets/gambar/organisasi/".$data["organisasi"]["periode"]."_portrait.png";
 		} else {
 			$foto	= "assets/gambar/organisasi/_standar_portrait.png";
@@ -50,7 +50,7 @@ class Umum extends CI_Controller {
 			)
 		);
 		
-		if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$data["organisasi"]["periode"]."_landscape.png")) {
+		if (@is_file("../public_html/assets/gambar/organisasi/".$data["organisasi"]["periode"]."_landscape.png")) {
 			$foto	= "assets/gambar/organisasi/".$data["organisasi"]["periode"]."_landscape.png";
 		} else {
 			$foto	= "assets/gambar/organisasi/_standar_landscape.png";
@@ -84,8 +84,15 @@ class Umum extends CI_Controller {
 			"judul" => "Kontak"
 		);
 		$data			= $this->M_Pendahuluan->umum($menu);
-		$data["api"] 	= base_url("..")."/pskhuinsuka.com.api";
 
+		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
+		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
+		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
+			$data["api"] 	= "//api.pskhuinsuka.com";
+		} else {
+			$data["api"] 	= base_url("..")."/api.pskhuinsuka.com";
+		}
+		
 		$this->load->view("umum/kontak", $data);
 	}
 
@@ -136,6 +143,28 @@ class Umum extends CI_Controller {
 			$this->load->view("umum/berita_lihat", $data);
 		} else {
 			$this->load->view("umum/berita", $data);
+		}
+	}
+
+	public function berita_cari() {
+		$method = $_SERVER["REQUEST_METHOD"];
+		if (
+			$method === "POST"
+			&& !empty($this->input->post("kata")) && is_string($this->input->post("kata")) === TRUE
+		) {
+			$menu = array(
+				"judul" => "Berita"
+			);
+
+			$data			= $this->M_Pendahuluan->umum($menu);
+			$data["data"]	= array();
+
+			$berita = $this->M_Berita->cari($this->input->post("kata"));
+			$data["data"] = @array_merge($data["data"], $berita["keterangan"]);
+
+			$this->load->view("umum/berita", $data);
+		} else {
+			redirect(base_url("berita"));
 		}
 	}
 
@@ -217,7 +246,15 @@ class Umum extends CI_Controller {
 			"judul" => "Pendaftaran"
 		);
 		$data		 	= $this->M_Pendahuluan->umum($menu);
-		$data["api"] 	= base_url("..")."/pskhuinsuka.com.api";
+
+		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
+		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
+		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
+			$data["api"] 	= "//api.pskhuinsuka.com";
+		} else {
+			$data["api"] 	= base_url("..")."/api.pskhuinsuka.com";
+		}
+
 		$data["data"]	= array();
 
 		$periode		= $this->M_Organisasi->periode_terakhir();

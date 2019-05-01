@@ -54,7 +54,7 @@
                                     </a>
                                     <div class="card-footer border-top d-flex">
                                         <div class="card-post__author d-flex">
-                                            <span class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('<?= base_url("assets/")."gambar/keanggotaan/".(@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$berita["berita_penerbit"].".png") ? $berita["berita_penerbit"] : "_standar" ).".png" ?>');">Written by <?= $berita["keanggotaan_nama"] ?></span>
+                                            <span class="card-post__author-avatar card-post__author-avatar--small" style="background-image: url('<?= base_url("assets/")."gambar/keanggotaan/".(@is_file("../public_html/assets/gambar/keanggotaan/".$berita["berita_penerbit"].".png") ? $berita["berita_penerbit"] : "_standar" ).".png" ?>');">Written by <?= $berita["keanggotaan_nama"] ?></span>
                                             <div class="d-flex flex-column justify-content-center ml-3">
                                                 <span class="card-post__author-name"><?= $berita["keanggotaan_nama"] ?></span>
                                                 <small class="text-muted"><?= $berita["divisi_keterangan"] ?></small>

@@ -41,9 +41,9 @@
                             <a class="nav-link" href="<?= base_url() ?>kontak">Kontak</a>
                         </li>
                     </ul>
-                    <form action="" method="POST" class="form-inline my-2 my-lg-0 search">
-                        <input class="form-control mr-sm-1" type="search" placeholder="Cari berita..." name="cari" required>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
+                    <form action="<?= base_url("berita/")."cari" ?>" method="POST" class="form-inline my-2 my-lg-0 search">
+                        <input class="form-control mr-sm-1" type="search" placeholder="Cari berita..." name="kata" value="<?= !empty($this->input->post("kata")) ? $this->input->post("kata") : "" ?>" required>
+                        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Cari</button>
                     </form>
                 </div>
             </nav>

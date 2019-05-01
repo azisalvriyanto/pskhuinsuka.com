@@ -140,7 +140,7 @@
 </head>
 <body>
 <div class="sly-login">
-  <form>
+  <form id="form">
     <div class="svgContainer">
       <div>
         <svg class="mySVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -309,7 +309,7 @@
       </div>
       <br/>
       <div>
-        <button type="button" id="login" class="button-login">Masuk</button>
+        <button type="submit" id="login" class="button-login">Masuk</button>
       </div>
     </div>
 

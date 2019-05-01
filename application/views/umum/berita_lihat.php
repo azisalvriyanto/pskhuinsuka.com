@@ -30,7 +30,7 @@
             <h3 class="tittle" style="word-wrap: break-word;"><?= $data[0]["berita_judul"] ?></h3>
             <h5 class="mt-4"><?= $data[0]["divisi_keterangan"] ?> | <?= $data[0]["berita_waktu"] ?></h5>
             <div class="row inner-sec-wthree m-0"><?php
-                if (@is_file("../pskhuinsuka.com/assets/berita/".$data[0]["berita_id"].".png")) { ?>
+                if (@is_file("../public_html/assets/berita/".$data[0]["berita_id"].".png")) { ?>
                     <div class="d-flex justify-content-center text-center col-md-12 mt-4">
                         <img src="<?= base_url("assets/berita/").$data[0]["berita_id"].".png"?>" alt="Gambar Berita"  style="height: 100%; max-width: 1000px;">
                     </div>

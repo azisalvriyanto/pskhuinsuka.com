@@ -193,7 +193,7 @@
 
                                                         <div class="form-row">
                                                             <div class="form-group col-md-5 text-center" style="margin: 1em 0;">
-                                                                <img id="<?= $i+1 ?>_foto_pratinjau" class="rounded-circle" src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../pskhuinsuka.com/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt="User Avatar" height="140" width="140">
+                                                                <img id="<?= $i+1 ?>_foto_pratinjau" class="rounded-circle" src="<?= base_url("assets/gambar/jejakpendapat/").(@is_file("../public_html/assets/gambar/jejakpendapat/".($i+1).".png") ? ($i+1) : "_standar").".png" ?>" alt="User Avatar" height="140" width="140">
                                                                 <input type="file" id="<?= $i+1 ?>_foto" name="<?= $i+1 ?>_foto" class="btn btn-secondary" style="margin-top: 85px; margin-left:-210px;">
                                                             </div>
                                                             <div class="form-group col-md-7">

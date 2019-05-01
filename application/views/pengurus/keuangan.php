@@ -1,7 +1,7 @@
 <?php
     $debet = $kredit = $saldo = 0;
     if (!empty($data["daftar_semua"])) {
-        foreach($data["daftar_semua"] as $keuangan){
+        foreach($data["daftar_semua"] as $keuangan) {
             if($keuangan["keuangan_keterangan"] === "1") {
                 $debet = $debet+$keuangan["keuangan_nominal"];
             } else {
@@ -119,17 +119,17 @@
                                                 <input type="text" class="form-control text-center" id="pengaturan_tanggal" name="pengaturan_tanggal" placeholder="Tanggal" value="">
                                             </div>
                                             <div class="form-group col-md-7">
-                                                <label for="pengaturan_judul">Judul</label>
-                                                <input type="text" class="form-control" id="pengaturan_judul" name="pengaturan_judul" placeholder="Judul" value="">
+                                                <label for="pengaturan_judul">Keterangan</label>
+                                                <input type="text" class="form-control" id="pengaturan_judul" name="pengaturan_judul" placeholder="Keterangan" value="">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3" id="fjumlah">
-                                                <label for="pengaturan_jumlah">Jumlah</label>
-                                                <input type="number" class="form-control text-center" id="pengaturan_jumlah" name="pengaturan_jumlah" placeholder="Jumlah" value="">
+                                                <label for="pengaturan_jumlah">Qty</label>
+                                                <input type="number" class="form-control text-center" id="pengaturan_jumlah" name="pengaturan_jumlah" placeholder="Qty" value="">
                                             </div>
                                             <div class="form-group col-md-4" id="fketerangan">
-                                                <label for="pengaturan_keterangan">Keterangan</label>
+                                                <label for="pengaturan_keterangan">Jenis</label>
                                                 <select id="pengaturan_keterangan" class="form-control">
                                                 </select>
                                             </div>
@@ -248,7 +248,7 @@
                                                 <tr>
                                                     <th scope="col" class="border-0">Tanggal</th>
                                                     <th scope="col" class="border-0">Keterangan</th>
-                                                    <th scope="col" class="border-0">Jumlah</th>
+                                                    <th scope="col" class="border-0">Qty</th>
                                                     <th scope="col" class="border-0">Debet</th>
                                                     <th scope="col" class="border-0">Kredit</th>
                                                     <th scope="col" class="border-0">Saldo</th>

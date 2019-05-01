@@ -36,7 +36,7 @@ class M_Keanggotaan extends CI_Model {
         if ($query->num_rows() > 0) {
             $query  = $query->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$query->keanggotaan_username.".png")) {
+            if (@is_file("../public_html/assets/gambar/keanggotaan/".$query->keanggotaan_username.".png")) {
                 $foto	= "assets/gambar/keanggotaan/".$query->keanggotaan_username.".png";
             } else {
                 $foto	= "assets/gambar/keanggotaan/_standar.png";

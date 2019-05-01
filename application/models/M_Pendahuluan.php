@@ -15,7 +15,7 @@ class M_Pendahuluan extends CI_Model {
         if ($organisasi->num_rows() > 0) {
             $organisasi = $organisasi->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+            if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
                 $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";
@@ -79,12 +79,20 @@ class M_Pendahuluan extends CI_Model {
     }
 
     public function pengurus($menu, $username) {
+		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
+		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
+		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
+			$api 	= "//api.pskhuinsuka.com";
+		} else {
+			$api 	= base_url("..")."/api.pskhuinsuka.com";
+        }
+
         $data = array(
             "menu" => array(
                 "judul" => $menu["judul"],
                 "judul_sub" => $menu["judul_sub"]
             ),
-            "api" => base_url("..")."/pskhuinsuka.com.api"
+            "api" => $api
         );
 
         $organisasi = $this->db->select("organisasi_periode, organisasi_nama_panjang, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
@@ -92,7 +100,7 @@ class M_Pendahuluan extends CI_Model {
         if ($organisasi->num_rows() > 0) {
             $organisasi = $organisasi->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+            if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
                 $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";
@@ -126,7 +134,7 @@ class M_Pendahuluan extends CI_Model {
         if ($keanggotaan->num_rows() > 0) {
             $keanggotaan = $keanggotaan->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/keanggotaan/".$keanggotaan->keanggotaan_username.".png")) {
+            if (@is_file("../public_html/assets/gambar/keanggotaan/".$keanggotaan->keanggotaan_username.".png")) {
                 $foto	= "assets/gambar/keanggotaan/".$keanggotaan->keanggotaan_username.".png";
             } else {
                 $foto	= "assets/gambar/keanggotaan/_standar.png";
@@ -165,16 +173,24 @@ class M_Pendahuluan extends CI_Model {
     }
 
     public function masuk() {
+		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
+		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
+		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
+			$api 	= "//api.pskhuinsuka.com";
+		} else {
+			$api 	= base_url("..")."/api.pskhuinsuka.com";
+        }
+
         $data = array(
             "judul" => "Masuk",
-            "api" => base_url("..")."/pskhuinsuka.com.api"
+            "api" => $api
         );
 
         $organisasi = $this->db->select("organisasi_periode, organisasi_nama_panjang")->from("organisasi")->order_by("organisasi_periode", "desc")->get();
         if ($organisasi->num_rows() > 0) {
             $organisasi = $organisasi->row();
 
-            if (@is_file("../pskhuinsuka.com/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
+            if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png")) {
                 $logo	= "assets/gambar/organisasi/".$organisasi->organisasi_periode."_logo.png";
             } else {
                 $logo	= "assets/gambar/organisasi/_standar_logo.png";

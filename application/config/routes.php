@@ -20,6 +20,7 @@ $route["artikel/(:num)"]                        = "Umum/artikel/$1";
 $route["artikel/(:num)/(:num)"]                 = "Umum/artikel/$1/$2";
 $route["artikel/(:num)/(:any)/(:num)/(:any)"]   = "Umum/artikel/$1/$2/$3/$4";
 $route["berita"]                                = "Umum/berita";
+$route["berita/cari"]                           = "Umum/berita_cari";
 $route["berita/(:num)"]                         = "Umum/berita/$1";
 $route["berita/(:num)/(:num)"]                  = "Umum/berita/$1/$2";
 $route["berita/(:num)/(:any)/(:num)/(:any)"]    = "Umum/berita/$1/$2/$3/$4";

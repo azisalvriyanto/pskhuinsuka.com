@@ -78,7 +78,7 @@
                                                                 </label>
                                                                 <div class="input-group">
                                                                     <input type="file" id="landscape" name="landscape" class="btn btn-secondary col-md-12 mb-2">
-                                                                    <img id="landscape_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_landscape.png" ? $data["periode"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
+                                                                    <img id="landscape_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../public_html/".$data["periode"])."_landscape.png" ? $data["periode"] : "_standar")."_landscape.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-5">
@@ -88,7 +88,7 @@
                                                                 </label>
                                                                 <div class="input-group">
                                                                     <input type="file" id="portrait" name="portrait" class="btn btn-secondary col-md-12 mb-2">
-                                                                    <img id="portrait_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../pskhuinsuka.com/".$data["periode"])."_portrait.png" ? $data["periode"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
+                                                                    <img id="portrait_pratinjau" src="<?= base_url()."assets/gambar/organisasi/".(@is_file("../public_html/".$data["periode"])."_portrait.png" ? $data["periode"] : "_standar")."_portrait.png" ?>" height="100%" width="100%">
                                                                 </div>
                                                             </div>
                                                         </div>
