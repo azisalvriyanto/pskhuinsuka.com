@@ -50,7 +50,6 @@ class M_Keanggotaan extends CI_Model {
                     "foto" => $foto,
                     "username" => $query->keanggotaan_username,
                     "nama" => $query->keanggotaan_nama,
-                    "angkatan" => $query->keanggotaan_angkatan,
                     "divisi" => $query->divisi_keterangan,
                     "jabatan" => $query->jabatan_keterangan,
                     "jabatan_x" => $query->keanggotaan_jabatan,

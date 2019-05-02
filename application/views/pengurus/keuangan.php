@@ -340,7 +340,7 @@
                 });
 
                 $("#pemasukkan").click(function () {
-                    $("input[id=pengaturan_tanggal]").val("");
+                    $("input[id=pengaturan_tanggal]").val(`<?= date("d/m/Y") ?>`);
                     $("input[id=pengaturan_judul]").val("");
                     $("input[id=pengaturan_jumlah]").val("");
                     $("input[id=pengaturan_nominal]").val("");
@@ -424,7 +424,7 @@
                 });
 
                 $("#pengeluaran").click(function () {
-                    $("input[id=pengaturan_tanggal]").val("");
+                    $("input[id=pengaturan_tanggal]").val(`<?= date("d/m/Y") ?>`);
                     $("input[id=pengaturan_judul]").val("");
                     $("input[id=pengaturan_jumlah]").val("");
                     $("input[id=pengaturan_nominal]").val("");

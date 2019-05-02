@@ -29,7 +29,7 @@ $route["galeri"]                = "Umum/galeri";
 $route["berkas"]                = "Umum/berkas";
 
 //pendaftaran
-$route["pendaftaran"]               = "Umum/pendaftaran";
+$route["pendaftaran"]   = "Umum/pendaftaran";
 
 //pengurus
 $route["pengurus"]  = "pengurus/C_PMasuk/index";

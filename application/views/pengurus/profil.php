@@ -41,17 +41,17 @@
                                                 <img id="foto_pratinjau" class="rounded-circle" src="<?= base_url().(@is_file("../public_html/".$data["foto"]) ? $data["foto"] : "assets/gambar/keanggotaan/_standar.png" ) ?>" alt="Foto Profil" width="110" height="110">
                                                 <input type="file" id="foto" name="foto" class="btn btn-secondary col-md-12 mt-2">
                                             </div>
-                                            <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) ? $data["nama"] : "{ Nama }" ?></h4>
+                                            <h4 id="tampil_nama" class="mb-0"><?= !empty($data["periode"]) && !empty($data["nama"]) ? $data["nama"] : "{ Nama }" ?></h4>
                                             <span class="text-muted d-block mb-2">
-                                                <span id="tampil_divisi"><?= !empty($data["periode"]) ? ucwords($data["divisi"]) : "{ Divisi }" ?></span>
-                                                (<span id="tampil_jabatan"><?= !empty($data["periode"]) ? ucwords($data["jabatan"]) : "{ Jabatan }" ?></span>)
+                                                <span id="tampil_divisi"><?= !empty($data["periode"]) && !empty($data["divisi"]) ? ucwords($data["divisi"]) : "{ Divisi }" ?></span>
+                                                (<span id="tampil_jabatan"><?= !empty($data["periode"]) && !empty($data["jabatan"]) ? ucwords($data["jabatan"]) : "{ Jabatan }" ?></span>)
                                             </span>
                                         </div>
                                     </form>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item px-4">
                                         <div class="progress-wrapper">
-                                            <span id="tampil_motto"><?= !empty($data["periode"]) ? $data["motto"] : "{ Tidak ada motto. }" ?></span>
+                                            <span id="tampil_motto"><?= !empty($data["periode"]) && !empty($data["motto"]) ? $data["motto"] : "{ Tidak ada motto. }" ?></span>
                                         </div>
                                     </ul>
                                 </div>
