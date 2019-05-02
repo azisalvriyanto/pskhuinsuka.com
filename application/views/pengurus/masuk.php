@@ -132,7 +132,7 @@
 </head>
 <body>
 <div class="sly-login">
-  <form>
+  <form id="form">
     <div class="svgContainer">
       <!-- <div> -->
         <img src="<?= base_url().$organisasi["logo"] ?>" alt="">
@@ -154,7 +154,7 @@
       </div>
       <br/>
       <div>
-        <button id="login" class="button-login">Masuk</button>
+        <button type="button" id="login" class="button-login">Masuk</button>
       </div>
     </div>
 
@@ -166,6 +166,12 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function() {
+  $('input').on('keypress', (event)=> {
+        if(event.which === 13) {
+          $("#login").click();
+        }
+  });
+
   $("#showPasswordCheck").click(function() {
     $("#showPasswordCheck").is(":checked") ? $("#loginPassword").attr('type', 'text') : $("#loginPassword").attr('type', 'password');
   });

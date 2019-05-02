@@ -169,7 +169,7 @@
                                 var data = response.keterangan;
                                 for (const index in response.keterangan) {
                                     var nomor = parseInt(index)+parseInt(1);
-                                    if (data[index].jabatan_keterangan === "1") {
+                                    if (data[index].jabatan_keterangan === 1) {
                                         var keterangan = "Aktif";
                                     } else {
                                         var keterangan = "Tidak aktif";
