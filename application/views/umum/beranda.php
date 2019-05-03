@@ -201,7 +201,7 @@
             </div>
         </div>
     </section>
-    <!-- //divisi --><?php } if (!empty($data["jpendapat"]) && !empty($data["jpendapat"]["1"]["jpendapat_nama"])) { ?>
+    <!-- //divisi --><?php } if (!empty($data["jpendapat"]) && !empty($data["jpendapat"]["0"]["jpendapat_nama"])) { ?>
 
 
     <!-- jejak pendapat -->
