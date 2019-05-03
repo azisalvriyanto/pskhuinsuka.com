@@ -201,7 +201,7 @@
             </div>
         </div>
     </section>
-    <!-- //divisi --><?php } if (!empty($data["jpendapat"])) { ?>
+    <!-- //divisi --><?php } if (!empty($data["jpendapat"]) && !empty($data["jpendapat"]["1"]["jpendapat_nama"])) { ?>
 
 
     <!-- jejak pendapat -->
@@ -210,7 +210,8 @@
         <div class="inner-sec-wthree">
             <section class="slider">
                 <div class="flexslider">
-                    <ul class="slides"><?php for ($i=0; $i<count($data["jpendapat"]) ; $i++) { ?>
+                    <ul class="slides"><?php for ($i=0; $i<count($data["jpendapat"]) ; $i++) {
+                        if (!empty($data["jpendapat"][$i]["jpendapat_nama"])) { ?>
 
                         <li>
                             <div class="testimonials_grid">
@@ -221,7 +222,7 @@
                                 <i><?= $data["jpendapat"][$i]["jpendapat_jabatan"] ?></i>
                                 <p><?= $data["jpendapat"][$i]["jpendapat_pendapat"] ?></p>
                             </div>
-                        </li> <?php } ?>
+                        </li> <?php } } ?>
 
                     </ul>
                 </div>
