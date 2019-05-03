@@ -4,7 +4,7 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class M_JPendapat extends CI_Model {
     public function daftar()
     {
-        $query = $this->db->select("*")->from("jpendapat")->get();
+        $query = $this->db->select("*")->from("jpendapat")->where("jpendapat_nama is  NOT NULL")->get();
         if ($query->num_rows() > 0) {
             return array(
                 "status" => 200,
