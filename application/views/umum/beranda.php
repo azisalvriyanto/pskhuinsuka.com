@@ -39,7 +39,7 @@
         }<?php
             $i++;
         }
-    } else { 
+    } else {
         $berita_foto = base_url("assets/gambar/organisasi/");
         if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi["periode"]."_landscape.png")) {
             $berita_foto .= $organisasi["periode"];

@@ -1,4 +1,12 @@
-<title><?= $menu["judul"] !== "Beranda" ? $menu["judul"] : "" ?><?= $menu["judul"] !== "Beranda" && !empty($organisasi["nama_panjang"]) ? " &mdash; " : "" ?><?= !empty($organisasi["nama_panjang"]) ? $organisasi["nama_panjang"] : "" ?></title>
+<?php
+    $landscape = base_url("assets/gambar/organisasi/");
+    if (@is_file("../public_html/assets/gambar/organisasi/".$organisasi["periode"]."_landscape.png")) {
+        $landscape .= $organisasi["periode"];
+    } else {
+        $landscape .= "_standar";
+    }
+    $landscape .= "_landscape.png";
+?><title><?= $menu["judul"] !== "Beranda" ? $menu["judul"] : "" ?><?= $menu["judul"] !== "Beranda" && !empty($organisasi["nama_panjang"]) ? " &mdash; " : "" ?><?= !empty($organisasi["nama_panjang"]) ? $organisasi["nama_panjang"] : "" ?></title>
     <link href="<?= base_url().$organisasi["logo"] ?>" rel="icon" type="image/x-icon">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,20 +31,20 @@
 
     <style>
         .reviews_sec {
-            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
+            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
             background-size: cover;
             padding: 7em 0;
             background-attachment: fixed;
         }
 
         .banner-inner {
-            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
-            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= base_url("assets/") ?>gambar/organisasi/<?= $organisasi["periode"] ?>_landscape.png) no-repeat;
+            background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
+            background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?= $landscape ?>) no-repeat;
             background-size: cover;
             min-height: 250px;
         }
