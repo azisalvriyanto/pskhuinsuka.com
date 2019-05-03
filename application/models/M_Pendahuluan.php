@@ -176,7 +176,7 @@ class M_Pendahuluan extends CI_Model {
 		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
 		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
 		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
-			$api 	= "//api.pskhuinsuka.com";
+			$api 	= base_url()."api.pskhuinsuka.com";
 		} else {
 			$api 	= base_url("..")."/api.pskhuinsuka.com";
         }
