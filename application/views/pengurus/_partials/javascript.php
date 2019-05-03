@@ -34,7 +34,7 @@
 					.then((yes) => {
 						if (yes) {
 							$.ajax({
-								url: `<?= $api ?>`+`/otentikasi/keluar`,
+								url: `<?= $api_keluar ?>`+`/otentikasi/keluar`,
 								dataType: "json",
 								type: "GET",
 								success: function(response) {
