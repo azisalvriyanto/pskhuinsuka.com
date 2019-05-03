@@ -185,21 +185,22 @@
                         $("#kirim").html("Kirim");
 
                         if (response.status === 200) {
-                            var judul = "Pesan berhasil dikirim."
-                            var icon = "success";
+                            swal({
+                                title: "Pesan berhasil dikirim.",
+                                text: response.keterangan,
+                                icon: "success",
+                                button: "Tutup",
+                            }).then((value) => {
+                                $("#form")[0].reset();
+                            });
                         } else {
-                            var judul = "Pesan gagal dikirim."
-                            var icon = "error";
+                            swal({
+                                title: "Pesan gagal dikirim.",
+                                text: response.keterangan,
+                                icon: "error",
+                                button: "Tutup",
+                            });
                         }
-
-                        swal({
-                            title: judul,
-                            text: response.keterangan,
-                            icon: icon,
-                            button: "Tutup",
-                        }).then((value) => {
-                            $("#form")[0].reset();
-                        });
                     },
                     error: function (jqXHR, exception) {
                         if (jqXHR.status === 0) {
