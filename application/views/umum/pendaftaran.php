@@ -218,6 +218,8 @@
                         $("#daftar").html("<i class=\"fa fa-cog fa-spin mx-1\"></i> Sedang melakukan pendaftaran...");
                     },
                     success: function(response) {
+                        $("#daftar").html("Daftar");
+
                         if (response.status === 200) {
                             swal({
                                 title: "Akun anda berhasil didaftarkan.",
@@ -239,6 +241,8 @@
                         }
                     },
                     error: function (jqXHR, exception) {
+                        $("#daftar").html("Daftar");
+
                         if (jqXHR.status === 0) {
                             keterangan = "Not connect (verify network).";
                         } else if (jqXHR.status == 404) {
