@@ -25,7 +25,7 @@ class Umum extends CI_Controller {
 		}
 
 		$jpendapat = $this->M_JPendapat->daftar();
-		if ($divisi["status"] === 200) {
+		if ($jpendapat["status"] === 200) {
 			$data["data"] = @array_merge($data["data"],
 				array(
 					"jpendapat" => $jpendapat["keterangan"],
