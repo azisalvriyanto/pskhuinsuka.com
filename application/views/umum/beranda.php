@@ -157,7 +157,7 @@
 
         </div>
     </section>
-    <!-- //organisasi --><? } if (!empty($data["jpendapat"])) { ?>
+    <!-- //organisasi --><? } if (!empty($data["divisi"])) { ?>
 
 
     <!-- divisi -->
