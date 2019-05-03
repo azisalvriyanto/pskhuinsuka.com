@@ -187,8 +187,6 @@
                         if (response.status === 200) {
                             var judul = "Pesan berhasil dikirim."
                             var icon = "success";
-
-                            $("#form")[0].reset();
                         } else {
                             var judul = "Pesan gagal dikirim."
                             var icon = "error";
@@ -199,6 +197,8 @@
                             text: response.keterangan,
                             icon: icon,
                             button: "Tutup",
+                        }).then((value) => {
+                            $("#form")[0].reset();
                         });
                     },
                     error: function (jqXHR, exception) {
