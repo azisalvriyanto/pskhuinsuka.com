@@ -25,7 +25,7 @@
             if (@is_file("../public_html/assets/berita/".$berita["berita_id"].".png")) {
                 $berita_foto[$i] .= $berita["berita_id"];
             } else {
-                $berita_foto[$i] .= "_standar";
+                $berita_foto[$i] = base_url("assets/gambar/")."organisasi/_standar_landscape";
             }
             $berita_foto[$i] .= ".png"; ?>
 
