@@ -41,7 +41,6 @@
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
-
         });
     </script>
 

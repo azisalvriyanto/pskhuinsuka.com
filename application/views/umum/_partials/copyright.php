@@ -49,7 +49,6 @@
                     by
                     <a href="//www.facebook.com/tegal6etar" target="_blank">Teknik Informatika 2016</a>
                 </p>
-
             </div>
             <div class="clearfix"></div>
         </div>

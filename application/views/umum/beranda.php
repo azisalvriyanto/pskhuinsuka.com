@@ -229,7 +229,18 @@
             </section>
         </div>
     </section>
-    <!-- //jejak pendapat --><?php } ?>
+    <!-- //jejak pendapat --><?php } else { ?>
+
+
+    <div class="flexslider">
+       	<ul class="slides">
+        	<li>
+                <div class="testimonials_grid">
+                    <p><br><br><br></p>
+                </div>
+            </li>
+        </ul>
+    </div><?php } ?>
 
     <!-- //field -->
 
@@ -253,7 +264,6 @@
     <script src="<?= base_url("assets/umum/") ?>js/jquery.countup.js"></script>
     <script>
         $('.counter').countUp();
-
     </script>
     <!-- //stats -->
 </body>
