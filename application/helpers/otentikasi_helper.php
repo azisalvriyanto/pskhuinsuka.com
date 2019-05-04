@@ -11,42 +11,13 @@ function pengurus()
         ->where("akun_username", $username)->get()->row_array();
         if ($pengguna["akun_keterangan"] === "1") {
             $menu = @strtolower($_this->uri->segment(2));
-            // if (
-            //     (
-            //         $menu === "organisasi"
-            //         && $pengguna["keanggotaan_jabatan"] === "1"
-            //     )
-            //     || (
-            //         $menu === "keanggotaan"
-            //         && (
-            //             $pengguna["keanggotaan_jabatan"] === "1"
-            //             || $pengguna["keanggotaan_jabatan"] === "2"
-            //         )
-            //     )
-            //     || (
-            //         $menu === "keuangan"
-            //         && (
-            //             $pengguna["keanggotaan_jabatan"] === "1"
-            //             || $pengguna["keanggotaan_jabatan"] === "3"
-            //         )
-            //     )
-            // ) {
-            //     //no action
-            // } else {
-            //     $_menu = array(
-            //         "judul" => "404 Not Found",
-            //         "judul_sub" => ""
-            //     );
-                
-            //     $data  = $_this->M_Pendahuluan->pengurus($_menu, $_this->session->userdata("username"));
-    
-            //     $_this->load->view("galat/pengurus", $data);
-            // }
-
             if (
                 (
                     $menu === "organisasi"
-                    && $pengguna["keanggotaan_jabatan"] !== "1"
+                    && (
+                        $pengguna["keanggotaan_jabatan"] !== "1"
+                        && $pengguna["keanggotaan_jabatan"] !== "2"
+                    )
                 )
                 || (
                     $menu === "keanggotaan"
@@ -78,7 +49,10 @@ function pengurus()
                 )
                 || (
                     $menu === "galeri"
-                    && $pengguna["keanggotaan_jabatan"] !== "1"
+                    && (
+                        $pengguna["keanggotaan_jabatan"] !== "1"
+                        && $pengguna["keanggotaan_jabatan"] !== "6"
+                    )
                 )
                 || (
                     $menu === "pengaturan"

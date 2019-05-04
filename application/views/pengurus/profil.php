@@ -399,7 +399,7 @@
                                         && keterangan === "0"
                                     ) {
                                         $.ajax({
-                                            url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                            url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                             dataType: "json",
                                             type: "GET",
                                             success: function(response) {
@@ -513,7 +513,7 @@
                                         .then((yes) => {
                                             if (username === `<?= $pengguna["username"] ?>`) {
                                                 $.ajax({
-                                                    url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                    url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                                     dataType: "json",
                                                     type: "GET",
                                                     success: function(response) {
@@ -724,7 +724,7 @@
                                     if (yes) {
                                         if (username_lama === `<?= $pengguna["username"] ?>`) {
                                             $.ajax({
-                                                url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                                 dataType: "json",
                                                 type: "GET",
                                                 success: function(response) {
@@ -863,7 +863,7 @@
                                     if (yes) {
                                         if ($("#username").val() === `<?= $pengguna["username"] ?>`) {
                                             $.ajax({
-                                                url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                                 dataType: "json",
                                                 type: "GET",
                                                 success: function(response) {

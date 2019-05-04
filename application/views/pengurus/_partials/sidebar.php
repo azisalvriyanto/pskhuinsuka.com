@@ -21,6 +21,7 @@
 								</a>
 							</li><?php if (
 								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "2"
 							) { ?>
 
 							<li class="nav-item">
@@ -88,6 +89,7 @@
 							</li><?php
 							if (
 								$pengguna["jabatan"] === "1"
+								|| $pengguna["jabatan"] === "6"
 							) { ?>
 
 							<li class="nav-item">

@@ -82,9 +82,11 @@ class M_Pendahuluan extends CI_Model {
 		$protokol	= ((isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") ? "https" : "http");
 		$situs		= $protokol."://".$_SERVER["HTTP_HOST"];
 		if (preg_match('/^'.$protokol.':\/\/(www.)?pskhuinsuka.com/i', base_url())) {
-			$api 	= "//api.pskhuinsuka.com";
+            $api 	        = "//api.pskhuinsuka.com";
+            $api_otentikasi = base_url()."api.pskhuinsuka.com";
 		} else {
-			$api 	= base_url("..")."/api.pskhuinsuka.com";
+			$api 	        = base_url("..")."/api.pskhuinsuka.com";
+            $api_otentikasi = base_url("..")."/api.pskhuinsuka.com";
         }
 
         $data = array(
@@ -92,7 +94,8 @@ class M_Pendahuluan extends CI_Model {
                 "judul" => $menu["judul"],
                 "judul_sub" => $menu["judul_sub"]
             ),
-            "api" => $api
+            "api" => $api,
+            "api_otentikasi" => $api_otentikasi
         );
 
         $organisasi = $this->db->select("organisasi_periode, organisasi_nama_panjang, organisasi_nama_pendek")->from("organisasi")->order_by("organisasi_periode", "desc")->get();

@@ -388,7 +388,7 @@
                                         .then((yes) => {
                                             if (periode === `<?= $pengguna["periode"] ?>`) {
                                                 $.ajax({
-                                                    url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                    url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                                     dataType: "json",
                                                     type: "GET",
                                                     success: function(response) {
@@ -538,7 +538,7 @@
                                         })
                                         .then((yes) => {
                                             $.ajax({
-                                                url: `<?= $api ?>`+`/otentikasi/keluar`,
+                                                url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
                                                 dataType: "json",
                                                 type: "GET",
                                                 success: function(response) {
