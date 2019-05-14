@@ -114,7 +114,7 @@
                                                 <tr id="<?= $daftar[$i]["kegiatan_id"] ?>">
                                                     <td><?= $i+1 ?></td>
                                                     <td><?= date("d/m/Y", strtotime($daftar[$i]["kegiatan_tanggal"])) ?></td>
-                                                    <td><?= $daftar[$i]["kegiatan_nama"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["kegiatan_nama"] ?></td>
                                                     <td class="text-nowrap">
                                                         <button type="button" onclick="sunting(`<?= $daftar[$i]['kegiatan_id'] ?>`);" class="btn btn-sm btn-outline-info mr-1">
                                                             <i class="fas fa-pencil-alt mr-1"></i>
@@ -203,7 +203,7 @@
                                     $("#tbody").append(`<tr id="`+kegiatan[index].kegiatan_id+`">
                                         <td>`+nomor+`</td>
                                         <td>`+tanggal+`</td>
-                                        <td>`+kegiatan[index].kegiatan_nama+`</td>
+                                        <td class="text-left">`+kegiatan[index].kegiatan_nama+`</td>
                                         <td class="text-nowrap">`+tombol+`</td>
                                     <tr>`);
                                 }

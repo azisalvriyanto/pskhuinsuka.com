@@ -137,6 +137,12 @@
                                                 <label for="pengaturan_nominal">Nominal</label>
                                                 <input type="text" class="form-control text-right" id="pengaturan_nominal" name="pengaturan_nominal" placeholder="Nominal" value="">
                                             </div>
+                                            <div class="form-control mb-3 text-center">
+                                                <input type="file" id="gambar" name="gambar" class="col-md-12">
+                                            </div>
+                                            <div class="form-control mb-0 text-center">
+                                                <img id="gambar_pratinjau" src="#" class="col-sm-12 mt-3 mb-3" alt="&nbsp;&nbsp;Gambar artikel">
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -339,6 +345,22 @@
                     autoclose: true
                 });
 
+                function pratinjau(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#gambar_pratinjau').attr("src", e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#gambar").change(function() {
+                    pratinjau(this);
+                });
+
                 $("#pemasukkan").click(function () {
                     $("input[id=pengaturan_tanggal]").val(`<?= date("d/m/Y") ?>`);
                     $("input[id=pengaturan_judul]").val("");
@@ -363,18 +385,21 @@
                     })
                     .then((yes) => {
                         if (yes) {
+                            var form = new FormData($("#form-pengaturan")[0]);
+                            form.append("periode", `<?= $data["periode"] ?>`);
+                            form.append("tanggal", $("#pengaturan_tanggal").val());
+                            form.append("judul", $("#pengaturan_judul").val());
+                            form.append("jumlah", $("#pengaturan_jumlah").val());
+                            form.append("keterangan", 2);
+                            form.append("nominal", $("#pengaturan_nominal").val());
+
                             $.ajax({
                                 url: site_api+"/keuangan/tambah",
                                 dataType: "json",
                                 type: "POST",
-                                data : {
-                                    "periode": `<?= $data["periode"] ?>`,
-                                    "tanggal": $("#pengaturan_tanggal").val(),
-                                    "judul": $("#pengaturan_judul").val(),
-                                    "jumlah": $("#pengaturan_jumlah").val(),
-                                    "keterangan": 1,
-                                    "nominal": $("#pengaturan_nominal").val()
-                                },
+                                data : form,
+                                contentType: false,
+                                processData: false,
                                 success: function(response) {
                                     if (response.status === 200) {
                                         swal({
@@ -709,6 +734,10 @@
                             $("input[id=pengaturan_judul]").val(keuangan.judul);
                             $("input[id=pengaturan_jumlah]").val(keuangan.jumlah);
                             $("input[id=pengaturan_nominal]").val(keuangan.nominal);
+                            $("#gambar_pratinjau").attr("src", "");
+                            if(keuangan.gambar !== "#") {
+                                $("#gambar_pratinjau").attr("src", `<?= base_url() ?>`+keuangan.gambar);
+                            }
 
                             if (keuangan.keterangan === "1") {
                                 $("#pengaturan_keterangan").html(`<option value="1" selected>Pemasukan</option>
@@ -736,18 +765,22 @@
                             })
                             .then((yes) => {
                                 if (yes) {
+                                    var form = new FormData($("#form-pengaturan")[0]);
+                                    form.append("id", id);
+                                    form.append("periode", `<?= $data["periode"] ?>`);
+                                    form.append("tanggal", $("#pengaturan_tanggal").val());
+                                    form.append("judul", $("#pengaturan_judul").val());
+                                    form.append("jumlah", $("#pengaturan_jumlah").val());
+                                    form.append("keterangan", 2);
+                                    form.append("nominal", $("#pengaturan_nominal").val());
+
                                     $.ajax({
                                         url: site_api+"/keuangan/perbarui",
                                         dataType: "json",
                                         type: "POST",
-                                        data : {
-                                            "id": id,
-                                            "tanggal": $("#pengaturan_tanggal").val(),
-                                            "judul": $("#pengaturan_judul").val(),
-                                            "jumlah": $("#pengaturan_jumlah").val(),
-                                            "keterangan": $("#pengaturan_keterangan").val(),
-                                            "nominal": $("#pengaturan_nominal").val()
-                                        },
+                                        data : form,
+                                        contentType: false,
+                                        processData: false,
                                         success: function(response) {
                                             if (response.status === 200) {
                                                 swal({

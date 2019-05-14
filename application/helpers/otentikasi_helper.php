@@ -51,7 +51,7 @@ function pengurus()
                     $menu === "galeri"
                     && (
                         $pengguna["keanggotaan_jabatan"] !== "1"
-                        && $pengguna["keanggotaan_jabatan"] !== "6"
+                        && ($pengguna["keanggotaan_divisi"] !== "4" && $pengguna["keanggotaan_jabatan"] !== "6")
                     )
                 )
                 || (

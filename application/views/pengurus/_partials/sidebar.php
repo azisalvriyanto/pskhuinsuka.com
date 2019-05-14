@@ -89,7 +89,7 @@
 							</li><?php
 							if (
 								$pengguna["jabatan"] === "1"
-								|| $pengguna["jabatan"] === "6"
+								|| ($pengguna["divisi"] === "4" && $pengguna["jabatan"] === "6")
 							) { ?>
 
 							<li class="nav-item">

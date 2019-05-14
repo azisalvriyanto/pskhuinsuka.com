@@ -90,7 +90,7 @@
 
                                                 <tr id="<?= $daftar[$i]["berkas_id"] ?>">
                                                     <td><?= $i+1 ?></td>
-                                                    <td><?= $daftar[$i]["berkas_nama"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["berkas_nama"] ?></td>
                                                     <td class="text-nowrap">
                                                         <button type="button" onclick="sunting(`<?= $daftar[$i]['berkas_id'] ?>`);" class="btn btn-sm btn-outline-info mr-1">
                                                             <i class="fas fa-pencil-alt mr-1"></i>

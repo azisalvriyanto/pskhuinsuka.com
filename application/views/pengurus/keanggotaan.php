@@ -106,10 +106,10 @@
                                                 <tr id="<?= $daftar[$i]["keanggotaan_username"] ?>">
                                                     <td><?= $i+1 ?></td>
                                                     <td><?= $keterangan ?></td>
-                                                    <td><?= $daftar[$i]["keanggotaan_nama"] ?></td>
-                                                    <td><?= $daftar[$i]["divisi_keterangan"] ?></td>
-                                                    <td><?= $daftar[$i]["jabatan_keterangan"] ?></td>
-                                                    <td><?= $daftar[$i]["keanggotaan_telepon"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["keanggotaan_nama"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["divisi_keterangan"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["jabatan_keterangan"] ?></td>
+                                                    <td class="text-left"><?= $daftar[$i]["keanggotaan_telepon"] ?></td>
                                                     <td class="text-nowrap">
                                                         <button type="button" onclick="sunting(`<?= $daftar[$i]['keanggotaan_username'] ?>`, `<?= $daftar[$i]['keanggotaan_nama'] ?>`);" class="btn btn-sm btn-outline-info mr-1">
                                                             <i class="fas fa-pencil-alt mr-1"></i>
@@ -178,10 +178,10 @@
                                     $("#tbody").append(`<tr id="`+data[index].keanggotaan_username+`">
                                                     <td>`+nomor+`</td>
                                                     <td>`+keterangan+`</td>
-                                                    <td>`+data[index].keanggotaan_nama+`</td>
-                                                    <td>`+data[index].divisi_keterangan+`</td>
-                                                    <td>`+data[index].jabatan_keterangan+`</td>
-                                                    <td>`+data[index].keanggotaan_telepon+`</td>
+                                                    <td class="text-left">`+data[index].keanggotaan_nama+`</td>
+                                                    <td class="text-left">`+data[index].divisi_keterangan+`</td>
+                                                    <td class="text-left">`+data[index].jabatan_keterangan+`</td>
+                                                    <td class="text-left">`+data[index].keanggotaan_telepon+`</td>
                                                     <td class="text-nowrap">
                                                         <button type="button" onclick="sunting(\``+data[index].keanggotaan_username+`\`, \``+data[index].keanggotaan_nama+`\`);" class="btn btn-sm btn-outline-info mr-1"><i class="fas fa-pencil-alt mr-1"></i> Sunting</button>
                                                         <button type="button" onclick="hapus(\``+data[index].keanggotaan_username+`\`, \``+data[index].keanggotaan_nama+`\`);" class="btn btn-sm btn-outline-danger mr-1"><i class="fas fa-trash-alt mr-1"></i> Hapus</button>
