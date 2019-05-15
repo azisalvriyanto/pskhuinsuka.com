@@ -171,6 +171,7 @@ class M_Berita extends CI_Model {
                     "judul" => $query->berita_judul,
                     "isi" => $query->berita_isi,
                     "gambar" => $gambar,
+                    "kegiatan" => $query->berita_kegiatan,
                 )
             );
         }

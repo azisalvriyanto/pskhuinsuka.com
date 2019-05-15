@@ -64,6 +64,17 @@
                     <h2><?= $kegiatan["kegiatan_nama"] ?></h2>
                     <em><?= date("F d, Y", strtotime($kegiatan["kegiatan_tanggal"])); ?></em>
                     <p><?= $kegiatan["kegiatan_keterangan"] ?></p>
+                    <br><br>
+                    <h3>Berita Terkait</h3><?php
+                        $berita = $this->db->select("*")->from("berita")->where("berita_kegiatan", $kegiatan["kegiatan_id"])->get()->result_array();
+                        if (count($berita) > 0) {
+                            for ($i=0; $i<count($berita); $i++) { ?>
+
+                    <p><?= ($i+1) ?>. <a href="<?= base_url() . "berita/" . date("Y/m", strtotime($berita[$i]["berita_waktu"]))."/".$berita[$i]["berita_id"]."/".@substr($berita[$i]["berita_judul"], 0, 30) ?>"><?= @strlen($berita[$i]["berita_judul"]) <= 41 ? $berita[$i]["berita_judul"] : @substr($berita[$i]["berita_judul"], 0, 40)."..." ?></a></p><?php }
+                        } else { ?>
+
+                    <p>Berita tidak ditemukan.</p><?php } ?>
+
                 </li><?php } ?>
 
             </ol>

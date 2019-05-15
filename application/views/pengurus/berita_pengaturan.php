@@ -51,7 +51,35 @@
                                 </div>
                                 <!-- //Berita -->
                             </div>
-                            <div class="col-lg-3 col-md-12">
+                            <div class="col-lg-3 col-md-12"><?php if (!empty($kegiatan)) { ?>
+                                <!-- //Kegiatan -->
+                                <div class="card card-small mb-3">
+                                    <div class="card-header border-bottom">
+                                        <h6 class="m-0">Kegiatan</h6>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item p-3"><?php foreach ($kegiatan as $kegiatan_value) {
+                                                if ($menu["judul_sub"] === "Sunting") {
+                                                    $checked = $kegiatan_value["kegiatan_id"] === $data["kegiatan"] ? " checked=\"true\"" : "";
+                                                } else {
+                                                    $checked = "";
+                                                } ?>
+
+                                                <label><input type="radio" name="kegiatan" value="<?= $kegiatan_value["kegiatan_id"] ?>"<?= $checked ?>> <?= @strlen($kegiatan_value["kegiatan_nama"]) <= 20 ? $kegiatan_value["kegiatan_nama"] : @substr($kegiatan_value["kegiatan_nama"], 0, 17)."..." ?></label><?php } ?>
+
+                                            </li>
+                                            <li class="list-group-item d-flex px-3">
+                                                <button id="kegiatan_clear" class="btn btn-sm btn-outline-accent col-md-12">
+                                                    <i class="material-icons">file_copy</i>
+                                                    Clear
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- //Kegiatan --><?php } ?>
+
                                 <!-- Keterangan -->
                                 <div class="card card-small mb-3">
                                     <div class="card-header border-bottom">
@@ -156,6 +184,10 @@
                     $("input[id=keterangan_tanggal]").val(`<?= date("d/m/Y") ?>`);
                 });
 
+                $("#kegiatan_clear").click(function() {
+                    $('input[name="kegiatan"]').prop('checked', false);
+                });
+
                 $("#kembali").click(function() {
                     if ($("#keterangan_status").val() !== "Belum disimpan") {
                         window.location.assign(`<?= base_url("pengurus/")."berita" ?>`);
@@ -197,6 +229,7 @@
                 form.append("keterangan", id);
                 form.append("penerbit", `<?= $pengguna["username"] ?>`);
                 form.append("isi", $(".ql-editor").html());
+                form.append("kegiatan", $("input[name='kegiatan']:checked").val());
 
                 $.ajax({
                     url: site_api+"/berita/tambah",
@@ -284,6 +317,7 @@
                 form.append("id", `<?= $data["id"] ?>`);
                 form.append("keterangan", id);
                 form.append("isi", $(".ql-editor").html());
+                form.append("kegiatan", $("input[name='kegiatan']:checked").val());
 
                 $.ajax({
                     url: site_api+"/berita/perbarui",

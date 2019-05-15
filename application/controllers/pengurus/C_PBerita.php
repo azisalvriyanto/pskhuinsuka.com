@@ -48,6 +48,14 @@ class C_PBerita extends CI_Controller {
                 redirect("pengurus/berita");
             }
 
+			$periode    = $this->M_Organisasi->periode_terakhir();
+            $kegiatan   = $this->M_Kegiatan->daftar($periode["keterangan"]);
+            if ($periode["status"] === 200 && $kegiatan["status"] === 200) {
+                $data["kegiatan"] = $kegiatan["keterangan"];
+            } else {
+                $data["kegiatan"] = "";
+            }
+
             $this->load->view("pengurus/berita_pengaturan", $data);
         } else {
             redirect("pengurus/berita");
@@ -68,6 +76,14 @@ class C_PBerita extends CI_Controller {
                 $data["data"] = @array_merge($data["data"], $berita["keterangan"]);
             } else {
                 redirect("pengurus/berita/tambah");
+            }
+
+			$periode    = $this->M_Organisasi->periode_terakhir();
+            $kegiatan   = $this->M_Kegiatan->daftar($periode["keterangan"]);
+            if ($periode["status"] === 200 && $kegiatan["status"] === 200) {
+                $data["kegiatan"] = $kegiatan["keterangan"];
+            } else {
+                $data["kegiatan"] = "";
             }
 
             $this->load->view("pengurus/berita_pengaturan", $data);
