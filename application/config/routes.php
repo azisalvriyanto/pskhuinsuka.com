@@ -15,7 +15,7 @@ $route["translate_uri_dashes"]	= FALSE;
 //umum
 $route["beranda"]               = "Umum/index";
 $route["kontak"]                = "Umum/kontak";
-$route["artikel"]                               = "Umum/artikel";
+$route["artikel"]                               = "Umum/artikel";   
 $route["artikel/(:num)"]                        = "Umum/artikel/$1";
 $route["artikel/(:num)/(:num)"]                 = "Umum/artikel/$1/$2";
 $route["artikel/(:num)/(:any)/(:num)/(:any)"]   = "Umum/artikel/$1/$2/$3/$4";

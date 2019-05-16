@@ -11,6 +11,15 @@ class M_Keuangan extends CI_Model {
             ->where("MONTH(keuangan_tanggal)", $bulan)
             ->order_by("keuangan_tanggal", "ASC")
             ->get();
+            if ($query->num_rows() > 0) {
+                $query = $query;
+            } else {
+                $query = $this->db->select("bulan.bulan_keterangan, keuangan.*")->from("keuangan")
+                ->join("bulan", "bulan.bulan_id=MONTH(keuangan.keuangan_tanggal)")
+                ->where("keuangan_periode", $periode)
+                ->order_by("keuangan_tanggal", "ASC")
+                ->get();
+            }
         } else {
             $query = $this->db->select("bulan.bulan_keterangan, keuangan.*")->from("keuangan")
             ->join("bulan", "bulan.bulan_id=MONTH(keuangan.keuangan_tanggal)")
