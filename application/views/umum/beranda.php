@@ -222,6 +222,7 @@
                                 <i><?= $data["jpendapat"][$i]["jpendapat_jabatan"] ?></i>
                                 <p><?= $data["jpendapat"][$i]["jpendapat_pendapat"] ?></p>
                             </div>
+                            <br>
                         </li> <?php } } ?>
 
                     </ul>

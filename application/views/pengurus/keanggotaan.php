@@ -169,7 +169,7 @@
                                 var data = response.keterangan;
                                 for (const index in response.keterangan) {
                                     var nomor = parseInt(index)+parseInt(1);
-                                    if (data[index].jabatan_keterangan === 1) {
+                                    if (data[index].akun_keterangan === "1") {
                                         var keterangan = "Aktif";
                                     } else {
                                         var keterangan = "Tidak aktif";
@@ -273,6 +273,52 @@
                                         title: "Data berhasil dihapus.",
                                         icon: "success",
                                         button: "Tutup"
+                                    })
+                                    .then((yes) => {
+                                        if (yes) {
+                                            if (username === `<?= $pengguna["username"] ?>`) {
+                                                $.ajax({
+                                                    url: `<?= $api_otentikasi ?>`+`/otentikasi/keluar`,
+                                                    dataType: "json",
+                                                    type: "GET",
+                                                    success: function(response) {
+                                                        if (response.status === 200) {
+                                                            window.location.assign(`<?= base_url("pengurus") ?>`);
+                                                        } else {
+                                                            swal({
+                                                                title: "Silahkan coba lagi!",
+                                                                text: response.keterangan,
+                                                                icon: "error",
+                                                                button: "Tutup"
+                                                            });
+                                                        }
+                                                    },
+                                                    error: function (jqXHR, exception) {
+                                                        if (jqXHR.status === 0) {
+                                                            keterangan = "Not connect (verify network).";
+                                                        } else if (jqXHR.status == 404) {
+                                                            keterangan = "Requested page not found.";
+                                                        } else if (jqXHR.status == 500) {
+                                                            keterangan = "Internal Server Error.";
+                                                        } else if (exception === "parsererror") {
+                                                            keterangan = "Requested JSON parse failed.";
+                                                        } else if (exception === "timeout") {
+                                                            keterangan = "Time out error.";
+                                                        } else if (exception === "abort") {
+                                                            keterangan = "Ajax request aborted.";
+                                                        } else {
+                                                            keterangan = "Uncaught Error ("+jqXHR.responseText+").";
+                                                        }
+                                                        swal({
+                                                            title: "Silahkan coba lagi!",
+                                                            text: keterangan,
+                                                            icon: "error",
+                                                            button: "Tutup"
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        }
                                     });
 
                                     $("#"+username).closest("tr").remove();

@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="form-group col-md-5" id="fnominal">
                                                 <label for="pengaturan_nominal">Nominal</label>
-                                                <input type="text" class="form-control text-right" id="pengaturan_nominal" name="pengaturan_nominal" placeholder="Nominal" value="">
+                                                <input type="number" class="form-control text-right" id="pengaturan_nominal" name="pengaturan_nominal" placeholder="Nominal" value="">
                                             </div>
                                             <div class="form-control mb-3 text-center">
                                                 <input type="file" id="gambar" name="gambar" class="col-md-12">
@@ -366,6 +366,7 @@
                     $("input[id=pengaturan_judul]").val("");
                     $("input[id=pengaturan_jumlah]").val("");
                     $("input[id=pengaturan_nominal]").val("");
+                    $("#gambar_pratinjau").attr("src", "");
 
                     $("#fjumlah").attr("class", "form-group col-md-5");
                     $("#fnominal").attr("class", "form-group col-md-7");
@@ -390,7 +391,7 @@
                             form.append("tanggal", $("#pengaturan_tanggal").val());
                             form.append("judul", $("#pengaturan_judul").val());
                             form.append("jumlah", $("#pengaturan_jumlah").val());
-                            form.append("keterangan", 2);
+                            form.append("keterangan", 1);
                             form.append("nominal", $("#pengaturan_nominal").val());
 
                             $.ajax({
@@ -453,6 +454,7 @@
                     $("input[id=pengaturan_judul]").val("");
                     $("input[id=pengaturan_jumlah]").val("");
                     $("input[id=pengaturan_nominal]").val("");
+                    $("#gambar_pratinjau").attr("src", "");
 
                     $("#fjumlah").attr("class", "form-group col-md-5");
                     $("#fnominal").attr("class", "form-group col-md-7");
@@ -472,18 +474,21 @@
                     })
                     .then((yes) => {
                         if (yes) {
+                            var form = new FormData($("#form-pengaturan")[0]);
+                            form.append("periode", `<?= $data["periode"] ?>`);
+                            form.append("tanggal", $("#pengaturan_tanggal").val());
+                            form.append("judul", $("#pengaturan_judul").val());
+                            form.append("jumlah", $("#pengaturan_jumlah").val());
+                            form.append("keterangan", 2);
+                            form.append("nominal", $("#pengaturan_nominal").val());
+
                             $.ajax({
                                 url: site_api+"/keuangan/tambah",
                                 dataType: "json",
                                 type: "POST",
-                                data : {
-                                    "periode": `<?= $data["periode"] ?>`,
-                                    "tanggal": $("#pengaturan_tanggal").val(),
-                                    "judul": $("#pengaturan_judul").val(),
-                                    "jumlah": $("#pengaturan_jumlah").val(),
-                                    "keterangan": 2,
-                                    "nominal": $("#pengaturan_nominal").val()
-                                },
+                                data : form,
+                                contentType: false,
+                                processData: false,
                                 success: function(response) {
                                     if (response.status === 200) {
                                         swal({
@@ -771,7 +776,7 @@
                                     form.append("tanggal", $("#pengaturan_tanggal").val());
                                     form.append("judul", $("#pengaturan_judul").val());
                                     form.append("jumlah", $("#pengaturan_jumlah").val());
-                                    form.append("keterangan", 2);
+                                    form.append("keterangan", $("#pengaturan_keterangan option:selected").val());
                                     form.append("nominal", $("#pengaturan_nominal").val());
 
                                     $.ajax({

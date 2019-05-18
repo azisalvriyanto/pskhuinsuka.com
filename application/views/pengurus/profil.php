@@ -71,7 +71,7 @@
                                                         <label for="keterangan">Keterangan</label>
                                                         <select id="keterangan" class="form-control">
                                                             <?php
-                                                                if ($data["keterangan"] === NULL) {
+                                                                if ($menu["judul_sub"] === "Tambah") {
                                                                     echo "<option value=\"\" selected>Pilih...</option>";
                                                                     $data["keterangan"] = "";
                                                                 } ?>
@@ -284,7 +284,7 @@
 
                 $("#tambah").click(function() {
                     var form = new FormData($("#form")[0]);
-                    form.append("keterangan", keterangan);
+                    form.append("keterangan", $("#keterangan option:selected").val());
                     form.append("periode", $("#periode").val());
                     form.append("username", $("#username").val());
                     form.append("password", $("#password").val());

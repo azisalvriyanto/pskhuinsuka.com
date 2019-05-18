@@ -24,9 +24,9 @@ $route["berita/cari"]                           = "Umum/berita_cari";
 $route["berita/(:num)"]                         = "Umum/berita/$1";
 $route["berita/(:num)/(:num)"]                  = "Umum/berita/$1/$2";
 $route["berita/(:num)/(:any)/(:num)/(:any)"]    = "Umum/berita/$1/$2/$3/$4";
-$route["kegiatan"]              = "Umum/kegiatan";
-$route["galeri"]                = "Umum/galeri";
-$route["berkas"]                = "Umum/berkas";
+$route["kegiatan"]  = "Umum/kegiatan";
+$route["galeri"]    = "Umum/galeri";
+$route["berkas"]    = "Umum/berkas";
 
 //pendaftaran
 $route["pendaftaran"]   = "Umum/pendaftaran";
